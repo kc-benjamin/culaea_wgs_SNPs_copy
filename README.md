@@ -18,7 +18,7 @@ The 02_info_files directory should contain the following files:
 * `chromosomes.txt` - a list (in a snigle column) of all the chromosomes in the reference genome (can be created form the .dict file that should be in the 03_genome directory). An example is provided.
 * `bamfiles.txt` - a list (in a single column) of the paths to all the bam files generated in step 06, that will be used in step 07 (i.e. all the "realigned.bam" files). An example is provided.
 
-The 03_genome directory should contain an indexed reference genome. A script to index the reference genome is included here. IMPORTANT NOTE: for some reason, the extension on your reference genome has to be .fa (not .fna or anything else) for this set of scripts to work!!!
+The 03_genome directory should contain an indexed reference genome. A script to index the reference genome (`00_index_ref.sh`) is included as an example here. IMPORTANT NOTE: for some reason, the extension on your reference genome has to be .fa (not .fna or anything else) for this set of scripts to work!!!
 
 The 04_raw_data directory should contain all the raw fastq files (or fastq.gz files) that you want to analyze.
 

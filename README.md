@@ -114,7 +114,7 @@ I was not able to use the Genome-wide Complex Trait Analysis (GCTA) software pac
 2. Make sure your Plink-formatted filtered SNPS, your Plink-formatted LD-pruned set of SNPs, as well as a file containing phenotype information (e.g. a .phen file) are all in the same directory.
 3. Open Terminal.
 4. Navigate to the directory containing your SNPs.
-5. Run the following line of code:
+5. Run the following line of code (in this example, for SNP file called AST_snps_geno20_maf01 and AST_snps_geno20_maf01_pruned, with a phenotype file called AST_snps.phen):
 ```
-~/Dropbox/Brook\ Stickleback/SNP\ Data/gcta_1.92.2beta_mac/bin/gcta64 --mlma --bfile AST_snps_geno20_maf01 --grm AST_snps_geno20_maf01_pruned --pheno AST_snps.phen --out AST_ninespine_geno20_maf01
+~/gcta_1.92.2beta_mac/bin/gcta64 --mlma --bfile AST_snps_geno20_maf01 --grm AST_snps_geno20_maf01_pruned --pheno AST_snps.phen --out AST_ninespine_geno20_maf01
 ```

@@ -107,3 +107,14 @@ Uses PLINK and vcftools and GCTA. This script is designed to accommodate non-mod
 * Inputs: `*_filtered.vcf.gz`
 * Outputs: plink-formatted version of your SNPs filtered for missingness and minimum allele frequency, LD-pruned SNPs, and a GRM.
 
+## Run a GWAS
+I was not able to use the Genome-wide Complex Trait Analysis (GCTA) software package to run an MLMA analysis on the HPC cluster I was using. To run the GWAS with GCTA in on a Mac computer:
+
+1. Download GCTA from https://yanglab.westlake.edu.cn/software/gcta/#Download 
+2. Make sure your Plink-formatted filtered SNPS, your Plink-formatted LD-pruned set of SNPs, as well as a file containing phenotype information (e.g. a .phen file) are all in the same directory.
+3. Open Terminal.
+4. Navigate to the directory containing your SNPs.
+5. Run the following line of code:
+```
+~/Dropbox/Brook\ Stickleback/SNP\ Data/gcta_1.92.2beta_mac/bin/gcta64 --mlma --bfile AST_snps_geno20_maf01 --grm AST_snps_geno20_maf01_pruned --pheno AST_snps.phen --out AST_ninespine_geno20_maf01
+```

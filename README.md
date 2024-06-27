@@ -62,7 +62,7 @@ Duplicates are marked and removed using Picard's `MarkDuplicates`
 
 ## Step 5 - Pat yourself on the back. You're doing great
 
-* Scripts: `05_pa_on_back.sh`
+* Scripts: `05_pat_on_back.sh`
 * Inputs: None
 * Outputs: a nice congratulatory .out file
 

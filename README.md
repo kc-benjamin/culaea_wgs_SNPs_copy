@@ -5,7 +5,7 @@ The scripts are in a subdirectory called 01_scripts, and are numbered 01-09. The
 
 Steps 1-4 & 6 are run over individual files using "submit" scripts (with bash-coded for loops).
 Step 5 is silly but important.
-Step 7 is run over groups of scaffolds using a "submit" script (with a bash-coded for loop)..
+Step 7 is run over groups of scaffolds using a "submit" script (with a bash-coded for loop).
 Steps 8 and 9 are run as a single jobs.
 
 More details on these scripts are below.

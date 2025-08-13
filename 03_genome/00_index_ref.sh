@@ -1,13 +1,14 @@
 #!/bin/bash
-#SBATCH --account=def-jonmee
+#SBATCH --partition=batch
 #SBATCH --time=06:00:00
+#SBATCH --ntasks=1
 #SBATCH --mem=8G
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=00_index_ref_%j.out
 #SBATCH --job-name=00_index_ref 
 
-cd /home/jonmee/projects/def-jonmee/jonmee/ref_ninespine_2024/
+cd /scratch/kcb95328/Mee-Culaea-WGS
 
 module load nixpkgs/16.09 gcc/7.3.0
 

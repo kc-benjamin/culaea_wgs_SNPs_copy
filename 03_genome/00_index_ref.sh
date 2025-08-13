@@ -7,6 +7,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=00_index_ref_%j.out
 #SBATCH --job-name=00_index_ref 
+#SBATCH --error=00_index_ref_%j.err
 
 cd /scratch/kcb95328/Mee-Culaea-WGS
 

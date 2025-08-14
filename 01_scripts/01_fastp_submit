@@ -3,6 +3,6 @@
 END=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | wc -l)
 
 for i in $(seq 1 $END); do
-  sbatch --job-name "01_fastp_$i" ./01_scripts/01_fastp.sh "$i"
+  sbatch --job-name "01_fastp_$i" /home/kcb95328/culaea_wgs_SNPs_copy/01_scripts/01_fastp.sh "$i"
   sleep 1
 done

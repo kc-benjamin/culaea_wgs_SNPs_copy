@@ -11,7 +11,7 @@
 #SBATCH --error=98_log_files/%x_%j.err
 
 # Load up fastp
-module load StdEnv/2020 fastp/0.23.4-GCC-13.2.0
+module load fastp/0.23.4-GCC-13.2.0
 
 # Variables
 INDIR="04_raw_data"

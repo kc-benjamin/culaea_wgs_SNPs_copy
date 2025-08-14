@@ -5,25 +5,25 @@
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=10G
 #SBATCH --time=0-00:30:00
-#SBATCH --account=def-jonmee
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
+#SBATCH --error=98_log_files/%x_%j.err
 
 # Load up fastp
-module load StdEnv/2020 fastp/0.20.1
+module load StdEnv/2020 fastp/0.23.4-GCC-13.2.0
 
 # Variables
 INDIR="04_raw_data"
 OUTDIR="05_trimmed_data"
 LOG="98_log_files"
 #mkdir $OUTDIR/01_reports
-# need to make the directory 01_reports in 05_trimmed_data
+#need to make the directory 01_reports in 05_trimmed_data
 
 #Pass the sample number from the sbatch command
 samp_num=$1
 
-# Pull sample name from the sample info
+#Pull sample name from the sample info
 sample_name=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} \

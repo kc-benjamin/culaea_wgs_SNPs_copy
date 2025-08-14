@@ -4,6 +4,6 @@ END=$(cut -f1 02_info_files/chromosomes.txt | wc -l)
 #END=2
 
 for i in $(seq 1 $END); do
-  sbatch --job-name "07_bcftools_vc_$i" ./01_scripts/07_bcftools_vc.sh "$i"
+  sbatch --job-name "07_bcftools_vc_$i" /home/kcb95328/culaea_wgs_SNPs_copy/01_scripts/07_bcftools_vc.sh "$i"
   sleep 1
 done

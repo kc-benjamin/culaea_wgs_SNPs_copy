@@ -1,17 +1,17 @@
 #!/bin/bash
 
+#SBATCH --partition=batch
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=1024M
 #SBATCH --time=0-12:00:00
-#SBATCH --account=def-jonmee
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 
 # Load needed modules
-module load StdEnv/2020  gcc/9.3.0 bcftools/1.11
+module gcc/9.3.0 bcftools/1.11
 
 # Global variables
 INFO="02_info_files"

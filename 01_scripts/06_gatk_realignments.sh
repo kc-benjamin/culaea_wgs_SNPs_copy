@@ -1,12 +1,12 @@
 #!/bin/bash
 
+#SBATCH --partition=batch
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=10G
 #SBATCH --time=00-24:00:00
-#SBATCH --account=def-jonmee
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 
@@ -18,7 +18,7 @@ LOG_FOLDER="98_log_files"
 cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Load needed modules
-module load StdEnv/2020 samtools/1.12
+module samtools/1.12
 
 # Global variables
 BAM="06_bam_files"

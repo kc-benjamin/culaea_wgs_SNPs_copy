@@ -1,17 +1,17 @@
 #!/bin/bash
 
+#SBATCH --partition=batch
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=96G
 #SBATCH --time=0-06:00:00
-#SBATCH --account=def-jonmee
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 
 # Load modules
-module load StdEnv/2020 java/13.0.2 picard/2.26.3
+module java/13.0.2 picard/2.26.3
 
 # Global variables
 PICARD=$EBROOTPICARD/picard.jar

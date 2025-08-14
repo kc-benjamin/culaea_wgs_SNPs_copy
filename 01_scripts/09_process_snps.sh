@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --account=def-jonmee
+#SBATCH --partition=batch
 #SBATCH --time=06:00:00
 #SBATCH --mem=30G
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=09_process_snps_%j.out
 #SBATCH --job-name=09_process_snps 
@@ -40,13 +40,13 @@ rm shunda_snps_filtered_temp*
 
 echo "Converting to PLINK at: `date`"
 
-module load StdEnv/2020 vcftools/0.1.16
+module vcftools/0.1.16
 
 vcftools --vcf shunda_snps_filtered.vcf --plink --out SHU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 
-module load StdEnv/2020 plink/1.9b_6.21-x86_64
+module plink/1.9b_6.21-x86_64
 
 echo "Creating VCF file with appropriate LG labels at: `date`"
 

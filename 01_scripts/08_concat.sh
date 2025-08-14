@@ -1,17 +1,17 @@
 #!/bin/bash
+#SBATCH --partition=batch
 #SBATCH --job-name="08_concat"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16G
 #SBATCH --time=00-23:00:00
-#SBATCH --account=def-jonmee
-#SBATCH --mail-user=jmee@mtroyal.ca
+#SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 
 module load vcftools bcftools
-module load StdEnv/2020 intel/2020.1.217 tabix/0.2.6
+module intel/2020.1.217 tabix/0.2.6
 
 vcf-concat $(ls -1 ./07_raw_VCFs/* | perl -pe 's/\n/ /g') > shunda_snps.vcf
 

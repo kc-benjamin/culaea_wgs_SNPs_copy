@@ -35,7 +35,7 @@ cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 samp_num=$1
 
     # Fetch filename from the array
-    file=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
+    file=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | sed -n "${samp_num}p")
     bamfile=${file}.sorted.bam
 
     echo \n">>> Computing alignment metrics for $file <<<"\n

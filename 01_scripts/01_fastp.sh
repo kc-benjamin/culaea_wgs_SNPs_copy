@@ -25,7 +25,7 @@ LOG="98_log_files"
 samp_num=$1
 
 #Pull sample name from the sample info
-sample_name=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} \
         -i $INDIR/$(cut -f12 02_info_files/datatable.txt | sed -n "${samp_num}p") \

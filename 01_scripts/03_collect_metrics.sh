@@ -11,7 +11,7 @@
 #SBATCH --output=98_log_files/%x_%j.out
 
 # Load modules
-module java/13.0.2 picard/2.26.3 r
+module load java/13.0.2 picard/2.26.3 r
 
 # Global variables
 GENOMEFOLDER="03_genome"

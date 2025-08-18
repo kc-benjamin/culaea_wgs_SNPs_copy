@@ -8,6 +8,7 @@
 #SBATCH --time=0-00:30:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
+#SBATCH --job-name=fastp_trim
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
 
@@ -18,7 +19,7 @@ module load fastp/0.23.4-GCC-13.2.0
 INDIR= "/scratch/kcb95328/Mee-Culaea-WGS/04_raw_data"
 OUTDIR="/scratch/kcb95328/Mee-Culaea-WGS/05_trimmed_data"
 LOG="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
-#mkdir $OUTDIR/01_reports
+mkdir $OUTDIR/01_reports
 #need to make the directory 01_reports in 05_trimmed_data
 
 #Pass the sample number from the sbatch command
@@ -28,8 +29,8 @@ samp_num=$1
 sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} \
-        -i $INDIR/$(cut -f12 02_info_files/datatable.txt | sed -n "${samp_num}p") \
-        -I $INDIR/$(cut -f13 02_info_files/datatable.txt | sed -n "${samp_num}p") \
+        -i $INDIR/$(cut -f12 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | sed -n "${samp_num}p") \
+        -I $INDIR/$(cut -f13 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | sed -n "${samp_num}p") \
         -o $OUTDIR/"$sample_name".R1.trimmed.fastq.gz \
         -O $OUTDIR/"$sample_name".R2.trimmed.fastq.gz \
         -j $OUTDIR/01_reports/"$sample_name".json \

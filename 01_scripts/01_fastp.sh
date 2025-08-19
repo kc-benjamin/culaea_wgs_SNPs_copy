@@ -17,7 +17,7 @@ module load fastp/0.23.4-GCC-13.2.0
 # Variables
 INDIR= "/scratch/kcb95328/Mee-Culaea-WGS/04_raw_data"
 OUTDIR= "/scratch/kcb95328/Mee-Culaea-WGS/05_trimmed_data"
-LOG= "98_log_files"
+LOG= 98_log_files
 #mkdir $OUTDIR/01_reports
 #need to make the directory 01_reports in 05_trimmed_data
 
@@ -28,8 +28,8 @@ samp_num=$1
 sample_name=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} \
-        -i $INDIR/$(cut -f12 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/datatable.txt | sed -n "${samp_num}p") \
-        -I $INDIR/$(cut -f13 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/datatable.txt | sed -n "${samp_num}p") \
+        -i $INDIR/$(cut -f12 02_info_files/datatable.txt | sed -n "${samp_num}p") \
+        -I $INDIR/$(cut -f13 02_info_files/datatable.txt | sed -n "${samp_num}p") \
         -o $OUTDIR/"$sample_name".R1.trimmed.fastq.gz \
         -O $OUTDIR/"$sample_name".R2.trimmed.fastq.gz \
         -j $OUTDIR/01_reports/"$sample_name".json \

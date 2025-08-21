@@ -15,9 +15,9 @@
 module load fastp/0.23.4-GCC-13.2.0
 
 # Variables
-INDIR= "/scratch/kcb95328/Mee-Culaea-WGS/04_raw_data"
-OUTDIR= "/scratch/kcb95328/Mee-Culaea-WGS/05_trimmed_data"
-LOG= 98_log_files
+INDIR="/scratch/kcb95328/Mee-Culaea-WGS/04_raw_data"
+OUTDIR="/scratch/kcb95328/Mee-Culaea-WGS/05_trimmed_data"
+LOG="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 #mkdir $OUTDIR/01_reports
 #need to make the directory 01_reports in 05_trimmed_data
 

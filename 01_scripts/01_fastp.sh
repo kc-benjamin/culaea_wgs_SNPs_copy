@@ -11,6 +11,7 @@
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
 
+#currently for Muir Lake
 # Load up fastp
 module load fastp/0.23.4-GCC-13.2.0
 
@@ -25,11 +26,11 @@ LOG="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 samp_num=$1
 
 #Pull sample name from the sample info
-sample_name=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} \
-        -i $INDIR/$(cut -f12 02_info_files/datatable.txt | sed -n "${samp_num}p") \
-        -I $INDIR/$(cut -f13 02_info_files/datatable.txt | sed -n "${samp_num}p") \
+        -i $INDIR/$(cut -f12 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p") \
+        -I $INDIR/$(cut -f13 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p") \
         -o $OUTDIR/"$sample_name".R1.trimmed.fastq.gz \
         -O $OUTDIR/"$sample_name".R2.trimmed.fastq.gz \
         -j $OUTDIR/01_reports/"$sample_name".json \

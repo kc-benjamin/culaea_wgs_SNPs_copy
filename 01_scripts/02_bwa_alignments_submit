@@ -1,6 +1,6 @@
 #!/bin/sh
 
-END=$(cut -f1 02_info_files/SraRunTable-metadata-ML.txt | wc -l)
+END=$(cut -f1 02_info_files/SraRunTable-metadata-ML.csv | wc -l)
 #END=39
 
 for i in $(seq 1 $END); do

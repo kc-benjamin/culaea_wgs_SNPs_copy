@@ -1,5 +1,5 @@
 #!/bin/sh
-
+cd /scratch/kcb95328/Mee-Culaea-WGS
 END=$(cut -f1 02_info_files/SraRunTable-metadata-ML.csv | wc -l)
 #END=39
 

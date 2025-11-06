@@ -33,7 +33,7 @@ fi
 samp_num=$1
 
 # Pull sample name from the sample info
-name=$(cut -f1 02_info_files/SraRunTable-metadata-ML.txt | sed -n "${samp_num}p")
+name=$(cut -f1 /02_info_files/SraRunTable-metadata-ML.txt | sed -n "${samp_num}p")
 
 # Name of uncompressed file
 file1=${name}.R1.trimmed.fastq.gz

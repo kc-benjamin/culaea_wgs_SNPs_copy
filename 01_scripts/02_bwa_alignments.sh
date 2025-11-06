@@ -12,6 +12,7 @@
 
 # Load needed modules
 module load bwa samtools
+cd /scratch/kcb95328/Mee-Culaea-WGS
 
 # Global variables
 GENOMEFOLDER="03_genome"
@@ -31,7 +32,7 @@ fi
 samp_num=$1
 
 # Pull sample name from the sample info
-name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SraRunTable-metadata-ML.txt | sed -n "${samp_num}p")
+name=$(cut -f1 02_info_files/SraRunTable-metadata-ML.txt | sed -n "${samp_num}p")
 
 # Name of uncompressed file
 file1=${name}.R1.trimmed.fastq.gz

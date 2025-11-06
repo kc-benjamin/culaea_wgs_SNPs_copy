@@ -11,7 +11,8 @@
 #SBATCH --output=98_log_files/%x_%j.out
 
 # Load needed modules
-module load bwa samtools
+module load bwa 
+module load samtools
 cd /scratch/kcb95328/Mee-Culaea-WGS
 
 # Global variables

@@ -16,8 +16,8 @@ module java/13.0.2 picard/2.26.3
 # Global variables
 PICARD=$EBROOTPICARD/picard.jar
 MARKDUPS="MarkDuplicates"
-ALIGNEDFOLDER="06_bam_files"
-METRICSFOLDER="99_metrics"
+ALIGNEDFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/06_bam_files"
+METRICSFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/99_metrics"
 
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
@@ -32,7 +32,7 @@ export _JAVA_OPTIONS="-Xms2g -Xmx50g "
 samp_num=$1
 
 # Fetch filename from the array
-sample_name=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txts | sed -n "${samp_num}p")
 file=${sample_name}.sorted.bam
 
 echo "DEduplicatING sample $file"

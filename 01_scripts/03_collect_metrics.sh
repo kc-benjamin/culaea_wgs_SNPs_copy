@@ -11,13 +11,13 @@
 #SBATCH --output=98_log_files/%x_%j.out
 
 # Load modules
-module load java/13.0.2 picard/2.26.3 r
+module load Java/11.0.20 picard/2.25.1-Java-ll R/4.4.2-gfbf-2024a
 
 # Global variables
-GENOMEFOLDER="03_genome"
+GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/*fa | xargs -n 1 basename)
-ALIGNEDFOLDER="06_bam_files"
-METRICSFOLDER="99_metrics"
+ALIGNEDFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/06_bam_files"
+METRICSFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/99_metrics"
 PICARD=$EBROOTPICARD/picard.jar
 ALIGN="CollectAlignmentSummaryMetrics"
 INSERT="CollectInsertSizeMetrics"
@@ -28,14 +28,14 @@ COVERAGE="CollectWgsMetricsWithNonZeroCoverage"
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
 SCRIPTNAME=$(basename $0)
-LOG_FOLDER="98_log_files"
+LOG_FOLDER="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 
 #Pass the sample number from the sbatch command
 samp_num=$1
 
     # Fetch filename from the array
-    file=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/datatable.txt | sed -n "${samp_num}p")
+    file=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
     bamfile=${file}.sorted.bam
 
     echo \n">>> Computing alignment metrics for $file <<<"\n

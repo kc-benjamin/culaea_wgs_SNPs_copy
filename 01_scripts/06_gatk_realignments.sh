@@ -18,7 +18,7 @@ LOG_FOLDER="98_log_files"
 cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Load needed modules
-module samtools/1.12
+module load SAMtools/1.21-GCC-13.3.0
 
 # Global variables
 BAM="06_bam_files"
@@ -33,7 +33,7 @@ echo " >>> Realigning...
 samp_num=$1
 
 # Fetch filename from the array
-sample_name=$(cut -f1 02_info_files/datatable.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 file=${sample_name}.dedup.bam
 
 echo "
@@ -46,7 +46,7 @@ samtools index $BAM/$file
 # Now load modules
 module purge
 module load nixpkgs/16.09
-module load java gatk/3.8
+module load java GATK/4.6.0.0-GCCcore-13.2.0-Java-17
 
 # Realign
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \

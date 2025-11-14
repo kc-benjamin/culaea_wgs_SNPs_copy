@@ -1,6 +1,6 @@
 #!/bin/sh
 
-END=$(cut -f1 02_info_files/datatable.txt | wc -l)
+END=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | wc -l)
 #END=21
 
 for i in $(seq 1 $END); do

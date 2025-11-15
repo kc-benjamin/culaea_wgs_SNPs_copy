@@ -32,7 +32,7 @@ export _JAVA_OPTIONS="-Xms2g -Xmx50g "
 samp_num=$1
 
 # Fetch filename from the array
-sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txts | sed -n "${samp_num}p")
+sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 file=${sample_name}.sorted.bam
 
 echo "DEduplicatING sample $file"

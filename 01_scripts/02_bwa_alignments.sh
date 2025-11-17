@@ -9,7 +9,9 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
+#SBATCH --array=0-96
 
+PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
 module load BWA/0.7.18-GCCcore-13.3.0
 module load SAMtools/1.21-GCC-13.3.0
@@ -30,7 +32,7 @@ then
 fi
 
 #Pass the sample number from the sbatch command
-samp_num=$1
+samp_num=PREFIX
 
 # Pull sample name from the sample info
 name=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

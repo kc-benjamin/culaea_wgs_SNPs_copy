@@ -13,9 +13,12 @@
 
 PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
-module load BWA/0.7.18-GCCcore-13.3.0
-module load SAMtools/1.21-GCC-13.3.0
+eval "$(conda shell.bash hook)"
+conda activate /scratch/kcb95328/mee-culaea-enviro
+conda activate BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
+    conda install -c conda-forge BWA SAMtools
 
+module load BWA SAMtools
 
 # Global variables
 GENOMEFOLDER="03_genome"

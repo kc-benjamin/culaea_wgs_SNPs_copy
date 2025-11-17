@@ -9,6 +9,10 @@
 #SBATCH --job-name=ref_index
 #SBATCH --error=ref_pull_ncbi_%j.err
 
+conda activate /home/kcb95328/miniconda3/envs/ncbi_datasets
+conda activate ncbi_datasets
+    conda install -c conda-forge ncbi-datasets-cli
+    
 module load datasets/3.1.0-foss-2023a
 
 datasets download genome accession CASGFK000000000.1 --filename punpun-ref-genome.fa

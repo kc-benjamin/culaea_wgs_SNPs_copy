@@ -16,4 +16,4 @@ conda activate ncbi_datasets
 
 module load datasets/3.1.0-foss-2023a
 
-datasets download genome accession CASGFK000000000.1 --filename punpun-ref-genome.fa
+datasets download genome accession GCF_949316345.1 --filename punpun-ref-genome.fa

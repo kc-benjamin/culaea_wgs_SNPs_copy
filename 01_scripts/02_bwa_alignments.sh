@@ -14,10 +14,8 @@
 PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
 eval "$(conda shell.bash hook)"
-conda activate BWA
-    conda install -c bioconda BWA SAMtools
-conda activate SAMtools
-    conda install -c bioconda SAMtools/1.21-GCC-13.3.0
+conda install -c bioconda bwa
+conda install -c bioconda samtools
 module load BWA SAMtools
 
 # Global variables

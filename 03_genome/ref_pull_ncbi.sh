@@ -9,7 +9,7 @@
 #SBATCH --job-name=ref_index
 #SBATCH --error=ref_pull_ncbi_%j.err
 
-conda init bash
+eval "$(conda shell.bash hook)"
 conda activate /home/kcb95328/miniconda3/envs/ncbi_datasets
 conda activate ncbi_datasets
     conda install -c conda-forge ncbi-datasets-cli

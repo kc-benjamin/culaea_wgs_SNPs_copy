@@ -11,4 +11,4 @@
 
 module load datasets
 
-datasets download genome accession PRJEB33823 --filename punpun-ref-genome.fa
+datasets download genome accession CASGFK01 --filename punpun-ref-genome.fa

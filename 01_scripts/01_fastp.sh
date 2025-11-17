@@ -8,9 +8,11 @@
 #SBATCH --time=0-00:30:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
-#SBATCH --output=98_log_files/%x_%j.out
-#SBATCH --error=98_log_files/%x_%j.err
+#SBATCH --output=98_log_files/%a_%x.out
+#SBATCH --error=98_log_files/%a_%x.err
+#SBATCH --array=0-96
 
+PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 #currently for Muir Lake
 # Load up fastp
 module load fastp/0.23.4-GCC-13.2.0
@@ -23,7 +25,7 @@ LOG="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 #need to make the directory 01_reports in 05_trimmed_data
 
 #Pass the sample number from the sbatch command
-samp_num=$1
+samp_num=PREFIX
 
 #Pull sample name from the sample info
 sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

@@ -9,7 +9,9 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
+#SBATCH --array=0-96
 
+PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
@@ -30,7 +32,7 @@ echo " >>> Realigning...
 "
 
 #Pass the sample number from the sbatch command
-samp_num=$1
+samp_num=PREFIX
 
 # Fetch filename from the array
 sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
@@ -46,7 +48,7 @@ samtools index $BAM/$file
 # Now load modules
 module purge
 module load nixpkgs/16.09
-module load java GATK/4.6.0.0-GCCcore-13.2.0-Java-17
+module load GATK/4.6.0.0-GCCcore-13.2.0-Java-17
 
 # Realign
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \

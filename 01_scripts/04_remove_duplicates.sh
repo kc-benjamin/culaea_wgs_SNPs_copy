@@ -9,9 +9,12 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
+#SBATCH --error=98_log_files/%x_%j.err
+#SBATCH --array=0-96
 
+PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-module java/13.0.2 picard/2.26.3
+module load java/13.0.2 picard/2.26.3
 
 # Global variables
 PICARD=$EBROOTPICARD/picard.jar
@@ -29,7 +32,7 @@ export JAVA_TOOL_OPTIONS="-Xms2g -Xmx50g "
 export _JAVA_OPTIONS="-Xms2g -Xmx50g "
 
 #Pass the sample number from the sbatch command
-samp_num=$1
+samp_num=PREFIX
 
 # Fetch filename from the array
 sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

@@ -50,7 +50,7 @@ RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -t $NCPU -R $RG  /03_genome/brook_genome_hap1_v1.fa $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
 samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam"
 
 # Sort

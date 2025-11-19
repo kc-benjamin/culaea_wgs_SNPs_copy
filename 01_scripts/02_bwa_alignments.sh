@@ -16,8 +16,8 @@ PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
 
 # Global variables
-GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/*fasta | xargs -n 1 basename) #changed to brook genome
+GENOMEFOLDER="/scratch/kcb95328/03_genome"
+GENOME=$(ls -1 $GENOMEFOLDER/*.fasta | xargs -n 1 basename) #changed to brook genome
 INDGENOME=${GENOME}.fai
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
@@ -30,7 +30,10 @@ then
 fi
 
 #Pass the sample number from the sbatch command
-samp_num="$PREFIX"
+samp_num=$((SLURM_ARRAY_TASK_ID + 1))
+echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
+echo "samp_num='$samp_num'"
+echo "PREFIX='$PREFIX'"
 
 # Pull sample name from the sample info
 name=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

@@ -16,7 +16,7 @@ PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
 
 # Global variables
-GENOMEFOLDER="/scratch/kcb95328/03_genome"
+GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
 INDGENOME="brook_genome_hap1_v1.fasta.fai"
 RAWDATAFOLDER="05_trimmed_data"

@@ -51,7 +51,7 @@ RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
 bwa mem -t $NCPU -R $RG  brook_genome_hap1_v1.fa $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-samtools view -b -q 10 -o - $ALIGNEDFOLDER/${name}.bam
+samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam"
 
 # Sort
 samtools sort --threads $NCPU $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.bam \

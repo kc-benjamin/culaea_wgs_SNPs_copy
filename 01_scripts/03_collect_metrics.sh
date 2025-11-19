@@ -12,13 +12,15 @@
 #SBATCH --array=0-96
 PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-module load Java/11.0.20 picard/2.25.1-Java-ll R/4.4.2-gfbf-2024a
+module load Java/11.0.20 R/4.4.2-gfbf-2024a
+#picard/2.25.1-Java-ll 
 
 # Global variables
-GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/*fasta | xargs -n 1 basename) #changed to fasta to target brook genome
-ALIGNEDFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/06_bam_files"
-METRICSFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/99_metrics"
+GENOMEFOLDER="03_genome"
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to fasta to target brook genome
+GENOME_FULL="$GENOMEFOLDER/$GENOME"
+ALIGNEDFOLDER="06_bam_files"
+METRICSFOLDER="99_metrics"
 PICARD=$EBROOTPICARD/picard.jar
 ALIGN="CollectAlignmentSummaryMetrics"
 INSERT="CollectInsertSizeMetrics"
@@ -33,11 +35,14 @@ LOG_FOLDER="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 
 #Pass the sample number from the sbatch command
-samp_num="$PREFIX"
+samp_num=$SLURM_ARRAY_TASK_ID
+#echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
+#echo "samp_num='$samp_num'"
+#echo "PREFIX='$PREFIX'"
 
     # Fetch filename from the array
-    file=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-    bamfile=${file}.sorted.bam
+    file=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+    bamfile= "06_bam_files/${file}.sorted.bam"
 
     echo \n">>> Computing alignment metrics for $file <<<"\n
     java -jar $PICARD $ALIGN \

@@ -32,10 +32,10 @@ then
 fi
 
 #Pass the sample number from the sbatch command
-samp_num=$((SLURM_ARRAY_TASK_ID + 1))
+samp_num=$SLURM_ARRAY_TASK_ID
 echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
 echo "samp_num='$samp_num'"
-echo "PREFIX='$PREFIX'"
+#echo "PREFIX='$PREFIX'"
 
 # Pull sample name from the sample info
 name=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
@@ -49,15 +49,15 @@ echo ">>> Aligning file $file1 $file2 <<<"
 RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 
 # Align reads
-bwa index $GENOME_FULL bwa-generated-index
-bwa mem -t $NCPU -R $RG bwa-generated-index $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-samtools view -b -q 10 - -o $ALIGNEDFOLDER/${name%}.bam
+#bwa index $GENOME_FULL bwa-generated-index
+bwa mem -t $NCPU -R $RG  brook_genome_hap1_v1.fa $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+samtools view -b -q 10 -o - $ALIGNEDFOLDER/${name}.bam
 
 # Sort
-samtools sort --threads $NCPU $ALIGNEDFOLDER/${name%.R1.trimmed.fastq.gz}.bam \
-    > $ALIGNEDFOLDER/${name%.R1.trimmed.fastq.gz}.sorted.bam
+samtools sort --threads $NCPU $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.bam \
+    > $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.sorted.bam
 
 # Index
-samtools index $ALIGNEDFOLDER/${name%.R1.trimmed.fastq.gz}.sorted.bam
+samtools index $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.sorted.bam
 
 &> $LOG_FOLDER/02_mapping_${name}.log

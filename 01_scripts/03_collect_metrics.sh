@@ -16,7 +16,7 @@ module load Java/11.0.20 picard/2.25.1-Java-ll R/4.4.2-gfbf-2024a
 
 # Global variables
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/*fa | xargs -n 1 basename)
+GENOME=$(ls -1 $GENOMEFOLDER/*fasta | xargs -n 1 basename) #changed to fasta to target brook genome
 ALIGNEDFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/06_bam_files"
 METRICSFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/99_metrics"
 PICARD=$EBROOTPICARD/picard.jar
@@ -36,7 +36,7 @@ cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 samp_num=PREFIX
 
     # Fetch filename from the array
-    file=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+    file=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
     bamfile=${file}.sorted.bam
 
     echo \n">>> Computing alignment metrics for $file <<<"\n

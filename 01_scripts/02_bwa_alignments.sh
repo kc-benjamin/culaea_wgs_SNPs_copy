@@ -49,7 +49,7 @@ echo ">>> Aligning file $file1 $file2 <<<"
 RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 
 # Align reads
-bwa index $GENOME bwa-generated-index
+bwa index $GENOME_FULL bwa-generated-index
 bwa mem -t $NCPU -R $RG bwa-generated-index $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
 samtools view -Sb -q 10 - > $ALIGNEDFOLDER/${name%}.bam
 

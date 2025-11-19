@@ -12,7 +12,7 @@
 #SBATCH --error=98_log_files/%a_%x.err
 #SBATCH --array=0-96
 
-PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
+#PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 #currently for Muir Lake
 # Load up fastp
 module load fastp/0.23.4-GCC-13.2.0
@@ -25,14 +25,15 @@ LOG="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 #need to make the directory 01_reports in 05_trimmed_data
 
 #Pass the sample number from the sbatch command
-#samp_num=$PREFIX
+samp_num=$SLURM_ARRAY_TASK_ID
+
 
 #Pull sample name from the sample info
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${$PREFIX}p")
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} \
-        -i "$INDIR/$(cut -f12 02_info_files/SRR_Acc_List_ML.txt | sed -n "${$PREFIX}p").fastq" \
-        -I "$INDIR/$(cut -f13 02_info_files/SRR_Acc_List_ML.txt | sed -n "${$PREFIX}p").fastq" \
+        -i "$INDIR/$(cut -f12 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p").fastq" \
+        -I "$INDIR/$(cut -f13 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p").fastq" \
         -o $OUTDIR/"$sample_name".R1.trimmed.fastq.gz \
         -O $OUTDIR/"$sample_name".R2.trimmed.fastq.gz \
         -j $OUTDIR/01_reports/"$sample_name".json \

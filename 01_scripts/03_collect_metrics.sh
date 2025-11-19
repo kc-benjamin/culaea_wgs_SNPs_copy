@@ -33,7 +33,7 @@ LOG_FOLDER="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 
 #Pass the sample number from the sbatch command
-samp_num=PREFIX
+samp_num="$PREFIX"
 
     # Fetch filename from the array
     file=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

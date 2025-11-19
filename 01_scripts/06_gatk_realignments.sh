@@ -32,7 +32,7 @@ echo " >>> Realigning...
 "
 
 #Pass the sample number from the sbatch command
-samp_num=PREFIX
+samp_num="$PREFIX"
 
 # Fetch filename from the array
 sample_name=$(cut -f1 /home/kcb95328/culaea_wgs_SNPs_copy/02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

@@ -12,7 +12,7 @@
 #SBATCH --array=0-96
 PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-module load Java/11.0.20 R/4.4.2-gfbf-2024a
+ml Java/11.0.20 R/4.4.2-gfbf-2024a
 java -jar $EBROOTPICARD/picard.jar
 
 # Global variables
@@ -47,19 +47,19 @@ samp_num=$((SLURM_ARRAY_TASK_ID +1))
     echo \n">>> Computing alignment metrics for $file <<<"\n
     java -jar $PICARD $ALIGN \
         R=$GENOMEFOLDER/$GENOME \
-        I=$ALIGNEDFOLDER/$bamfile \
+        I=$bamfile \
         O=$METRICSFOLDER/${file}_alignment_metrics.txt
 
     echo \n">>> Computing insert size metrics for $file <<<"\n
     java -jar $PICARD $INSERT \
-        I=$ALIGNEDFOLDER/$bamfile \
+        I=$bamfile \
         OUTPUT=$METRICSFOLDER/${file}_insert_size_metrics.txt \
         HISTOGRAM_FILE=$METRICSFOLDER/${file}_insert_size_histogram.pdf
 
     echo \n">>> Computing coverage metrics for $file <<<"\n
     java -jar $PICARD $COVERAGE \
         R=$GENOMEFOLDER/$GENOME \
-        I=$ALIGNEDFOLDER/$bamfile \
+        I=$bamfile \
         OUTPUT=$METRICSFOLDER/${file}_collect_wgs_metrics.txt\
         CHART=$METRICSFOLDER/${file}_collect_wgs_metrics.pdf
 

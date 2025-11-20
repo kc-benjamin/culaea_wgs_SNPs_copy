@@ -21,7 +21,7 @@ GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #cha
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ALIGNEDFOLDER="06_bam_files"
 METRICSFOLDER="99_metrics"
-PICARD=$EBROOTPICARD/picard.jar
+PICARD=$EBROOTPICARD/picard.jar #this is risky and may not work if picard fails
 ALIGN="CollectAlignmentSummaryMetrics"
 INSERT="CollectInsertSizeMetrics"
 COVERAGE="CollectWgsMetricsWithNonZeroCoverage"
@@ -42,7 +42,7 @@ samp_num=$SLURM_ARRAY_TASK_ID
 
     # Fetch filename from the array
     file=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-    bamfile= "06_bam_files/${file}.sorted.bam"
+    bamfile= "06_bam_files/${file}.trimmed.fastq.gz.sorted.bam" ###DOUBLE CHECK THAT THESE ARE THE OUTPUT FILES THAT COME OUT###
 
     echo \n">>> Computing alignment metrics for $file <<<"\n
     java -jar $PICARD $ALIGN \

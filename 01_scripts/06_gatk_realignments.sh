@@ -9,6 +9,7 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
+#SBATCH --error=98_log_files/%x_%j.err
 #SBATCH --array=0-96
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)

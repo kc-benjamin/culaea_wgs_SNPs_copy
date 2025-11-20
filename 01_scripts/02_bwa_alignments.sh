@@ -50,14 +50,14 @@ RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam"
+#bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+#samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam"
 
 # Sort
-samtools sort --threads $NCPU $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.bam \
-    > $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.sorted.bam
+samtools sort -t $NCPU $ALIGNEDFOLDER/${name}.bam \
+    > $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-samtools index $ALIGNEDFOLDER/${name.R1.trimmed.fastq.gz}.sorted.bam
+samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
 
 &> $LOG_FOLDER/02_mapping_${name}.log

@@ -12,7 +12,8 @@
 #SBATCH --array=0-96
 PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-module load Java/11.0.20 R/4.4.2-gfbf-2024a picard/2.25.1-Java-ll 
+module load Java/11.0.20 R/4.4.2-gfbf-2024a
+java -jar $EBROOTPICARD/picard.jar
 
 # Global variables
 GENOMEFOLDER="03_genome"

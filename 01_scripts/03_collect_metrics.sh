@@ -12,8 +12,7 @@
 #SBATCH --array=0-96
 PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-module load Java/11.0.20 R/4.4.2-gfbf-2024a
-#picard/2.25.1-Java-ll 
+module load Java/11.0.20 R/4.4.2-gfbf-2024a picard/2.25.1-Java-ll 
 
 # Global variables
 GENOMEFOLDER="03_genome"
@@ -35,14 +34,14 @@ LOG_FOLDER="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 
 #Pass the sample number from the sbatch command
-samp_num=$SLURM_ARRAY_TASK_ID
+samp_num=$((SLURM_ARRAY_TASK_ID +1))
 #echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
 #echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"
 
     # Fetch filename from the array
     file=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-    bamfile= "06_bam_files/${file}.trimmed.fastq.gz.sorted.bam" ###DOUBLE CHECK THAT THESE ARE THE OUTPUT FILES THAT COME OUT###
+    bamfile="06_bam_files/${file}.trimmed.fastq.gz.sorted.bam" ###DOUBLE CHECK THAT THESE ARE THE OUTPUT FILES THAT COME OUT###
 
     echo \n">>> Computing alignment metrics for $file <<<"\n
     java -jar $PICARD $ALIGN \

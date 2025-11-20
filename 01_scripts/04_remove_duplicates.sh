@@ -19,7 +19,7 @@ java -jar $EBROOTPICARD/picard.jar
 
 # Global variables
 PICARD=$EBROOTPICARD/picard.jar
-MARKDUPS="MarkDuplicates"
+#MARKDUPS="MarkDuplicates"
 ALIGNEDFOLDER="06_bam_files"
 ALIGNEDFOLDER_test="06_bam_files/test"
 METRICSFOLDER="99_metrics"
@@ -47,7 +47,7 @@ samtools view -f 0x2 -b $ALIGNEDFOLDER_test/$file > $ALIGNEDFOLDER_test/${sample
 
 echo "DEduplicatING sample $file"
 
-java -jar $PICARD $MARKDUPS \
+java -jar $PICARD MarkDuplicates \
     I=$ALIGNEDFOLDER_test/$file \
     O=$ALIGNEDFOLDER_test/${sample_name}.dedup.bam \
     METRICS_FILE=$METRICSFOLDER/${sample_name}_DUP_metrics.txt \

@@ -22,6 +22,7 @@ GENOME_FULL="$GENOMEFOLDER/$GENOME"
 INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
+ALIGNED_test="06_bam_files/test2"
 LOG_FOLDER="98_log_files"
 echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 
@@ -50,14 +51,14 @@ RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-#bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-#samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam"
+bwa mem -M -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
 samtools sort -t $NCPU $ALIGNEDFOLDER/${name}.bam \
-    > $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+    > $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 &> $LOG_FOLDER/02_mapping_${name}.log

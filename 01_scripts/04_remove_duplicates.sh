@@ -49,11 +49,13 @@ file=${sample_name}.trimmed.fastq.gz.sorted.bam ###again need to make sure that 
 echo "DEduplicatING sample $file"
 
 java -jar $PICARD MarkDuplicates \
-    I=$ALIGNEDFOLDER/$file \
-    O=$ALIGNEDFOLDER/${sample_name}.dedup.bam \
-    METRICS_FILE=$METRICSFOLDER/${sample_name}_DUP_metrics.txt \
-    VALIDATION_STRINGENCY=SILENT \
-    REMOVE_DUPLICATES=true
+    -I $ALIGNEDFOLDER/$file \
+    -O $ALIGNEDFOLDER/${sample_name}.dedup.bam \
+    -METRICS_FILE $METRICSFOLDER/${sample_name}_DUP_metrics.txt \
+    -VALIDATION_STRINGENCY SILENT \
+    -REMOVE_DUPLICATES true
+#MarkDuplicates -I 06_bam_files/SRR19221339.trimmed.fastq.gz.sorted.bam -O 06_bam_files/SRR19221339.dedup.bam \
+#-METRICS_FILE 99_metrics/SRR19221339_DUP_metrics.txt -VALIDATION_STRINGENCY SILENT -REMOVE_DUPLICATES true
 
 echo " >>> Cleaning a bit...
 "

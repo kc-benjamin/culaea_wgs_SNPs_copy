@@ -14,7 +14,8 @@
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-ml Java/11.0.20 SAMtools/1.18-GCC-12.3.0
+ml Java/17.0.6 
+ml picard/3.3.0-Java-17
 java -jar $EBROOTPICARD/picard.jar
 
 # Global variables
@@ -41,15 +42,15 @@ sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 file=${sample_name}.trimmed.fastq.gz.sorted.bam ###again need to make sure that this is a file that exists###
 
 #removing duplicates
-samtools view -f 0x2 -b $ALIGNEDFOLDER_test/$file > $ALIGNEDFOLDER_test/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
+#samtools view -f 0x2 -b $ALIGNEDFOLDER_test/$file > $ALIGNEDFOLDER_test/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 #this will remove the duplicates stored within the same file and remove the weird reads.
 #copied files over to a test folder to make sure it works first
 
 echo "DEduplicatING sample $file"
 
 java -jar $PICARD MarkDuplicates \
-    I=$ALIGNEDFOLDER_test/$file \
-    O=$ALIGNEDFOLDER_test/${sample_name}.dedup.bam \
+    I=$ALIGNEDFOLDER/$file \
+    O=$ALIGNEDFOLDER/${sample_name}.dedup.bam \
     METRICS_FILE=$METRICSFOLDER/${sample_name}_DUP_metrics.txt \
     VALIDATION_STRINGENCY=SILENT \
     REMOVE_DUPLICATES=true

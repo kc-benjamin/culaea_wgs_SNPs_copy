@@ -22,7 +22,7 @@ java -jar $EBROOTPICARD/picard.jar
 PICARD=$EBROOTPICARD/picard.jar
 #MARKDUPS="MarkDuplicates"
 ALIGNEDFOLDER="06_bam_files"
-ALIGNEDFOLDER_test="06_bam_files/test"
+ALIGNEDFOLDER_test="06_bam_files/test2"
 METRICSFOLDER="99_metrics"
 
 # Copy script to log folder
@@ -47,6 +47,12 @@ file2=${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 #this will remove the duplicates stored within the same file and remove the weird reads.
 #copied files over to a test folder to make sure it works first
 
+echo "Validating sample $file2"
+
+java -jar $PICARD ValidateSamFile \
+      -I $ALIGNEDFOLDER_test/$file2 \
+      -MODE SUMMARY
+
 echo "DEduplicatING sample $file2"
 
 java -jar $PICARD MarkDuplicates \
@@ -54,6 +60,7 @@ java -jar $PICARD MarkDuplicates \
     -O $ALIGNEDFOLDER_test/${sample_name}.dedup.bam \
     -METRICS_FILE $METRICSFOLDER/${sample_name}_DUP_metrics.txt \
     -VALIDATION_STRINGENCY SILENT \
+    -ASSUME_SORT_ORDER queryname \
     -REMOVE_DUPLICATES true
 #MarkDuplicates -I 06_bam_files/SRR19221339.trimmed.fastq.gz.sorted.bam -O 06_bam_files/SRR19221339.dedup.bam \
 #-METRICS_FILE 99_metrics/SRR19221339_DUP_metrics.txt -VALIDATION_STRINGENCY SILENT -REMOVE_DUPLICATES true

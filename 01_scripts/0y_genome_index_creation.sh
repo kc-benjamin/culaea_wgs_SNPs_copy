@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/genome_index_%j.out
 
-module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
+module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0 
 
 #location variables
 GENOMEFOLDER="03_genome"
@@ -18,5 +18,8 @@ GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #cha
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
 #bwa index -p brook_genome_hap1_v1.fa -a is $GENOME_FULL
-
 samtools faidx $GENOME_FULL
+
+module purge
+module load GATK/3.8-1-Java-1.8.0_241
+gatk CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict

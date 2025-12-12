@@ -14,8 +14,8 @@
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-ml Java/17.0.6 GCCcore/12.3.0 SAMtools/1.18-GCC-12.3.0 
-ml picard/3.3.0-Java-17
+ml Java/11.0.20 SAMtools/1.18-GCC-12.3.0 
+ml picard/2.25.1-Java-11
 java -jar $EBROOTPICARD/picard.jar
 
 # Global variables

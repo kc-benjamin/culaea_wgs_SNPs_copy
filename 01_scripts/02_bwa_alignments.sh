@@ -22,7 +22,7 @@ GENOME_FULL="$GENOMEFOLDER/$GENOME"
 INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
-ALIGNED_test="06_bam_files/test2"
+ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
 echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 

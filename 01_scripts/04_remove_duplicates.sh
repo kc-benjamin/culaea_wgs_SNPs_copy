@@ -14,7 +14,7 @@
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-ml Java/17.0.6 
+ml Java/17.0.6 SAMtools/1.18-GCC-12.3.0
 ml picard/3.3.0-Java-17
 java -jar $EBROOTPICARD/picard.jar
 
@@ -35,7 +35,7 @@ export JAVA_TOOL_OPTIONS="-Xms2g -Xmx50g "
 export _JAVA_OPTIONS="-Xms2g -Xmx50g "
 
 #Pass the sample number from the sbatch command
-samp_num=$((SLURM_ARRAY_TASK_ID +1))
+samp_num=$(($SLURM_ARRAY_TASK_ID +1))
 
 # Fetch filename from the array
 sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")

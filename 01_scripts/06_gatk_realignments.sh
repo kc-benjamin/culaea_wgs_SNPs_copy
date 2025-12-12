@@ -50,7 +50,7 @@ samtools index $BAM/$file
 # Now load modules
 module purge
 #module load nixpkgs/16.09 #ensure that this is right#
-ml Java/17.0.6 GATK/4.6.0.0-GCCcore-13.2.0-Java-17
+ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
 
 # Realign
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \

@@ -17,4 +17,4 @@ GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-bwa index [-a bwtsw|is] $GENOME_FULL bwa-index-brook
+bwa index $GENOME_FULL bwa-index-brook

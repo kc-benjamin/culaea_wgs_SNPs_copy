@@ -52,10 +52,10 @@ RG=$'@RG\tID:'"${name}"$'\tSM:'"${name}"$'\tPL:Illumina'
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
 bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-#samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
+    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
-samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
+samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
     -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index

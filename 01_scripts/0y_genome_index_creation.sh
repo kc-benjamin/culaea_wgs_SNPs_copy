@@ -21,5 +21,5 @@ GENOME_FULL="$GENOMEFOLDER/$GENOME"
 #samtools faidx $GENOME_FULL
 
 #module purge
-ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
-java -jar $EBROOTGATK/CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict
+ml Java/17.0.6 GATK/4.6.0.0-GCCcore-13.2.0-Java-17 picard/3.3.0-Java-17
+java -jar picard.jar CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict

@@ -10,11 +10,13 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/genome_index_%j.out
 
-module load BWA/0.7.18-GCCcore-13.3.0
+module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
 
 #location variables
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-bwa index -p bwa-index-brook -a is $GENOME_FULL
+#bwa index -p brook_genome_hap1_v1.fa -a is $GENOME_FULL
+
+samtools faidx $GENOME_FULL

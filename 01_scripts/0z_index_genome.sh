@@ -3,7 +3,7 @@
 #SBATCH --partition=batch  
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=8
 #SBATCH --mem=10G
 #SBATCH --time=0-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu

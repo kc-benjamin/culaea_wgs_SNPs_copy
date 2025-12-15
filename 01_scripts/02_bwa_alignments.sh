@@ -14,7 +14,7 @@
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
-module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
+module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 
 # Global variables
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"

@@ -14,7 +14,7 @@
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
-#module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
+module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0
 
 # Global variables
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
@@ -52,14 +52,14 @@ RG=$'@RG\tID:'"${name}"$'\tSM:'"${name}"$'\tPL:Illumina'
 echo $RG
 
 # Align reads
-#bwa index $GENOME_FULL bwa-generated-index
-#bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-#    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
+bwa index $GENOME_FULL bwa-generated-index
+bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
-#samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
- #   -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
+    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-#samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
-#    &> $LOG_FOLDER/02_mapping_${name}.log
+samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+    &> $LOG_FOLDER/02_mapping_${name}.log

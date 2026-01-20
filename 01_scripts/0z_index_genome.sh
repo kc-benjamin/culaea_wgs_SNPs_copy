@@ -12,4 +12,4 @@
 #SBATCH --error=/scratch/kcb95328/Mee-Culaea-WGS/98_log_files/0z_genome_%j.err
 
 ml BWA/0.7.18-GCCcore-13.3.0
-bwa index -p brook_genome_hap1_v1.fasta -a is brook_genome_hap1_v1.fasta
+bwa index -p brook_genome_hap1_v1.fasta -a bwtsw brook_genome_hap1_v1.fasta

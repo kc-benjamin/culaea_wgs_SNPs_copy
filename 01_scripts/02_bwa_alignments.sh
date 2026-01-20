@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=10G
+#SBATCH --mem=6G
 #SBATCH --time=0-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
@@ -18,14 +18,14 @@ module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 
 # Global variables
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fasta | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
-INDGENOME="${GENOME}.fai"
+#INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
 ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
-echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
+#echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 
 # Test if user specified a number of CPUs
 #if [[ -z "$NCPU" ]]

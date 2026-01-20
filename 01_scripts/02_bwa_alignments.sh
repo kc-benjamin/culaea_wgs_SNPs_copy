@@ -8,9 +8,9 @@
 #SBATCH --time=0-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
-#SBATCH --output=98_log_files/%x_%j.out
-#SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=0-96
+#SBATCH --output=98_log_files/%x_%j_.out
+#SBATCH --error=98_log_files/%x_%j_.err
+#SBATCH --array=1-1
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
@@ -20,7 +20,7 @@ module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fasta | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
-#INDGENOME="${GENOME}.fai"
+##INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
 ALIGNED_test="06_bam_files/test3"

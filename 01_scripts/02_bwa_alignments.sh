@@ -48,7 +48,8 @@ file2=${name}.R2.trimmed.fastq.gz
 echo ">>> Aligning file $file1 $file2 <<<"
 
 # Set read group header line info
-RG=$'@RG\tID:'"${name}"$'\tSM:'"${name}"$'\tPL:Illumina'
+#RG=$'@RG\tID:'"${name}"$'\tSM:'"${name}"$'\tPL:Illumina'
+RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 echo $RG
 
 # Align reads
@@ -58,8 +59,8 @@ bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RA
 
 # Sort
 #samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
-    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+   # -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
 #samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
-    &> $LOG_FOLDER/02_mapping_${name}.log
+   # &> $LOG_FOLDER/02_mapping_${name}.log

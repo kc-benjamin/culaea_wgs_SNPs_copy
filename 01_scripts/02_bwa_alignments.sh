@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=6G
-#SBATCH --time=0-24:00:00
+#SBATCH --time=0-12:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out

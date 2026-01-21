@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out
 #SBATCH --error=98_log_files/%x_%j_.err
-#SBATCH --array=1-1
+#SBATCH --array=0-96
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
@@ -54,13 +54,13 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
+bwa mem -M -v 4 -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 #|
+    #samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
-samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
-    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+#samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
+    #-o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
-    &> $LOG_FOLDER/02_mapping_${name}.log
+#samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+    #&> $LOG_FOLDER/02_mapping_${name}.log

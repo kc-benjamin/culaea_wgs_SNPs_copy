@@ -23,6 +23,6 @@ GENOME_FULL="$GENOMEFOLDER/$GENOME"
 #ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
 #echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
-name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+#name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
-samtools view -q 10 -o "06_bam_files/${name}.sam" "06_bam_files/${name}.bam"
+samtools view -q 10 -o "06_bam_files/SRR19221208.sam" "06_bam_files/SRR19221208.bam"

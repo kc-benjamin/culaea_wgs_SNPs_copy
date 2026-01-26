@@ -13,5 +13,5 @@
 
 module load SAMtools/1.21-GCC-13.3.0
 
-samtools sort -@ $NCPU 06_bam_files/SRR19221208.bam \
-    -o 06_bam_files/SRR19221208.trimmed.fastq.gz.sorted.bam
+samtools sort -@ $NCPU 06_bam_files/SRR19221208.sam #\
+    #-o 06_bam_files/SRR19221208.trimmed.fastq.gz.sorted.bam

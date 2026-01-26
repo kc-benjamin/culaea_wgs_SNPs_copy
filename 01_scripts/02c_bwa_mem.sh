@@ -24,4 +24,4 @@ RAWDATAFOLDER="05_trimmed_data"
 #file1=${name}.R1.trimmed.fastq.gz
 #file2=${name}.R2.trimmed.fastq.gz
 
-bwa mem -M -t $SLURM_CPUS_PER_TASK -R @RG\tID:SRR19221208\tSM:SRR19221208\tPL:Illumina $GENOME_FULL $RAWDATAFOLDER/SRR19221208.R1.trimmed.fastq.gz $RAWDATAFOLDER/SRR19221208.R2.trimmed.fastq.gz
+bwa mem -M -t $SLURM_CPUS_PER_TASK -R "@RG\tID:SRR19221208\tSM:SRR19221208\tPL:Illumina" $GENOME_FULL $RAWDATAFOLDER/SRR19221208.R1.trimmed.fastq.gz $RAWDATAFOLDER/SRR19221208.R2.trimmed.fastq.gz

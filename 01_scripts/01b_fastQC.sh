@@ -14,6 +14,6 @@
 
 module load FastQC/0.12.1-Java-11
 
-fastqc -o 02_fastQC \
+fastqc -o /05_trimmed_data/02_fastQC \
     -t ${SLURM_CPUS_PER_TASK} 04_raw_data/$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)_1.fastq \
     04_raw_data/$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)_2.fastq

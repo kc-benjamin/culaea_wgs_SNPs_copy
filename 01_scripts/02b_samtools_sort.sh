@@ -13,5 +13,8 @@
 
 module load SAMtools/1.21-GCC-13.3.0
 
-samtools sort -@ $NCPU 06_bam_files/SRR19221208.sam #\
-    #-o 06_bam_files/SRR19221208.trimmed.fastq.gz.sorted.bam
+samp_num=$(($SLURM_ARRAY_TASK_ID +1))
+name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+
+samtools sort -@ $NCPU 04_trimmed_data/${name}.fastq  #\
+    #-o 06_bam_files/${name}.R1.trimmed.fastq.gz.bam

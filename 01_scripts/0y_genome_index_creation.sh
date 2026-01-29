@@ -10,16 +10,17 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/genome_index_%j.out
 
-#module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.18-GCC-12.3.0 
+module load BWA/0.7.18-GCCcore-13.3.0 #SAMtools/1.18-GCC-12.3.0 
 
 #location variables
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-#bwa index -p brook_genome_hap1_v1.fa -a is $GENOME_FULL
+#bwa index $GENOME_FULL bwa-generated-index
+bwa index -p GCF_949316345.1_Punpun_genome.fa -a bwtsw $GENOME_FULL
 #samtools faidx $GENOME_FULL
 
 #module purge
-ml Java/17.0.6 GATK/4.6.0.0-GCCcore-13.2.0-Java-17 picard/3.3.0-Java-17
-java -jar picard.jar CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict
+#ml Java/17.0.6 GATK/4.6.0.0-GCCcore-13.2.0-Java-17 picard/3.3.0-Java-17
+#java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict

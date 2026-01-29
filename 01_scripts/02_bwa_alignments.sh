@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=6G
-#SBATCH --time=0-12:00:00
+#SBATCH --time=0-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out
@@ -18,14 +18,14 @@ module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 
 # Global variables
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to ninespine genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ##INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
 ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
-#echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
+echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 
 # Test if user specified a number of CPUs
 #if [[ -z "$NCPU" ]]
@@ -45,7 +45,7 @@ name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 # Name of uncompressed file
 file1=${name}.R1.trimmed.fastq.gz
 file2=${name}.R2.trimmed.fastq.gz
-echo ">>> Aligning file $file1 $file2 <<<"
+echo ">>> Aligning file $file1 and $file2 <<<"
 
 # Set read group header line info
 #RG=$'@RG\tID:'"${name}"$'\tSM:'"${name}"$'\tPL:Illumina'
@@ -54,13 +54,13 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -M -v 4 -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 #|
-    #samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
+bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
-#samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
-    #-o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
+    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-#samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
-    #&> $LOG_FOLDER/02_mapping_${name}.log
+samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+    &> $LOG_FOLDER/02_mapping_${name}.log

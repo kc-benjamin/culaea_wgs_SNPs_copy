@@ -34,7 +34,7 @@ echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 #fi
 
 #Pass the sample number from the sbatch command
-samp_num=$(($SLURM_ARRAY_TASK_ID +1))
+samp_num=$(($SLURM_ARRAY_TASK_ID))
 echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
 echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"
@@ -54,13 +54,13 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
+bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 #|
+    #samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
-samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
-    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+#samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
+   # -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
-    &> $LOG_FOLDER/02_mapping_${name}.log
+#samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+  #  &> $LOG_FOLDER/02_mapping_${name}.log

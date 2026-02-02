@@ -14,5 +14,7 @@
 
 module load FastQC/0.12.1-Java-11
 
-fastqc -o /scratch/kcb95328/Mee-Culaea-WGS/05_trimmed_data/02_fastQC_raw_files \
-    -t ${SLURM_CPUS_PER_TASK} 04_raw_data/$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt).fastq
+fastqc -o /scratch/kcb95328/Mee-Culaea-WGS/05_trimmed_data/03_fastQC_trimmed_files \
+    -t ${SLURM_CPUS_PER_TASK} \
+    04_raw_data/$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt).R1.trimmed.fastq.gz \
+    04_raw_data/$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt).R2.trimmed.fastq.gz

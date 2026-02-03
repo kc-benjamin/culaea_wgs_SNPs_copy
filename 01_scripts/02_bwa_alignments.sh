@@ -21,7 +21,7 @@ GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to ninespine genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ##INDGENOME="${GENOME}.fai"
-RAWDATAFOLDER="05_trimmed_data"
+RAWDATAFOLDER="04_raw_data"
 ALIGNEDFOLDER="06_bam_files"
 ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
@@ -43,8 +43,9 @@ echo "samp_num='$samp_num'"
 name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
 # Name of uncompressed file
-file1=${name}.R1.trimmed.fastq.gz
-file2=${name}.R2.trimmed.fastq.gz
+#file1=${name}.R1.trimmed.fastq.gz
+#file2=${name}.R2.trimmed.fastq.gz
+file1=${name}.fastq
 echo ">>> Aligning file $file1 and $file2 <<<"
 
 # Set read group header line info
@@ -54,7 +55,7 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 > $ALIGNED_test/$name.sam #|
+bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 > $ALIGNED_test/$name.sam #| $RAWDATAFOLDER/$file2
     #samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort

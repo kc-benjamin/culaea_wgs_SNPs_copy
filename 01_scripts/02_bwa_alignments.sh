@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out
 #SBATCH --error=98_log_files/%x_%j_.err
-#SBATCH --array=1-1
+#SBATCH --array=1-97
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
@@ -34,7 +34,7 @@ echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 #fi
 
 #Pass the sample number from the sbatch command
-samp_num=$(($SLURM_ARRAY_TASK_ID))
+samp_num=$SLURM_ARRAY_TASK_ID
 echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
 echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"

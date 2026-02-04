@@ -18,7 +18,7 @@
 module load fastp/0.23.4-GCC-13.2.0
 
 # Variables
-INDIR="04_raw_data"
+INDIR="04_raw_data/split-read-files"
 OUTDIR="05_trimmed_data"
 LOG="98_log_files"
 #mkdir $OUTDIR/01_reports

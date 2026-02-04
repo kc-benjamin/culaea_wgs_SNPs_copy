@@ -27,15 +27,14 @@ LOG="98_log_files"
 #Pass the sample number from the sbatch command
 samp_num=$SLURM_ARRAY_TASK_ID
 
-
 #Pull sample name from the sample info
 sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
-fastp -w ${SLURM_CPUS_PER_TASK} -g \
-        -i "$INDIR/$(cut -f12 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p").fastq" \
-        -I "$INDIR/$(cut -f13 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p").fastq" \
-        -o $OUTDIR/"$sample_name".R1.trimmed.fastq.gz \
-        -O $OUTDIR/"$sample_name".R2.trimmed.fastq.gz \
+fastp -w ${SLURM_CPUS_PER_TASK} --trim_poly_g --dedup \
+        -i "$INDIR/${sample_name}_1.fastq" \
+        -I "$INDIR/${sample_name}_2.fastq" \
+        -o ${OUTDIR}/"$sample_name".R1.trimmed.fastq.gz \
+        -O ${OUTDIR}/"$sample_name".R2.trimmed.fastq.gz \
         -j $OUTDIR/01_reports/"$sample_name".json \
         -h $OUTDIR/01_reports/"$sample_name".html \
         &> "$LOG"/01_fastp_"$sample_name".out

@@ -18,7 +18,7 @@ module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 
 # Global variables
 GENOMEFOLDER="/scratch/kcb95328/Mee-Culaea-WGS/03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to ninespine genome
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to ninespine genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ##INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="04_raw_data"
@@ -55,12 +55,12 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 > $ALIGNED_test/$name.sam #| $RAWDATAFOLDER/$file2
-    #samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
+#bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 > $ALIGNED_test/$name.sam #| $RAWDATAFOLDER/$file2
+    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam"
 
 # Sort
-#samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
-   # -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
+    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
 #samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam

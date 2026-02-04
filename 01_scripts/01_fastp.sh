@@ -31,7 +31,7 @@ samp_num=$SLURM_ARRAY_TASK_ID
 #Pull sample name from the sample info
 sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
-fastp -w ${SLURM_CPUS_PER_TASK} \
+fastp -w ${SLURM_CPUS_PER_TASK} -g \
         -i "$INDIR/$(cut -f12 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p").fastq" \
         -I "$INDIR/$(cut -f13 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p").fastq" \
         -o $OUTDIR/"$sample_name".R1.trimmed.fastq.gz \

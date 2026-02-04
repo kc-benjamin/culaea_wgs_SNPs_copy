@@ -19,5 +19,5 @@ ml SRA-Toolkit/3.0.3-gompi-2022a
 #get accession number
 name=$(sed -n "$(($SLURM_ARRAY_TASK_ID))p" 02_info_files/SRR_Acc_List_ML.txt)
 #fastq conversion
-prefetch $name && fastq-dump $name --split-files -O /scratch/kcb95328/Mee-Culaea-WGS/04_raw_data/
+prefetch $name && fastq-dump $name --split-3 -O /scratch/kcb95328/Mee-Culaea-WGS/04_raw_data/split-read-files/ --gzip
 #fasterq-dump $name --split-spot

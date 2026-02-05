@@ -55,12 +55,12 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
+#bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+    #samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
 
 # Sort
-#samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
-    #-o $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
+    -o $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
 #samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam

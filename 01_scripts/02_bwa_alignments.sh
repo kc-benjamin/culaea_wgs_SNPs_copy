@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out
 #SBATCH --error=98_log_files/%x_%j_.err
-#SBATCH --array=1-97
+#SBATCH --array=1-1
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
@@ -23,7 +23,7 @@ GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ##INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
 ALIGNEDFOLDER="06_bam_files"
-ALIGNED_test="06_bam_files/test3"
+#ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
 echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 
@@ -56,12 +56,12 @@ echo $RG
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
 bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    samtools view -b -q 10 -o "$ALIGNED_test/${name}.bam" 
+    samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
 
 # Sort
-samtools sort -@ $NCPU $ALIGNED_test/${name}.bam \
-    -o $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
+#samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
+    #-o $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-samtools index $ALIGNED_test/${name}.trimmed.fastq.gz.sorted.bam
-    &> $LOG_FOLDER/02_mapping_${name}.log
+#samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+    #&> $LOG_FOLDER/02_mapping_${name}.log

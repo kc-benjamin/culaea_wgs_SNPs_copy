@@ -28,10 +28,10 @@ LOG_FOLDER="98_log_files"
 echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
 
 # Test if user specified a number of CPUs
-#if [[ -z "$NCPU" ]]
-#then
-    #NCPU=4
-#fi
+if [[ -z "$NCPU" ]]
+then
+    NCPU=4
+fi
 
 #Pass the sample number from the sbatch command
 samp_num=$SLURM_ARRAY_TASK_ID
@@ -55,8 +55,8 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-#bwa mem -P -M -t $SLURM_CPUS_PER_TASK -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    #samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
+bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+    samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
 
 # Sort
 samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \

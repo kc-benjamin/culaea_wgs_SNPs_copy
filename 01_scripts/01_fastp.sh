@@ -31,8 +31,8 @@ samp_num=$SLURM_ARRAY_TASK_ID
 sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} --trim_poly_g --dedup \
-        -i "$INDIR/${sample_name}_1.fastq" \
-        -I "$INDIR/${sample_name}_2.fastq" \
+        -i "$INDIR/${sample_name}_1.fastq.gz" \
+        -I "$INDIR/${sample_name}_2.fastq.gz" \
         -o ${OUTDIR}/"$sample_name".R1.trimmed.fastq.gz \
         -O ${OUTDIR}/"$sample_name".R2.trimmed.fastq.gz \
         -j $OUTDIR/01_reports/"$sample_name".json \

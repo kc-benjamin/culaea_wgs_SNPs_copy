@@ -55,13 +55,13 @@ echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
-bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
+#bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
+    #samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
 
 # Sort
-samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
-    -o $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+#samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
+    #-o $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-#samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
-    #&> $LOG_FOLDER/02_mapping_${name}.log
+samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+    &> $LOG_FOLDER/02_mapping_${name}.log

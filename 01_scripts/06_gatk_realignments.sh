@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=10G
+#SBATCH --mem-per-cpu=2G
 #SBATCH --time=00-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
@@ -53,11 +53,11 @@ echo "
 ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
 
 # Realign
-java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
-    -T RealignerTargetCreator \
-    -R $GENOMEFOLDER/$GENOME \
-    -I $BAM/$file \
-    -o $BAM/${sample_name}.intervals
+#java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
+    #-T RealignerTargetCreator \
+    #-R $GENOMEFOLDER/$GENOME \
+    #-I $BAM/$file \
+    #-o $BAM/${sample_name}.intervals
 
 echo "
      >>> Realigning INDELs for $file <<<

@@ -35,9 +35,9 @@ module purge
 module load picard/3.3.0-Java-17
  
 java -Xmx32G -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary \
-	R=brook_genome_hap1_v1.fna \
-	O=brook_genome_hap1_v1.dict
+	-R brook_genome_hap1_v1.fna \
+	-O brook_genome_hap1_v1.dict
 
-module unload nixpkgs/16.09 gcc/7.3.0 picard/2.18.9
+#module unload nixpkgs/16.09 gcc/7.3.0 picard/2.18.9
 
 echo "Program finished with exit code $? at: `date`" 

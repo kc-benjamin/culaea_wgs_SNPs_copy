@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-1
+#SBATCH --array=2-97
 
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
@@ -53,11 +53,11 @@ echo "
 ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
 
 # Realign
-#java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
-    #-T RealignerTargetCreator \
-    #-R $GENOMEFOLDER/$GENOME \
-    #-I $BAM/$file \
-    #-o $BAM/${sample_name}.intervals
+java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
+    -T RealignerTargetCreator \
+    -R $GENOMEFOLDER/$GENOME \
+    -I $BAM/$file \
+    -o $BAM/${sample_name}.intervals
 
 echo "
      >>> Realigning INDELs for $file <<<

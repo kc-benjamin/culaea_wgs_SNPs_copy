@@ -11,31 +11,32 @@
 
 cd /scratch/kcb95328/Mee-Culaea-WGS
 
-module load nixpkgs/16.09 gcc/7.3.0
+#module load nixpkgs/16.09 gcc/7.3.0
 
 echo "Starting bwa index at: `date`" 
 
-module load bwa/0.7.17
+module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 
-bwa index GCA_949316345.1_fPunPun2.1_genomic.fna
+bwa index brook_genome_hap1_v1.fna
 
 echo "Finished bwa index at: `date`" 
 
 echo "Starting samtools faidx at: `date`" 
 
-module load samtools/1.9
+#module load samtools/1.9
 
-samtools faidx GCA_949316345.1_fPunPun2.1_genomic.fna
+samtools faidx brook_genome_hap1_v1.fna
 
 echo "Finished samtools faidx at: `date`" 
 
 echo "Starting picard CreateSequenceDictionary at: `date`" 
 
-module load picard/2.18.9
+module purge
+module load picard/3.3.0-Java-17
  
 java -Xmx32G -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary \
-	R=GCA_949316345.1_fPunPun2.1_genomic.fna \
-	O=GCA_949316345.1_fPunPun2.1_genomic.dict
+	R=brook_genome_hap1_v1.fna \
+	O=brook_genome_hap1_v1.dict
 
 module unload nixpkgs/16.09 gcc/7.3.0 picard/2.18.9
 

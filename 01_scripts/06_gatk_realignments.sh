@@ -10,9 +10,8 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=0-96
+#SBATCH --array=1-1
 
-#PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
@@ -21,10 +20,10 @@ LOG_FOLDER="98_log_files"
 cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Load needed modules
-module load SAMtools/1.18-GCC-12.3.0
+#module load SAMtools/1.18-GCC-12.3.0
 
 # Global variables
-BAM="06_bam_files/test2"
+BAM="06_bam_files"
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
@@ -34,21 +33,22 @@ echo " >>> Realigning...
 "
 
 #Pass the sample number from the sbatch command
-samp_num=$((SLURM_ARRAY_TASK_ID +1))
+samp_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch filename from the array
 sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-file=${sample_name}.dedup.bam ##ensure this file exists
+file=${sample_name}.trimmed.fastq.gz.sorted.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
 
 echo "
      >>> Realigning TARGET for $file <<<
      "
 
-# Index the bam file First #what is this for?
-samtools index $BAM/$file
+# Index the bam file First #what is this for? to make coordinates to point the script where in the genome each read belongs
+#samtools index $BAM/$file
+#commented out because I am skipping script 04 and already did this
 
 # Now load modules
-module purge
+#module purge
 #module load nixpkgs/16.09 #ensure that this is right#
 ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
 

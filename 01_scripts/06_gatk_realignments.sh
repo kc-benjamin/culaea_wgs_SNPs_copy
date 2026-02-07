@@ -36,7 +36,8 @@ echo " >>> Realigning...
 samp_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch filename from the array
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+#sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+sample_name=SRR19221338
 file=${sample_name}.trimmed.fastq.gz.sorted.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
 
 echo "

@@ -40,28 +40,29 @@ echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"
 
 # Pull sample name from the sample info
-name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+#name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+name=SRR19221338
 
 # Name of uncompressed file
-file1=SRR19221338.R1.trimmed.fastq.gz
-file2=SRR19221338.R2.trimmed.fastq.gz
+file1=${name}.R1.trimmed.fastq.gz
+file2=${name}.R2.trimmed.fastq.gz
 #file1=${name}.fastq
 echo ">>> Aligning file $file1 and $file2 <<<"
 
 # Set read group header line info
 #RG=$'@RG\tID:'"${name}"$'\tSM:'"${name}"$'\tPL:Illumina'
-RG="@RG\tID:SRR19221338\tSM:SRR19221338\tPL:Illumina"
+RG="@RG\tID:${name}\tSM:${name}\tPL:Illumina"
 echo $RG
 
 # Align reads
 #bwa index $GENOME_FULL bwa-generated-index
 bwa mem -t $NCPU -R $RG $GENOME_FULL $RAWDATAFOLDER/$file1 $RAWDATAFOLDER/$file2 |
-    samtools view -b -q 10 -o "$ALIGNEDFOLDER/SRR19221338.bam" 
+    samtools view -b -q 10 -o "$ALIGNEDFOLDER/${name}.bam" 
 
 # Sort
-samtools sort -@ $NCPU $ALIGNEDFOLDER/SRR19221338.bam \
-    -o $ALIGNEDFOLDER/SRR19221338.trimmed.fastq.gz.sorted.bam
+samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
+    -o $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
 
 # Index
-samtools index $ALIGNEDFOLDER/SRR19221338.trimmed.fastq.gz.sorted.bam
-    &> $LOG_FOLDER/02_mapping_SRR19221338.log
+samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
+    &> $LOG_FOLDER/02_mapping_${name}.log

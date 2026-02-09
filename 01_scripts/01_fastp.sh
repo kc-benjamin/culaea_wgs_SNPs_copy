@@ -28,13 +28,14 @@ LOG="98_log_files"
 samp_num=$SLURM_ARRAY_TASK_ID
 
 #Pull sample name from the sample info
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+#sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+sample_name=SRR19221338
 
 fastp -w ${SLURM_CPUS_PER_TASK} --trim_poly_g --dedup \
-        -i "$INDIR/SRR19221338_1.fastq.gz" \
-        -I "$INDIR/SRR19221338_2.fastq.gz" \
-        -o ${OUTDIR}/SRR19221338.R1.trimmed.fastq.gz \
-        -O ${OUTDIR}/SRR19221338.R2.trimmed.fastq.gz \
-        -j $OUTDIR/01_reports/SRR19221338.json \
-        -h $OUTDIR/01_reports/SRR19221338.html \
-        &> "$LOG"/01_fastp_SRR19221338.out
+        -i "$INDIR/${sample_name}_1.fastq.gz" \
+        -I "$INDIR/${sample_name}_2.fastq.gz" \
+        -o ${OUTDIR}/${sample_name}.R1.trimmed.fastq.gz \
+        -O ${OUTDIR}/${sample_name}.R2.trimmed.fastq.gz \
+        -j $OUTDIR/01_reports/${sample_name}.json \
+        -h $OUTDIR/01_reports/${sample_name}.html \
+        &> "$LOG"/01_fastp_${sample_name}.out

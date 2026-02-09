@@ -10,15 +10,15 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%j_%x.out
 #SBATCH --error=98_log_files/%j_%x.err
-#SBATCH --array=1-1
+#SBATCH --array=1-119
 
 #Go to correct directory
 cd $SLURM_SUBMIT_DIR
 #load package
 ml SRA-Toolkit/3.0.3-gompi-2022a
 #get accession number
-name=$(sed -n "$(($SLURM_ARRAY_TASK_ID))p" 02_info_files/SRR_Acc_List_ML.txt)
+name=$(sed -n "$(($SLURM_ARRAY_TASK_ID))p" 02_info_files/SRR_Acc_List_AL.txt)
 #fastq conversion
 #prefetch $name && 
-fastq-dump SRR19221338 --split-3 -O /scratch/kcb95328/Mee-Culaea-WGS/04_raw_data/split-read-files/ --gzip
+fastq-dump $name --split-3 -O /scratch/kcb95328/AstotinLakeBrooks/04_raw_data --gzip
 #fasterq-dump $name --split-spot

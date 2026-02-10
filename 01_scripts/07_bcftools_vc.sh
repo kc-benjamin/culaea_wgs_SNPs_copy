@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-97
+#SBATCH --array=1-23
 
 # Load needed modules
 module load BCFtools/1.21-GCC-13.3.0

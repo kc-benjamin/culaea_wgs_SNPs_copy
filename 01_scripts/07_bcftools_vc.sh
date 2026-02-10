@@ -21,7 +21,7 @@ INFO="02_info_files"
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
 VCF="07_raw_VCFs"
-BAM="02_info_files/ML_bamfiles_full.txt"
+BAM="02_info_files/ML_bamfiles.txt"
 SAMPS="02_info_files/SRR_Acc_List_ML.txt" #why does this not split it by file?
 
 #Pass the chromosome number from the sbatch command
@@ -32,5 +32,5 @@ CHROM=$(sed -n "${chrom_num}p" 03_genome/brook_genome_hap1_v1_chromosomes2.txt)
 SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
 
-bcftools mpileup -Ou -f $GENOMEFOLDER/$GENOME --bam-list "$BAM" -q 5 -r $CHROM -I -a FMT/AD | \
+bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list "$BAM" -q 5 -r $CHROM -I -a FMT/AD | \
 	bcftools call -S "$SAMPS" -G - -f GQ -mv -Ov > "$VCF/${SCAFFOLD}.vcf"

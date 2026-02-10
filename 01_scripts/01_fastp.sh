@@ -10,10 +10,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%a_%x.out
 #SBATCH --error=98_log_files/%a_%x.err
-#SBATCH --array=1-119
+#SBATCH --array=1-95
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
-#currently for Astotin Lake
+#currently for Shunda Lake
 # Load up fastp
 module load fastp/0.23.4-GCC-13.2.0
 
@@ -28,7 +28,7 @@ LOG="98_log_files"
 samp_num=$SLURM_ARRAY_TASK_ID
 
 #Pull sample name from the sample info
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_AL.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_SL.txt | sed -n "${samp_num}p")
 
 fastp -w ${SLURM_CPUS_PER_TASK} --trim_poly_g --dedup \
         -i "$INDIR/${sample_name}_1.fastq.gz" \

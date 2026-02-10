@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-1
+#SBATCH --array=1-119
 
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
@@ -36,8 +36,8 @@ echo " >>> Realigning...
 samp_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch filename from the array
-#sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-sample_name=SRR19221338
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_AL.txt | sed -n "${samp_num}p")
+
 file=${sample_name}.trimmed.fastq.gz.sorted.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
 
 echo "

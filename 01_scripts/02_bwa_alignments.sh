@@ -10,11 +10,11 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out
 #SBATCH --error=98_log_files/%x_%j_.err
-#SBATCH --array=1-119
+#SBATCH --array=1-95
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
-#for Astotin
+#for Shunda
 module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
 
 # Global variables
@@ -41,7 +41,7 @@ echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"
 
 # Pull sample name from the sample info
-name=$(cut -f1 02_info_files/SRR_Acc_List_AL.txt | sed -n "${samp_num}p")
+name=$(cut -f1 02_info_files/SRR_Acc_List_SL.txt | sed -n "${samp_num}p")
 #name=SRR19221338
 
 # Name of uncompressed file

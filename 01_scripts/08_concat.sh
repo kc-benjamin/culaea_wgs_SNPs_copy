@@ -10,19 +10,19 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 
-module load vcftools bcftools
+module load VCFtools/0.1.16-GCC-13.3.0 BCFtools/1.21-GCC-13.3.0
 module intel/2020.1.217 tabix/0.2.6
 
-vcf-concat $(ls -1 ./07_raw_VCFs/* | perl -pe 's/\n/ /g') > shunda_snps.vcf
+vcf-concat $(ls -1 ./07_raw_VCFs/* | perl -pe 's/\n/ /g') > muir_snps.vcf
 
-bgzip shunda_snps.vcf
-tabix -p vcf shunda_snps.vcf.gz
+bgzip muir_snps.vcf
+tabix -p vcf muir_snps.vcf.gz
 
-bcftools filter -e 'MQ < 30' shunda_snps.vcf.gz -Oz > tmp.vcf.gz
+bcftools filter -e 'MQ < 30' muir_snps.vcf.gz -Oz > tmp.vcf.gz
 
-vcftools --gzvcf tmp.vcf.gz --minQ 30 --minGQ 20 --minDP 5 --max-alleles 2 --recode --recode-INFO-all --stdout > shunda_snps_filtered.vcf
+vcftools --gzvcf tmp.vcf.gz --minQ 30 --minGQ 20 --minDP 5 --max-alleles 2 --recode --recode-INFO-all --stdout > muir_snps_filtered.vcf
 
 rm tmp.vcf.gz
 
-bgzip shunda_snps_filtered.vcf
-tabix -p vcf shunda_snps_filtered.vcf.gz
+bgzip muir_snps_filtered.vcf
+tabix -p vcf muir_snps_filtered.vcf.gz

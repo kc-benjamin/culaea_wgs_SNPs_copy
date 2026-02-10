@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-1
+#SBATCH --array=1-97
 
 # Load needed modules
 module load BCFtools/1.21-GCC-13.3.0
@@ -31,38 +31,6 @@ chrom_num=$1
 CHROM=$(sed -n "${chrom_num}p" 03_genome/brook_genome_hap1_v1_chromosomes2.txt)
 SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
-# Filter the BAM list to only files that actually exist (github)
-BAM_FILTER=$(mktemp)
-while IFS= read -r bamfile; do
-	[ -z "$bamfile" ] && continue
-	if [ -f "$bamfile" ]; then
-		echo "$bamfile" >> "$BAM_FILTER"
-	fi
-done < "$BAM"
 
-if [ ! -s "$BAM_FILTER" ]; then
-	echo "No existing BAM files found from $BAM; exiting."
-	rm -f "$BAM_FILTER"
-	exit 0
-fi
-
-# Create a filtered sample list containing only samples present in the filtered BAM list
-SAMP_FILTER=$(mktemp)
-while IFS= read -r sample; do
-	[ -z "$sample" ] && continue
-	if grep -Fq "$sample" "$BAM_FILTER"; then
-		echo "$sample" >> "$SAMP_FILTER"
-	fi
-done < "$SAMPS"
-
-if [ ! -s "$SAMP_FILTER" ]; then
-	echo "No matching samples found in $BAM_FILTER; exiting without running bcftools."
-	rm -f "$BAM_FILTER" "$SAMP_FILTER"
-	exit 0
-fi
-
-bcftools mpileup -Ou -f $GENOMEFOLDER/$GENOME --bam-list "$BAM_FILTER" -q 5 -r $CHROM -I -a FMT/AD | \
-	bcftools call -S "$SAMP_FILTER" -G - -f GQ -mv -Ov > "$VCF/${SCAFFOLD}.vcf"
-
-# cleanup
-rm -f "$SAMP_FILTER" "$BAM_FILTER"
+bcftools mpileup -Ou -f $GENOMEFOLDER/$GENOME --bam-list "$BAM" -q 5 -r $CHROM -I -a FMT/AD | \
+	bcftools call -S "$SAMPS" -G - -f GQ -mv -Ov > "$VCF/${SCAFFOLD}.vcf"

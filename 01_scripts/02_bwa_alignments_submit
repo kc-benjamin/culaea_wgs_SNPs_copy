@@ -1,9 +1,0 @@
-#!/bin/sh
-
-END=$(cut -f1 /scratch/kcb95328/Mee-Culaea-WGS/02_info_files/SraRunTable-metadata-ML.csv | wc -l)
-#END=39
-
-for i in $(seq 1 $END); do
-  sbatch --job-name "02_bwa_alignments_$i" /home/kcb95328/culaea_wgs_SNPs_copy/01_scripts/02_bwa_alignments.sh "$i"
-  sleep 1
-done

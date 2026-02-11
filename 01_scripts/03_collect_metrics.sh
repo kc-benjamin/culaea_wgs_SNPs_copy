@@ -35,7 +35,7 @@ LOG_FOLDER="/scratch/kcb95328/Mee-Culaea-WGS/98_log_files"
 cp $SCRIPT $LOG_FOLDER/${TIMESTAMP}_${SCRIPTNAME}
 
 #Pass the sample number from the sbatch command
-samp_num=$((SLURM_ARRAY_TASK_ID +1))
+samp_num=$((SLURM_ARRAY_TASK_ID))
 #echo "SLURM_ARRAY_TASK_ID='$SLURM_ARRAY_TASK_ID'"
 #echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"

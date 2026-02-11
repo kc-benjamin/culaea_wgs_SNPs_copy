@@ -10,8 +10,8 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 
-module load VCFtools/0.1.16-GCC-13.3.0 BCFtools/1.21-GCC-13.3.0
-module intel/2020.1.217 tabix/0.2.6
+module load VCFtools/0.1.16-GCC-13.3.0 BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCcore-13.3.0
+#module intel/2020.1.217 
 
 vcf-concat $(ls -1 ./07_raw_VCFs/* | perl -pe 's/\n/ /g') > muir_snps.vcf
 

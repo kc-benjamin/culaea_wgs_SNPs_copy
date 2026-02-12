@@ -52,7 +52,7 @@ echo "Converting to PLINK at: `date`"
 # Initialize Conda (adjust the path to your conda installation if needed)
 source /home/kcb95328/conda/envs/culaea_pkgs
 # Activate the environment
-conda run -n culaea_pkgs --no-capture-output echo "Conda environment 'culaea_pkgs' activated successfully at: `date`"
+conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
 
@@ -90,3 +90,5 @@ gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome --make-grm --out MU_snps_g
 #module unload gcta/1.26.0
 
 echo "Program finished with exit code $? at: `date`"
+
+conda deactivate

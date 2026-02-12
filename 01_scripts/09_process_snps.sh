@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=batch
 #SBATCH --partition=batch
-#SBATCH --job-name="08_concat"
+#SBATCH --job-name="09_process_snps"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
@@ -10,7 +10,6 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=09_process_snps_%j.out
-#SBATCH --job-name=09_process_snps 
 
 echo "Uncompressing vcf.gz file at: `date`"
 
@@ -47,9 +46,13 @@ echo "Converting to PLINK at: `date`"
 
 ## load all modules at once ###
 #module load VCFtools/0.1.16-GCC-13.3.0 plink/1.9b_6.21-x86_64 gcta/1.26.0
-conda init
-conda activate /home/kcb95328/conda/envs/culaea_pkgs #this doesnt work just copy over the packages it loads
+#conda init bash
+#conda activate /home/kcb95328/conda/envs/culaea_pkgs #this doesnt work just copy over the packages it loads
 ###############
+# Initialize Conda (adjust the path to your conda installation if needed)
+source /home/kcb95328/conda/envs/culaea_pkgs
+# Activate the environment
+conda run -n culaea_pkgs --no-capture-output echo "Conda environment 'culaea_pkgs' activated successfully at: `date`"
 
 vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
 

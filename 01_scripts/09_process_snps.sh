@@ -48,7 +48,7 @@ echo "Converting to PLINK at: `date`"
 ## load all modules at once ###
 #module load VCFtools/0.1.16-GCC-13.3.0 plink/1.9b_6.21-x86_64 gcta/1.26.0
 conda init
-conda activate /home/kcb95328/culaea_wgs_SNPs_copy/culaea_pkgs
+conda activate /home/kcb95328/conda/envs/culaea_pkgs #this doesnt work just copy over the packages it loads
 ###############
 
 vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps

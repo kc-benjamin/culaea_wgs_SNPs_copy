@@ -50,10 +50,12 @@ echo "Converting to PLINK at: `date`"
 #conda activate /home/kcb95328/conda/envs/culaea_pkgs #this doesnt work just copy over the packages it loads
 ###############
 # Initialize Conda (adjust the path to your conda installation if needed)
-source /home/kcb95328/conda/envs/culaea_pkgs
+#source activate /home/kcb95328/conda/envs/culaea_pkgs
 # Activate the environment
-conda init bash
+CONDA_BASE=$(conda info --base)
+source ${CONDA_BASE}/etc/profile.d/conda.sh 
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
+
 
 vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
 

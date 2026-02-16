@@ -17,7 +17,7 @@ module load VCFtools/0.1.16-GCC-13.3.0 BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCc
 vcf-concat $(ls -1 /scratch/kcb95328/MuirLakeBrooks/07_raw_VCFs/* | perl -pe 's/\n/ /g') > muir_snps.vcf
 
 bgzip muir_snps.vcf
-tabix --force --preset vcf muir_snps.vcf.gz
+tabix -f -p vcf muir_snps.vcf
 
 bcftools filter -e 'MQ < 30' muir_snps.vcf.gz -Oz > tmp.vcf.gz
 

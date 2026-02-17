@@ -66,7 +66,7 @@ echo "Starting PLINK filtering and removing missing data at: `date`"
 
 echo "Creating VCF file with appropriate LG labels at: `date`"
 
-plink --file MU_snps --chr-set brook_genome_hap1_v1_chromosomes2.txt --allow-extra-chr --recode vcf --out MU_snps
+plink --file MU_snps --chr-set 03_genome/brook_genome_hap1_v1_chromosomes2.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Filtering at: `date`"
 

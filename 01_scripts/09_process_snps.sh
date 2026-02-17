@@ -10,6 +10,7 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=09_process_snps_%j.out
+#SBATCH --error=09_process_snps_%j.err
 
 echo "Uncompressing vcf.gz file at: `date`"
 
@@ -65,11 +66,14 @@ echo "Starting PLINK filtering and removing missing data at: `date`"
 
 echo "Creating VCF file with appropriate LG labels at: `date`"
 
-plink --file MU_snps --allow-extra-chr --recode vcf --out MU_snps
+plink --file MU_snps --chr-set brook_genome_hap1_v1_chromosomes2.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Filtering at: `date`"
 
 plink --file MU_snps --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
+#geno: removes SNPs with more than 20% missing data
+#maf: removes SNPs with minor allele frequency less than 0.01
+#recode: outputs in ped/map format, which is needed for GCTA
 
 echo "Finished removing missing data at: `date`"
 

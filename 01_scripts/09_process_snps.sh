@@ -57,8 +57,13 @@ CONDA_BASE=$(conda info --base)
 source ${CONDA_BASE}/etc/profile.d/conda.sh 
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
+#make a chromosome map
+bcftools view -H muir_snps_filtered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0}' > muir_snps_filtered.chrom-map.txt
 
-vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
+#make a ped file using this chrom map
+vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
+
+#vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 

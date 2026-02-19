@@ -81,12 +81,12 @@ plink --file MU_snps --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_s
 
 echo "Finished removing missing data at: `date`"
 
-plink --file MU_snps_geno20_maf01 --indep 50 5 2
-plink --file MU_snps_geno20_maf01 --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
+plink --file MU_snps_geno20_maf01 --allow-extra-chr --indep 50 5 2
+plink --file MU_snps_geno20_maf01 --allow-extra-chr --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
 
 echo "Finished pruning SNPs for LD at: `date`"
 
-plink --file MU_snps_geno20_maf01 --make-bed --out MU_snps_geno20_maf01
+plink --file MU_snps_geno20_maf01 --allow-extra-chr --make-bed --out MU_snps_geno20_maf01
 
 echo "Finished saving binary files for unpruned SNPs at: `date`"
 

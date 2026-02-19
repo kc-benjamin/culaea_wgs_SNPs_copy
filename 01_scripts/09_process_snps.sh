@@ -10,7 +10,6 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=09_process_snps_%j.out
-#SBATCH --error=09_process_snps_%j.err
 
 echo "Uncompressing vcf.gz file at: `date`"
 
@@ -75,7 +74,7 @@ plink --file MU_snps --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Filtering at: `date`"
 
-plink --file MU_snps --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
+plink --file MU_snps --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
 #geno: removes SNPs with more than 20% missing data
 #maf: removes SNPs with minor allele frequency less than 0.01
 #recode: outputs in ped/map format, which is needed for GCTA

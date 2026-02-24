@@ -13,34 +13,34 @@
 
 echo "Uncompressing vcf.gz file at: `date`"
 
-gunzip -c muir_snps_filtered.vcf.gz > muir_snps_filtered_LG.vcf
+# gunzip -c muir_snps_filtered.vcf.gz > muir_snps_filtered_LG.vcf
 
-awk '{gsub(/OX438541.1/,"1"); print}' muir_snps_filtered_LG.vcf > muir_snps_filtered_temp1.vcf
-awk '{gsub(/OX438542.1/,"2"); print}' muir_snps_filtered_temp1.vcf > muir_snps_filtered_temp2.vcf
-awk '{gsub(/OX438543.1/,"3"); print}' muir_snps_filtered_temp2.vcf > muir_snps_filtered_temp3.vcf
-awk '{gsub(/OX438544.1/,"4"); print}' muir_snps_filtered_temp3.vcf > muir_snps_filtered_temp4.vcf
-awk '{gsub(/OX438545.1/,"5"); print}' muir_snps_filtered_temp4.vcf > muir_snps_filtered_temp5.vcf
-awk '{gsub(/OX438546.1/,"6"); print}' muir_snps_filtered_temp5.vcf > muir_snps_filtered_temp6.vcf
-awk '{gsub(/OX438547.1/,"7"); print}' muir_snps_filtered_temp6.vcf > muir_snps_filtered_temp7.vcf
-awk '{gsub(/OX438548.1/,"8"); print}' muir_snps_filtered_temp7.vcf > muir_snps_filtered_temp8.vcf
-awk '{gsub(/OX438549.1/,"9"); print}' muir_snps_filtered_temp8.vcf > muir_snps_filtered_temp9.vcf
-awk '{gsub(/OX438550.1/,"10"); print}' muir_snps_filtered_temp9.vcf > muir_snps_filtered_temp10.vcf
-awk '{gsub(/OX438551.1/,"11"); print}' muir_snps_filtered_temp10.vcf > muir_snps_filtered_temp11.vcf
-awk '{gsub(/OX438552.1/,"12"); print}' muir_snps_filtered_temp11.vcf > muir_snps_filtered_temp12.vcf
-awk '{gsub(/OX438553.1/,"13"); print}' muir_snps_filtered_temp12.vcf > muir_snps_filtered_temp13.vcf
-awk '{gsub(/OX438554.1/,"14"); print}' muir_snps_filtered_temp13.vcf > muir_snps_filtered_temp14.vcf
-awk '{gsub(/OX438555.1/,"15"); print}' muir_snps_filtered_temp14.vcf > muir_snps_filtered_temp15.vcf
-awk '{gsub(/OX438556.1/,"16"); print}' muir_snps_filtered_temp15.vcf > muir_snps_filtered_temp16.vcf
-awk '{gsub(/OX438557.1/,"17"); print}' muir_snps_filtered_temp16.vcf > muir_snps_filtered_temp17.vcf
-awk '{gsub(/OX438558.1/,"18"); print}' muir_snps_filtered_temp17.vcf > muir_snps_filtered_temp18.vcf
-awk '{gsub(/OX438559.1/,"19"); print}' muir_snps_filtered_temp18.vcf > muir_snps_filtered_temp19.vcf
-awk '{gsub(/OX438560.1/,"20"); print}' muir_snps_filtered_temp19.vcf > muir_snps_filtered_temp20.vcf
-awk '{gsub(/OX438561.1/,"21"); print}' muir_snps_filtered_temp20.vcf > muir_snps_filtered_temp21.vcf
-awk '{gsub(/OX438562.1/,"M"); print}' muir_snps_filtered_temp21.vcf > muir_snps_filtered_tempM.vcf
+# awk '{gsub(/OX438541.1/,"1"); print}' muir_snps_filtered_LG.vcf > muir_snps_filtered_temp1.vcf
+# awk '{gsub(/OX438542.1/,"2"); print}' muir_snps_filtered_temp1.vcf > muir_snps_filtered_temp2.vcf
+# awk '{gsub(/OX438543.1/,"3"); print}' muir_snps_filtered_temp2.vcf > muir_snps_filtered_temp3.vcf
+# awk '{gsub(/OX438544.1/,"4"); print}' muir_snps_filtered_temp3.vcf > muir_snps_filtered_temp4.vcf
+# awk '{gsub(/OX438545.1/,"5"); print}' muir_snps_filtered_temp4.vcf > muir_snps_filtered_temp5.vcf
+# awk '{gsub(/OX438546.1/,"6"); print}' muir_snps_filtered_temp5.vcf > muir_snps_filtered_temp6.vcf
+# awk '{gsub(/OX438547.1/,"7"); print}' muir_snps_filtered_temp6.vcf > muir_snps_filtered_temp7.vcf
+# awk '{gsub(/OX438548.1/,"8"); print}' muir_snps_filtered_temp7.vcf > muir_snps_filtered_temp8.vcf
+# awk '{gsub(/OX438549.1/,"9"); print}' muir_snps_filtered_temp8.vcf > muir_snps_filtered_temp9.vcf
+# awk '{gsub(/OX438550.1/,"10"); print}' muir_snps_filtered_temp9.vcf > muir_snps_filtered_temp10.vcf
+# awk '{gsub(/OX438551.1/,"11"); print}' muir_snps_filtered_temp10.vcf > muir_snps_filtered_temp11.vcf
+# awk '{gsub(/OX438552.1/,"12"); print}' muir_snps_filtered_temp11.vcf > muir_snps_filtered_temp12.vcf
+# awk '{gsub(/OX438553.1/,"13"); print}' muir_snps_filtered_temp12.vcf > muir_snps_filtered_temp13.vcf
+# awk '{gsub(/OX438554.1/,"14"); print}' muir_snps_filtered_temp13.vcf > muir_snps_filtered_temp14.vcf
+# awk '{gsub(/OX438555.1/,"15"); print}' muir_snps_filtered_temp14.vcf > muir_snps_filtered_temp15.vcf
+# awk '{gsub(/OX438556.1/,"16"); print}' muir_snps_filtered_temp15.vcf > muir_snps_filtered_temp16.vcf
+# awk '{gsub(/OX438557.1/,"17"); print}' muir_snps_filtered_temp16.vcf > muir_snps_filtered_temp17.vcf
+# awk '{gsub(/OX438558.1/,"18"); print}' muir_snps_filtered_temp17.vcf > muir_snps_filtered_temp18.vcf
+# awk '{gsub(/OX438559.1/,"19"); print}' muir_snps_filtered_temp18.vcf > muir_snps_filtered_temp19.vcf
+# awk '{gsub(/OX438560.1/,"20"); print}' muir_snps_filtered_temp19.vcf > muir_snps_filtered_temp20.vcf
+# awk '{gsub(/OX438561.1/,"21"); print}' muir_snps_filtered_temp20.vcf > muir_snps_filtered_temp21.vcf
+# awk '{gsub(/OX438562.1/,"M"); print}' muir_snps_filtered_temp21.vcf > muir_snps_filtered_tempM.vcf
 
-cp muir_snps_filtered_tempM.vcf muir_snps_filtered.vcf
+# cp muir_snps_filtered_tempM.vcf muir_snps_filtered.vcf
 
-rm muir_snps_filtered_temp*
+# rm muir_snps_filtered_temp*
 
 echo "Converting to PLINK at: `date`"
 
@@ -63,6 +63,7 @@ bcftools view -H muir_snps_filtered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0
 vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
+plink --bfile MU_snps -make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 
@@ -70,7 +71,7 @@ echo "Starting PLINK filtering and removing missing data at: `date`"
 
 echo "Creating VCF file with appropriate LG labels at: `date`"
 
-plink --file MU_snps --allow-extra-chr --recode vcf --out MU_snps
+#plink --file MU_snps --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Filtering at: `date`"
 

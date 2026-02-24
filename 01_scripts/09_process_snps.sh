@@ -63,7 +63,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 #vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
-plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-pheno.txt --allow-extra-chr --recode vcf --out MU_snps
+plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 
@@ -89,7 +89,7 @@ plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --upd
 echo "Finished pruning SNPs for LD at: `date`"
 
 plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --make-bed --out MU_snps_geno20_maf01
-plink --bfile MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --out MU_snps_geno20_maf01_pheno
+#plink --bfile MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --out MU_snps_geno20_maf01_pheno
 
 echo "Finished saving binary files for unpruned SNPs at: `date`"
 
@@ -104,7 +104,7 @@ echo "Making GRM from pruned data at: `date`"
 
 #module load gcta/1.26.0
 
-gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome-num 22 --autosome --make-grm --out MU_snps_geno20_maf01_pruned
+gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome --make-grm --out MU_snps_geno20_maf01_pruned
 
 #module unload gcta/1.26.0
 

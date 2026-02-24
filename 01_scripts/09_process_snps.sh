@@ -63,7 +63,7 @@ bcftools view -H muir_snps_filtered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0
 vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
-plink --bfile MU_snps -make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --recode vcf --out MU_snps
+plink --file MU_snps -make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 

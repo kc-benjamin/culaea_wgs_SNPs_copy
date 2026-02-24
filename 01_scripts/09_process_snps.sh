@@ -63,7 +63,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
-plink --file MU_snps --update-chr brook_chr_concat.txt --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --recode vcf --out MU_snps
+plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 
@@ -75,7 +75,7 @@ echo "Creating VCF file with appropriate LG labels at: `date`"
 
 echo "Filtering at: `date`"
 
-plink --file MU_snps --update-chr brook_chr_concat.txt --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
+plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
 
 #geno: removes SNPs with more than 20% missing data
 #maf: removes SNPs with minor allele frequency less than 0.01
@@ -83,8 +83,8 @@ plink --file MU_snps --update-chr brook_chr_concat.txt --make-pheno test-pheno.t
 
 echo "Finished removing missing data at: `date`"
 
-plink --file MU_snps_geno20_maf01 --update-chr brook_chr_concat.txt --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --indep 50 5 2
-plink --file MU_snps_geno20_maf01 --update-chr brook_chr_concat.txt --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
+plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --indep 50 5 2
+plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
 
 echo "Finished pruning SNPs for LD at: `date`"
 

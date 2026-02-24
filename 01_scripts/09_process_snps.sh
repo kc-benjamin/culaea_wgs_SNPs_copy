@@ -90,16 +90,21 @@ plink --file MU_snps_geno20_maf01 --allow-extra-chr --make-bed --out MU_snps_gen
 
 echo "Finished saving binary files for unpruned SNPs at: `date`"
 
+#make a phenotype file: do this using qlogin, then continue
+echo "Files are ready. Use qlogin to make a phenotype file and then make the GRM using the following steps in script 09"
+
+#plink --pheno 02_info_files/SraRunTable-metadata-ML_sexincl.csv --allow-extra-chr --pheno-name "sex_genotype"
+
 #module unload plink/1.9b_6.21-x86_64
 
-echo "Making GRM from pruned data at: `date`"
+#echo "Making GRM from pruned data at: `date`"
 
 #module load gcta/1.26.0
 
-gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome --make-grm --out MU_snps_geno20_maf01_pruned
+#gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome-num 22 --autosome --make-grm --out MU_snps_geno20_maf01_pruned
 
 #module unload gcta/1.26.0
 
-echo "Program finished with exit code $? at: `date`"
+#echo "Program finished with exit code $? at: `date`"
 
 conda deactivate

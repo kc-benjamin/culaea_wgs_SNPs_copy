@@ -63,7 +63,7 @@ bcftools view -H muir_snps_filtered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0
 vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
-plink --file MU_snps -make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --recode vcf --out MU_snps
+plink --file MU_snps --make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 
@@ -75,7 +75,7 @@ echo "Creating VCF file with appropriate LG labels at: `date`"
 
 echo "Filtering at: `date`"
 
-plink --file MU_snps --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
+plink --file MU_snps --make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
 
 #geno: removes SNPs with more than 20% missing data
 #maf: removes SNPs with minor allele frequency less than 0.01
@@ -83,13 +83,13 @@ plink --file MU_snps --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_s
 
 echo "Finished removing missing data at: `date`"
 
-plink --file MU_snps_geno20_maf01 --allow-extra-chr --indep 50 5 2
-plink --file MU_snps_geno20_maf01 --allow-extra-chr --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
+plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --indep 50 5 2
+plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
 
 echo "Finished pruning SNPs for LD at: `date`"
 
-plink --file MU_snps_geno20_maf01 --allow-extra-chr --make-bed --out MU_snps_geno20_maf01
-plink --make-pheno test-pheno.txt --allow-extra-chr --bfile MU_snps_geno20_maf01 --pheno-name "CASE/CONTROL" --out MU_snps_geno20_maf01_pheno
+plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --make-bed --out MU_snps_geno20_maf01
+plink --bfile MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --pheno-name "CASE/CONTROL" --update-sex test-pheno.txt --allow-extra-chr --out MU_snps_geno20_maf01_pheno
 
 echo "Finished saving binary files for unpruned SNPs at: `date`"
 
@@ -100,11 +100,11 @@ echo "Finished saving binary files for unpruned SNPs at: `date`"
 
 #module unload plink/1.9b_6.21-x86_64
 
-#echo "Making GRM from pruned data at: `date`"
+echo "Making GRM from pruned data at: `date`"
 
 #module load gcta/1.26.0
 
-#gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome-num 22 --autosome --make-grm --out MU_snps_geno20_maf01_pruned
+gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome-num 22 --autosome --make-grm --out MU_snps_geno20_maf01_pruned
 
 #module unload gcta/1.26.0
 

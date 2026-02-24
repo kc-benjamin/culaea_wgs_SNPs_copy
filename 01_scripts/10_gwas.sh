@@ -10,13 +10,12 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-97
 
 CONDA_BASE=$(conda info --base)
 source ${CONDA_BASE}/etc/profile.d/conda.sh 
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 #genome-wide complex trait analysis (GCTA) using the mlma (mixed linear model association) method
-gcta64 --mlma --bfile MU_snps_geno20_maf01 --grm MU_snps_geno20_maf01_pruned --pheno MU_snps.phen --out MU_ninespine_geno20_maf01
+gcta64 --mlma --bfile MU_snps_geno20_maf01 --grm MU_snps_geno20_maf01_pruned --pheno MU_snps.phen --out MU_brook_geno20_maf01
 
 conda deactivate

@@ -15,6 +15,6 @@ CONDA_BASE=$(conda info --base)
 source ${CONDA_BASE}/etc/profile.d/conda.sh 
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
-plink --file MU_snps_geno20_maf01 --update-chr brook_chr_for_plink.txt --update-sex test-sex.txt --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --make-bed --out MU_snps_geno20_maf01_scaffolds
+plink --file MU_snps_geno20_maf01 --update-chr brook_chr_for_plink.txt --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --make-bed --out MU_snps_geno20_maf01_scaffolds
 
 conda deactivate

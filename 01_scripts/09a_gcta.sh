@@ -12,8 +12,10 @@
 #SBATCH --output=09a_gcta_%j.out
 
 
-module load gcta/1.26.0
+module load GCTA/1.94.1-gfbf-2023a
 
 gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome-num 22 --autosome --make-grm --out MU_snps_geno20_maf01_pruned
 
-module unload gcta/1.26.0
+gcta64 --mlma --bfile MU_snps_geno20_maf01 --grm MU_snps_geno20_maf01_pruned --pheno MU_snps.phen --out MU_brook_geno20_maf01
+
+module unload GCTA/1.94.1-gfbf-2023a

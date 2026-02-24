@@ -60,7 +60,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 #bcftools view -H muir_snps_filtered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0}' > muir_snps_filtered.chrom-map.txt
 
 #make a ped file using this chrom map
-#vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
+vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
 plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --recode vcf --out MU_snps

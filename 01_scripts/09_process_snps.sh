@@ -70,7 +70,9 @@ echo "Starting PLINK filtering and removing missing data at: `date`"
 
 echo "Creating VCF file with appropriate LG labels at: `date`"
 
-plink --file MU_snps --allow-extra-chr --recode vcf --out MU_snps
+plink --make-pheno test-pheno.txt --allow-extra-chr --file MU_snps --recode vcf --out MU_snps
+
+#plink --file MU_snps --allow-extra-chr --recode vcf --out MU_snps
 
 echo "Filtering at: `date`"
 
@@ -91,9 +93,9 @@ plink --file MU_snps_geno20_maf01 --allow-extra-chr --make-bed --out MU_snps_gen
 echo "Finished saving binary files for unpruned SNPs at: `date`"
 
 #make a phenotype file: do this using qlogin, then continue
-echo "Files are ready. Use qlogin to make a phenotype file and then make the GRM using the following steps in script 09"
+#echo "Files are ready. Use qlogin to make a phenotype file and then make the GRM using the following steps in script 09"
 
-#plink --pheno 02_info_files/SraRunTable-metadata-ML_sexincl.csv --allow-extra-chr --pheno-name "sex_genotype"
+plink --pheno 02_info_files/SraRunTable-metadata-ML_sexincl.csv --allow-extra-chr --pheno-name "sex_genotype"
 
 #module unload plink/1.9b_6.21-x86_64
 

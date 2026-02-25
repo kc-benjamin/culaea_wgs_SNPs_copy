@@ -11,7 +11,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=09b_plink_reformatting_%j.out
 
-sed 's/PGA_scaffold22__123_contigs__length_35631191/22/g' tmp2.bim > tmp3.bim
+sed 's/PGA_scaffold22__123_contigs__length_35631191/22/g' 97_for_holding/MU_snps_geno20_maf01_pruned.bim > tmp3.bim
 sed 's/PGA_scaffold21__64_contigs__length_27087477/21/g' tmp3.bim > tmp4.bim
 sed 's/PGA_scaffold20__81_contigs__length_24420605/20/g' tmp4.bim > tmp5.bim
 sed 's/PGA_scaffold18__88_contigs__length_23069817/18/g' tmp5.bim > tmp6.bim
@@ -36,9 +36,9 @@ sed 's/PGA_scaffold2__66_contigs__length_13522551/2/g' tmp23.bim > final_bim_fil
 sed 's/PGA_scaffold1__43_contigs__length_10481396/1/g' final_bim_file.bim > final_bim_file_fixed.bim
 
 rm tmp*.bim final_bim_file.bim
-mv final_bim_file_fixed.bim MU_snps_geno20_maf01_pruned_FIXED.bim
-mv MU_snps_geno20_maf01_pruned.bim MU_snps_geno20_maf01_pruned_VER2.bim
-mv MU_snps_geno20_maf01_pruned_VER2.bim 97_for_holding
-mv MU_snps_geno20_maf01_pruned_FIXED.bim MU_snps_geno20_maf01_pruned.bim
+mv final_bim_file_fixed.bim MU_snps_geno20_maf01_pruned.bim
+#mv MU_snps_geno20_maf01_pruned.bim MU_snps_geno20_maf01_pruned_VER2.bim
+#mv MU_snps_geno20_maf01_pruned_VER2.bim 97_for_holding
+#mv MU_snps_geno20_maf01_pruned_FIXED.bim MU_snps_geno20_maf01_pruned.bim
 
 

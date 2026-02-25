@@ -4,9 +4,9 @@
 #SBATCH --job-name="09a_gcta"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 #SBATCH --time=06:00:00
-#SBATCH --mem=15G
+#SBATCH --mem=20G
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=09a_gcta_%j.out

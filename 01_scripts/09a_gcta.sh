@@ -16,6 +16,6 @@ module load GCTA/1.94.1-gfbf-2023a
 
 gcta64 --bfile MU_snps_geno20_maf01_pruned --autosome --make-grm --out MU_snps_geno20_maf01_pruned_22
 
-#gcta64 --mlma --bfile MU_snps_geno20_maf01_pruned --grm MU_snps_geno20_maf01_pruned --pheno MU_snps.phen --out MU_brook_geno20_maf01
+gcta64 --mlma --bfile MU_snps_geno20_maf01_pruned --grm MU_snps_geno20_maf01_pruned --pheno test-pheno.txt --out MU_brook_geno20_maf01
 
 module unload GCTA/1.94.1-gfbf-2023a

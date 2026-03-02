@@ -10,16 +10,18 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j_.out
 #SBATCH --error=98_log_files/%x_%j_.err
-#SBATCH --array=1-95
+#SBATCH --array=1-96
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load needed modules
 #for Shunda
-module load BWA/0.7.18-GCCcore-13.3.0 SAMtools/1.21-GCC-13.3.0
+CONDA_BASE=$(conda info --base)
+source ${CONDA_BASE}/etc/profile.d/conda.sh 
+conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 # Global variables
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to ninespine genome
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to ninespine genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ##INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_data"
@@ -41,7 +43,7 @@ echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"
 
 # Pull sample name from the sample info
-name=$(cut -f1 02_info_files/SRR_Acc_List_SL.txt | sed -n "${samp_num}p")
+name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 #name=SRR19221338
 
 # Name of uncompressed file
@@ -67,3 +69,5 @@ samtools sort -@ $NCPU $ALIGNEDFOLDER/${name}.bam \
 # Index
 samtools index $ALIGNEDFOLDER/${name}.trimmed.fastq.gz.sorted.bam
     &> $LOG_FOLDER/02_mapping_${name}.log
+
+conda deactivate

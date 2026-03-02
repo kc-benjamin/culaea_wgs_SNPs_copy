@@ -20,5 +20,5 @@ ml SRA-Toolkit/3.0.3-gompi-2022a
 name=$(sed -n "$(($SLURM_ARRAY_TASK_ID))p" 02_info_files/SRR_Acc_List_ML.txt)
 #fastq conversion
 #prefetch $name && 
-fastq-dump $name -O 04_raw_data --gzip
+fasterq-dump $name --split-3 -O 04_raw_data --gzip
 #fasterq-dump $name --split-spot

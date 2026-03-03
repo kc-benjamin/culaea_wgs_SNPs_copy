@@ -14,7 +14,7 @@
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
-ml Java/11.0.20 SAMtools/1.18-GCC-12.3.0 
+ml SAMtools/1.18-GCC-12.3.0 
 #ml picard/2.25.1-Java-11
 
 
@@ -44,13 +44,15 @@ file=${sample_name}.trimmed.fastq.gz.sorted.bam ###again need to make sure that 
 echo "$file"
 
 #removing duplicates
-samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
+#samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 file2=${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 #this will remove the duplicates stored within the same file and remove the weird reads.
 #copied files over to a test folder to make sure it works first
 
 echo "Validating sample $file2"
 
+module purge
+module load Java/11.0.20
 java -jar $EBROOTPICARD/picard.jar
 
 java -jar $PICARD ValidateSamFile \

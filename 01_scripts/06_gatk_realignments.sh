@@ -21,14 +21,15 @@ cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Load needed modules
 #module load SAMtools/1.18-GCC-12.3.0
-CONDA_BASE=$(conda info --base)
-source ${CONDA_BASE}/etc/profile.d/conda.sh 
-conda activate /home/kcb95328/conda/envs/culaea_pkgs
+# CONDA_BASE=$(conda info --base)
+# source ${CONDA_BASE}/etc/profile.d/conda.sh 
+# conda activate /home/kcb95328/conda/envs/culaea_pkgs
+###conda doesnt like to work for this script since GATK is Java
 
 # Global variables
 BAM="06_bam_files"
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
 # Build Bam Index
@@ -54,7 +55,7 @@ echo "
 # Now load modules
 #module purge
 #module load nixpkgs/16.09 #ensure that this is right#
-#ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
+ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
 
 # Realign
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \

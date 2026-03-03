@@ -21,6 +21,9 @@ cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Load needed modules
 #module load SAMtools/1.18-GCC-12.3.0
+CONDA_BASE=$(conda info --base)
+source ${CONDA_BASE}/etc/profile.d/conda.sh 
+conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 # Global variables
 BAM="06_bam_files"
@@ -51,7 +54,7 @@ echo "
 # Now load modules
 #module purge
 #module load nixpkgs/16.09 #ensure that this is right#
-ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
+#ml Java/1.8.0_241 GATK/3.8-1-Java-1.8.0_241
 
 # Realign
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
@@ -75,3 +78,4 @@ echo ">>> Cleaning a bit...
 "
 echo "
 DONE! Check your files"
+conda deactivate

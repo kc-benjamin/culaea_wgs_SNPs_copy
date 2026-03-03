@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-119
+#SBATCH --array=1-97
 
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
@@ -29,7 +29,7 @@ cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 # Global variables
 BAM="06_bam_files"
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
 # Build Bam Index
@@ -40,7 +40,7 @@ echo " >>> Realigning...
 samp_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch filename from the array
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_AL.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 
 file=${sample_name}.trimmed.fastq.gz.sorted.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
 

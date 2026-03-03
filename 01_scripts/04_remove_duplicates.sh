@@ -52,7 +52,7 @@ file2=${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 echo "Validating sample $file2"
 
 module purge
-module load Java/11.0.20
+module load picard/2.18.4-Java-1.8.0_241 Java/1.8.0_241
 java -jar $EBROOTPICARD/picard.jar
 
 java -jar $PICARD ValidateSamFile \

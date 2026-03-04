@@ -38,12 +38,12 @@ samp_num=$SLURM_ARRAY_TASK_ID
 echo "$samp_num"
 
 # Fetch filename from the array
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_AL.txt | sed -n "${samp_num}p")
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
 file=${sample_name}.trimmed.fastq.gz.sorted.bam ###again need to make sure that this is a file that exists###
 echo "$file"
 
 #removing duplicates
-#samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
+samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 file2=${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 #this will remove the duplicates stored within the same file and remove the weird reads.
 #copied files over to a test folder to make sure it works first

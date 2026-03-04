@@ -17,9 +17,8 @@
 ml SAMtools/1.18-GCC-12.3.0 
 #ml picard/2.25.1-Java-11
 
-
 # Global variables
-PICARD=$EBROOTPICARD/picard.jar
+#PICARD=$EBROOTPICARD/picard.jar
 #MARKDUPS="MarkDuplicates"
 ALIGNEDFOLDER="06_bam_files"
 #ALIGNEDFOLDER_test="06_bam_files"
@@ -52,16 +51,16 @@ file2=${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 echo "Validating sample $file2"
 
 module purge
-module load picard/2.18.4-Java-1.8.0_241 Java/1.8.0_241
-java -jar $EBROOTPICARD/picard.jar
+module load picard/2.18.4-Java-1.8.0_241
+#java -jar $EBROOTPICARD/picard.jar
 
-java -jar $PICARD ValidateSamFile \
+java -jar $EBROOTPICARD/picard.jar ValidateSamFile \
       -I $ALIGNEDFOLDER_test/$file2 \
       -MODE SUMMARY
 
 echo "DEduplicatING sample $file2"
 
-java -jar $PICARD MarkDuplicates \
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates \
     -I $ALIGNEDFOLDER_test/$file2 \
     -O $ALIGNEDFOLDER_test/${sample_name}.dedup.bam \
     -METRICS_FILE $METRICSFOLDER/${sample_name}_DUP_metrics.txt \

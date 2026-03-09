@@ -57,8 +57,8 @@ module load picard/3.3.0-Java-17
 echo "DEduplicatING sample $file2"
 
 java -jar $EBROOTPICARD/picard.jar MarkDuplicates \
-    -I $ALIGNEDFOLDER_test/$file2 \
-    -O $ALIGNEDFOLDER_test/${sample_name}.dedup.bam \
+    -I $ALIGNEDFOLDER/$file2 \
+    -O $ALIGNEDFOLDER/${sample_name}.dedup.bam \
     -METRICS_FILE $METRICSFOLDER/${sample_name}_DUP_metrics.txt \
     -VALIDATION_STRINGENCY SILENT \
     -ASSUME_SORT_ORDER queryname \

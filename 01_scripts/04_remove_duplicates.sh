@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-1
+#SBATCH --array=2-98
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
@@ -43,7 +43,7 @@ file=${sample_name}.trimmed.fastq.gz.sorted.bam ###again need to make sure that 
 echo "$file"
 
 #removing duplicates
-#samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
+samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 file2=${sample_name}.trimmed.fastq.gz.sorted.depaired.bam
 #this will remove the duplicates stored within the same file and remove the weird reads.
 #copied files over to a test folder to make sure it works first

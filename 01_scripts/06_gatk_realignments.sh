@@ -24,7 +24,7 @@ cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 # conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 # Load needed modules
-module load SAMtools/1.18-GCC-12.3.0 GATK/3.8-1-Java-1.8.0_241
+module load SAMtools/1.18-GCC-12.3.0 GATK/3.8-1-Java-1.8.0_241 picard/2.18.4-Java-1.8.0_241
 
 ###conda doesnt like to work for this script since GATK is Java
 
@@ -58,6 +58,12 @@ samtools index $BAM/$file
 # Now load modules
 #module purge
 #module load nixpkgs/16.09 #ensure that this is right#
+### THIS ONLY NEEDS TO HAPPEN ONCE####
+### DO IN QLOGIN ###
+# java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary \
+#     R=$GENOMEFOLDER/$GENOME \
+#     O=$GENOMEFOLDER/$GENOME.dict
+
 
 # Realign
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \

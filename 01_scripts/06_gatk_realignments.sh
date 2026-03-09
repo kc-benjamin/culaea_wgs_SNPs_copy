@@ -52,8 +52,10 @@ echo "
      "
 
 # Index the bam file First #what is this for? to make coordinates to point the script where in the genome each read belongs
-samtools index $BAM/$file
-#commented out because I am skipping script 04 and already did this
+samtools sort $BAM/$file -o $BAM/${sample_name}.dedup.sorted.bam
+file2=${sample_name}.dedup.sorted.bam
+samtools index $BAM/$file2
+#also need the bam file sorted
 
 # Now load modules
 #module purge
@@ -69,16 +71,16 @@ samtools index $BAM/$file
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
     -T RealignerTargetCreator \
     -R $GENOMEFOLDER/$GENOME \
-    -I $BAM/$file \
+    -I $BAM/$file2 \
     -o $BAM/${sample_name}.intervals
 
 echo "
-     >>> Realigning INDELs for $file <<<
+     >>> Realigning INDELs for $file2 <<<
      "
 java -jar $EBROOTGATK/GenomeAnalysisTK.jar \
     -T IndelRealigner \
     -R $GENOMEFOLDER/$GENOME \
-    -I $BAM/$file \
+    -I $BAM/$file2 \
     -targetIntervals $BAM/${sample_name}.intervals \
     --consensusDeterminationModel USE_READS  \
     -o $BAM/${sample_name}.realigned.bam

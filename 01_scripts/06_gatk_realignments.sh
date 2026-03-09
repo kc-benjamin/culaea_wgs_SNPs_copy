@@ -19,15 +19,13 @@ NAME=$(basename $0)
 LOG_FOLDER="98_log_files"
 cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
-CONDA_BASE=$(conda info --base)
-source ${CONDA_BASE}/etc/profile.d/conda.sh 
-conda activate /home/kcb95328/conda/envs/culaea_pkgs
-
-# Load needed modules
-#module load SAMtools/1.18-GCC-12.3.0
 # CONDA_BASE=$(conda info --base)
 # source ${CONDA_BASE}/etc/profile.d/conda.sh 
 # conda activate /home/kcb95328/conda/envs/culaea_pkgs
+
+# Load needed modules
+module load SAMtools/1.18-GCC-12.3.0 GATK/3.5-0-g36282e4-Java-1.7.0_80
+
 ###conda doesnt like to work for this script since GATK is Java
 
 # Global variables

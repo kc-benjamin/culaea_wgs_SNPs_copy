@@ -22,7 +22,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 # Global variables
 INFO="02_info_files"
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/ GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
 VCF="07_raw_VCFs"
 BAM="02_info_files/ML_bamfiles.txt"
 SAMPS="02_info_files/SRR_Acc_List_ML.txt" #why does this not split it by file?

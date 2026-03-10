@@ -25,6 +25,7 @@ GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
 VCF="07_raw_VCFs"
 BAM="02_info_files/realigned_bams.txt"
+echo $BAM
 SAMPS="02_info_files/SRR_Acc_List_ML.txt" #why does this not split it by file?
 
 #Pass the chromosome number from the sbatch command
@@ -32,10 +33,11 @@ chrom_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch chromosome from the array
 CHROM=$(sed -n "${chrom_num}p" 02_info_files/chromosome_list.txt)
+echo $CHROM
 #SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
 
-bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list "$BAM" -q 5 -r $CHROM -I -a FMT/AD | \
+bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list $BAM -q 5 -r $CHROM -I -a FMT/AD | \
 	bcftools call -S "$SAMPS" -G - -f GQ -mv -Ov > "$VCF/${CHROM}.vcf"
 
 conda deactivate

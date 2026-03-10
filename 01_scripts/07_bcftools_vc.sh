@@ -24,7 +24,7 @@ INFO="02_info_files"
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
 VCF="07_raw_VCFs"
-BAM="02_info_files/realigned_bams.txt"
+BAM="06_bam_files/realigned_bams.txt"
 echo $BAM
 SAMPS="02_info_files/SRR_Acc_List_ML.txt" #why does this not split it by file?
 

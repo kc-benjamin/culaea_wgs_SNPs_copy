@@ -43,10 +43,10 @@ samp_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch filename from the array
 # sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-sample_name=SRR19221314
+sample_name=SRR19221290
 
 #file=${sample_name}.dedup.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
-file=SRR19221314.dedup.bam 
+file=SRR19221290.dedup.bam 
 
 echo "
      >>> Realigning TARGET for $file <<<

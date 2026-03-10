@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=2-98
+#SBATCH --array=1-1
 
 #PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 # Load modules
@@ -38,9 +38,11 @@ samp_num=$SLURM_ARRAY_TASK_ID
 echo "$samp_num"
 
 # Fetch filename from the array
-sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-file=${sample_name}.trimmed.fastq.gz.sorted.bam ###again need to make sure that this is a file that exists###
-echo "$file"
+#sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+sample_name=SRR19221290
+# file=${sample_name}.trimmed.fastq.gz.sorted.bam 
+file=SRR19221290.trimmed.fastq.gz.sorted.bam 
+#echo "$file"
 
 #removing duplicates
 samtools view -f 0x2 -b $ALIGNEDFOLDER/$file > $ALIGNEDFOLDER/${sample_name}.trimmed.fastq.gz.sorted.depaired.bam

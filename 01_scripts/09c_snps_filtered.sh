@@ -5,14 +5,14 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
-#SBATCH --time=00:20:00
+#SBATCH --time=00:45:00
 #SBATCH --mem=1G
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
-#SBATCH --output=09b_plink_reformatting_%j.out
+#SBATCH --output=09c_snps_filtered_%j.out
 
 
-gunzip -c muir_snps_filtered.vcf.gz > muir_snps_filtered_LG.vcf
+#gunzip -c muir_snps_filtered.vcf.gz > muir_snps_filtered_LG.vcf
 
 awk '{gsub(/OX438541.1/,"1"); print}' muir_snps_filtered_LG.vcf > muir_snps_filtered_temp1.vcf
 awk '{gsub(/OX438542.1/,"2"); print}' muir_snps_filtered_temp1.vcf > muir_snps_filtered_temp2.vcf

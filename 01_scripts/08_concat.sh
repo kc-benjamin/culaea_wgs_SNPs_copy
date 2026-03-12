@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16G
-#SBATCH --time=00-23:00:00
+#SBATCH --time=00-12:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
@@ -14,11 +14,11 @@
 module load VCFtools/0.1.16-GCC-13.3.0 BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCcore-13.3.0 
 #module intel/2020.1.217 
 
-vcf-concat $(ls -1 /scratch/kcb95328/MuirLakeBrooks/07_raw_VCFs/* | perl -pe 's/\n/ /g') > muir_snps.vcf
+vcf-concat $(ls -1 /scratch/kcb95328/Ninespine-Muir/07_raw_VCFs/* | perl -pe 's/\n/ /g') > muir_snps.vcf
 
 bgzip muir_snps.vcf
-tabix -f -p vcf muir_snps.vcf
-bgzip -k muir_snps.vcf
+tabix --force --preset vcf muir_snps.vcf
+bgzip --keep muir_snps.vcf
 
 bcftools filter -e 'MQ < 30' muir_snps.vcf.gz -Oz > tmp.vcf.gz
 

@@ -17,6 +17,6 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 #bcftools index muir_snps_filtered.vcf.gz
 
-bcftools view muir_snps_filtered.vcf.gz PGA_scaffold14__88_contigs__length_21401847:15,382,674:15,488,296 > muir_snps_filtered_amhy_biggerwindow2.vcf
+bcftools view -Ov -o muir_snps_filtered_amhy_biggerwindow2 -r PGA_scaffold14__88_contigs__length_21401847:15382674-15488296 muir_snps_filtered.vcf.gz
 
 conda deactivate

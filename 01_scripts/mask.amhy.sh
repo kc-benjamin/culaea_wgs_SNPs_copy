@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=batch
-#SBATCH --job-name="filter-vcf"
+#SBATCH --job-name="mask-amhy"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -19,7 +19,7 @@ ml BEDTools/2.31.1-GCC-13.3.0 SAMtools/1.21-GCC-13.3.0
 ### mask Y par in reference fasta
 GENOME="03_genome"
 bedtools maskfasta \
-    -bed $GENOME/mask.bed \
+    -bed $GENOME/mask-amhy.bed \
     -fi $GENOME/brook_genome_hap1_v1.fa \
     -fo $GENOME/brook_genome_hap1_v1_no_amhy.fa
 

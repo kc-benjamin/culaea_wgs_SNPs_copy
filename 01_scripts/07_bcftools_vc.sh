@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-174
+#SBATCH --array=1-95
 
 # Load needed modules
 #module load BCFtools/1.21-GCC-13.3.0
@@ -22,17 +22,17 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 # Global variables
 INFO="02_info_files"
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 basename)
 VCF="07_raw_VCFs"
-BAM="02_info_files/ML_realigned_bams.txt"
+BAM="02_info_files/SL_realigned_bams.txt"
 echo $BAM
-SAMPS="02_info_files/SRR_Acc_List_ML.txt" #why does this not split it by file?
+SAMPS="02_info_files/SRR_Acc_List_SL.txt" #why does this not split it by file?
 
 #Pass the chromosome number from the sbatch command
 chrom_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch chromosome from the array
-CHROM=$(sed -n "${chrom_num}p" 02_info_files/chromosome_list.txt)
+CHROM=$(sed -n "${chrom_num}p" 02_info_files/brook_genome_hap1_v1_chromosomes2.txt)
 echo $CHROM
 #SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 

@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-1
+#SBATCH --array=1-95
 
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
@@ -31,7 +31,7 @@ module load SAMtools/1.18-GCC-12.3.0 GATK/3.8-1-Java-1.8.0_241 picard/2.18.4-Jav
 # Global variables
 BAM="06_bam_files"
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 basename) #changed to brook genome
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
 # Build Bam Index
@@ -42,11 +42,11 @@ echo " >>> Realigning...
 samp_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch filename from the array
-# sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-sample_name=SRR19221314
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_SL.txt | sed -n "${samp_num}p")
+#sample_name=SRR19221314
 
-#file=${sample_name}.dedup.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
-file=SRR19221314.dedup.bam 
+file=${sample_name}.dedup.bam ##changed to the trimmed sorted file because i dedup-ed using fastp
+#file=SRR19221314.dedup.bam 
 
 echo "
      >>> Realigning TARGET for $file <<<
@@ -64,8 +64,8 @@ samtools index $BAM/$file2
 ### THIS ONLY NEEDS TO HAPPEN ONCE####
 ### DO IN QLOGIN ###
 # java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary \
-#     R=$GENOMEFOLDER/$GENOME \
-#     O=$GENOMEFOLDER/$GENOME.dict
+#      R=$GENOME \
+#      O=$GENOME.dict
 
 
 # Realign

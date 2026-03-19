@@ -1,17 +1,28 @@
 #!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --job-name="rename_vcf_samples"
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --time=00-12:00:00
+#SBATCH --mail-user=kcb95328@uga.edu
+#SBATCH --mail-type=ALL
+#SBATCH --output=98_log_files/%x_%j.out
+#SBATCH --error=98_log_files/%x_%j.err
 
 # Script to rename samples in a VCF file using a mapping file
 # Usage: ./rename_vcf_samples.sh <input.vcf> <output.vcf> <name-conversion.txt>
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <input_vcf> <output_vcf> <mapping_file>"
-    echo "Example: $0 input.vcf output.vcf name-conversion.txt"
+    echo "Example: $0 SU_snps.vcf SU_snps_renamed.vcf name-conversion.txt"
     exit 1
 fi
 
-INPUT_VCF="$1"
-OUTPUT_VCF="$2"
-MAPPING_FILE="$3"
+INPUT_VCF="SU_snps.vcf"
+OUTPUT_VCF="SU_snps_renamed.vcf"
+MAPPING_FILE="name-conversion.txt"
 
 # Check if input files exist
 if [ ! -f "$INPUT_VCF" ]; then

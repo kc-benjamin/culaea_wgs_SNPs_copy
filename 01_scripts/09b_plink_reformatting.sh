@@ -11,34 +11,33 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=09b_plink_reformatting_%j.out
 
-sed 's/PGA_scaffold22__123_contigs__length_35631191/22/g' 97_for_holding/MU_snps_geno20_maf01_pruned.bim > tmp3.bim
-sed 's/PGA_scaffold21__64_contigs__length_27087477/21/g' tmp3.bim > tmp4.bim
-sed 's/PGA_scaffold20__81_contigs__length_24420605/20/g' tmp4.bim > tmp5.bim
-sed 's/PGA_scaffold18__88_contigs__length_23069817/18/g' tmp5.bim > tmp6.bim
-sed 's/PGA_scaffold19__71_contigs__length_22530169/19/g' tmp6.bim > tmp7.bim
-sed 's/PGA_scaffold17__83_contigs__length_22236360/17/g' tmp7.bim > tmp8.bim
-sed 's/PGA_scaffold14__88_contigs__length_21401847/14/g' tmp8.bim > tmp9.bim
-sed 's/PGA_scaffold16__56_contigs__length_21394868/16/g' tmp9.bim > tmp10.bim
-sed 's/PGA_scaffold15__61_contigs__length_21329229/15/g' tmp10.bim > tmp11.bim
-sed 's/PGA_scaffold12__56_contigs__length_20552211/12/g' tmp11.bim > tmp12.bim
-sed 's/PGA_scaffold10__89_contigs__length_20417627/10/g' tmp12.bim > tmp13.bim
-sed 's/PGA_scaffold13__42_contigs__length_19371112/13/g' tmp13.bim > tmp14.bim
-sed 's/PGA_scaffold11__71_contigs__length_19041060/11/g' tmp14.bim > tmp15.bim
-sed 's/PGA_scaffold7__70_contigs__length_18533579/7/g' tmp15.bim > tmp16.bim
-sed 's/PGA_scaffold9__59_contigs__length_18519828/9/g' tmp16.bim > tmp17.bim
-sed 's/PGA_scaffold8__67_contigs__length_18086311/8/g' tmp17.bim > tmp18.bim
-sed 's/PGA_scaffold5__81_contigs__length_16821318/5/g' tmp18.bim > tmp19.bim
-sed 's/PGA_scaffold6__72_contigs__length_16467905/6/g' tmp19.bim > tmp20.bim
-sed 's/PGA_scaffold4__53_contigs__length_16101261/4/g' tmp20.bim > tmp21.bim
-sed 's/PGA_scaffold3__61_contigs__length_14436489/3/g' tmp21.bim > tmp22.bim
-sed 's/PGA_scaffold23__90_contigs__length_32925445/23/g' tmp22.bim > tmp23.bim
-sed 's/PGA_scaffold2__66_contigs__length_13522551/2/g' tmp23.bim > final_bim_file.bim
-sed 's/PGA_scaffold1__43_contigs__length_10481396/1/g' final_bim_file.bim > final_bim_file_fixed.bim
+awk '{gsub(/PGA_scaffold22__123_contigs__length_35631191/,"4"); print}' shunda_snps_filtered_LG.vcf > shunda_snps_filtered_temp1.vcf
+awk '{gsub(/PGA_scaffold21__64_contigs__length_27087477/,"2"); print}' shunda_snps_filtered_temp1.vcf > shunda_snps_filtered_temp2.vcf
+awk '{gsub(/PGA_scaffold20__81_contigs__length_24420605/,"9"); print}' shunda_snps_filtered_temp2.vcf > shunda_snps_filtered_temp3.vcf
+awk '{gsub(/PGA_scaffold18__88_contigs__length_23069817/,"12"); print}' shunda_snps_filtered_temp3.vcf > shunda_snps_filtered_temp4.vcf
+awk '{gsub(/PGA_scaffold19__71_contigs__length_22530169/,"17"); print}' shunda_snps_filtered_temp4.vcf > shunda_snps_filtered_temp5.vcf
+awk '{gsub(/PGA_scaffold17__83_contigs__length_22236360/,"8"); print}' shunda_snps_filtered_temp5.vcf > shunda_snps_filtered_temp6.vcf
+awk '{gsub(/PGA_scaffold14__88_contigs__length_21401847/,"20"); print}' shunda_snps_filtered_temp6.vcf > shunda_snps_filtered_temp7.vcf
+awk '{gsub(/PGA_scaffold16__56_contigs__length_21394868/,"1"); print}' shunda_snps_filtered_temp7.vcf > shunda_snps_filtered_temp8.vcf
+awk '{gsub(/PGA_scaffold15__61_contigs__length_21329229/,"19"); print}' shunda_snps_filtered_temp8.vcf > shunda_snps_filtered_temp9.vcf
+awk '{gsub(/PGA_scaffold12__56_contigs__length_20552211/,"6"); print}' shunda_snps_filtered_temp9.vcf > shunda_snps_filtered_temp10.vcf
+awk '{gsub(/PGA_scaffold10__89_contigs__length_20417627/,"16"); print}' shunda_snps_filtered_temp10.vcf > shunda_snps_filtered_temp11.vcf
+awk '{gsub(/PGA_scaffold13__42_contigs__length_19371112/,"7"); print}' shunda_snps_filtered_temp11.vcf > shunda_snps_filtered_temp12.vcf
+awk '{gsub(/PGA_scaffold11__71_contigs__length_19041060/,"11"); print}' shunda_snps_filtered_temp12.vcf > shunda_snps_filtered_temp13.vcf
+awk '{gsub(/PGA_scaffold7__70_contigs__length_18533579/,"15"); print}' shunda_snps_filtered_temp13.vcf > shunda_snps_filtered_temp14.vcf
+awk '{gsub(/PGA_scaffold9__59_contigs__length_18519828/,"21"); print}' shunda_snps_filtered_temp14.vcf > shunda_snps_filtered_temp15.vcf
+awk '{gsub(/PGA_scaffold8__67_contigs__length_18086311/,"10"); print}' shunda_snps_filtered_temp15.vcf > shunda_snps_filtered_temp16.vcf
+awk '{gsub(/PGA_scaffold6__67_contigs__length_17942534/,"13"); print}' shunda_snps_filtered_temp16.vcf > shunda_snps_filtered_temp17.vcf
+awk '{gsub(/PGA_scaffold5__67_contigs__length_17942534/,"14"); print}' shunda_snps_filtered_temp17.vcf > shunda_snps_filtered_temp18.vcf
+awk '{gsub(/PGA_scaffold4__67_contigs__length_17942534/,"3"); print}' shunda_snps_filtered_temp18.vcf > shunda_snps_filtered_temp19.vcf
+awk '{gsub(/PGA_scaffold3__67_contigs__length_17942534/,"5"); print}' shunda_snps_filtered_temp19.vcf > shunda_snps_filtered_temp20.vcf
+awk '{gsub(/PGA_scaffold23__67_contigs__length_17942534/,"13"); print}' shunda_snps_filtered_temp20.vcf > shunda_snps_filtered_temp21.vcf
+awk '{gsub(/PGA_scaffold1__67_contigs__length_17942534/,"1"); print}' shunda_snps_filtered_temp21.vcf > shunda_snps_filtered_temp22.vcf
+awk '{gsub(/PGA_scaffold2__67_contigs__length_17942534/,"18"); print}' shunda_snps_filtered_temp22.vcf > shunda_snps_filtered_temp23.vcf
 
-rm tmp*.bim final_bim_file.bim
-mv final_bim_file_fixed.bim MU_snps_geno20_maf01_pruned.bim
-#mv MU_snps_geno20_maf01_pruned.bim MU_snps_geno20_maf01_pruned_VER2.bim
-#mv MU_snps_geno20_maf01_pruned_VER2.bim 97_for_holding
-#mv MU_snps_geno20_maf01_pruned_FIXED.bim MU_snps_geno20_maf01_pruned.bim
+
+cp shunda_snps_filtered_temp23.vcf shunda_snps_filtered.vcf
+rm shunda_snps_filtered_temp*
+
 
 

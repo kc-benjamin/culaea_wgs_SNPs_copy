@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
-#SBATCH --time=00:20:00
+#SBATCH --time=01:00:00
 #SBATCH --mem=1G
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL

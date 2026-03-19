@@ -13,8 +13,8 @@
 
 module load MUMmer/4.0.1-GCCcore-13.3.0
 
-nucmer -t 4 -c 100 -p attempt2 stickleback_v5_assembly.fa brook_genome_hap1_v1.fa
+nucmer -t 4 -c 100 -p attemptB-NS GCF_949316345.1_Punpun_genome.fa brook_genome_hap1_v1.fa
 
-show-coords attempt2.delta > coords.txt
+show-coords attemptB-NS.delta > coordsB-NS.txt
 
-mummerplot --medium -t png attempt2.delta
+mummerplot --medium -t png attemptB-NS.delta

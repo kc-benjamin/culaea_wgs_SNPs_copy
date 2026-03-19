@@ -16,13 +16,13 @@
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <input_vcf> <output_vcf> <mapping_file>"
-    echo "Example: $0 SU_snps.vcf SU_snps_renamed.vcf name-conversion.txt"
+    echo "Example: $0 shunda_snps_filtered.vcf shunda_snps_renamed.vcf name-conversion.txt"
     exit 1
 fi
 
-INPUT_VCF="SU_snps.vcf"
-OUTPUT_VCF="SU_snps_renamed.vcf"
-MAPPING_FILE="name-conversion.txt"
+INPUT_VCF="shunda_snps_filtered.vcf"
+OUTPUT_VCF="shunda_snps_renamed.vcf"
+MAPPING_FILE="02_info_files/name-conversion.txt"
 
 # Check if input files exist
 if [ ! -f "$INPUT_VCF" ]; then

@@ -27,13 +27,13 @@ awk '{gsub(/PGA_scaffold11__71_contigs__length_19041060/,"11"); print}' shunda_s
 awk '{gsub(/PGA_scaffold7__70_contigs__length_18533579/,"15"); print}' shunda_snps_filtered_temp13.vcf > shunda_snps_filtered_temp14.vcf
 awk '{gsub(/PGA_scaffold9__59_contigs__length_18519828/,"21"); print}' shunda_snps_filtered_temp14.vcf > shunda_snps_filtered_temp15.vcf
 awk '{gsub(/PGA_scaffold8__67_contigs__length_18086311/,"10"); print}' shunda_snps_filtered_temp15.vcf > shunda_snps_filtered_temp16.vcf
-awk '{gsub(/PGA_scaffold6__67_contigs__length_17942534/,"13"); print}' shunda_snps_filtered_temp16.vcf > shunda_snps_filtered_temp17.vcf
-awk '{gsub(/PGA_scaffold5__67_contigs__length_17942534/,"14"); print}' shunda_snps_filtered_temp17.vcf > shunda_snps_filtered_temp18.vcf
-awk '{gsub(/PGA_scaffold4__67_contigs__length_17942534/,"3"); print}' shunda_snps_filtered_temp18.vcf > shunda_snps_filtered_temp19.vcf
-awk '{gsub(/PGA_scaffold3__67_contigs__length_17942534/,"5"); print}' shunda_snps_filtered_temp19.vcf > shunda_snps_filtered_temp20.vcf
-awk '{gsub(/PGA_scaffold23__67_contigs__length_17942534/,"13"); print}' shunda_snps_filtered_temp20.vcf > shunda_snps_filtered_temp21.vcf
-awk '{gsub(/PGA_scaffold1__67_contigs__length_17942534/,"1"); print}' shunda_snps_filtered_temp21.vcf > shunda_snps_filtered_temp22.vcf
-awk '{gsub(/PGA_scaffold2__67_contigs__length_17942534/,"18"); print}' shunda_snps_filtered_temp22.vcf > shunda_snps_filtered_temp23.vcf
+awk '{gsub(/PGA_scaffold6__72_contigs__length_16467905/,"13"); print}' shunda_snps_filtered_temp16.vcf > shunda_snps_filtered_temp17.vcf
+awk '{gsub(/PGA_scaffold5__81_contigs__length_16821318/,"14"); print}' shunda_snps_filtered_temp17.vcf > shunda_snps_filtered_temp18.vcf
+awk '{gsub(/PGA_scaffold4__53_contigs__length_16101261/,"3"); print}' shunda_snps_filtered_temp18.vcf > shunda_snps_filtered_temp19.vcf
+awk '{gsub(/PGA_scaffold3__61_contigs__length_14436489/,"5"); print}' shunda_snps_filtered_temp19.vcf > shunda_snps_filtered_temp20.vcf
+awk '{gsub(/PGA_scaffold23__90_contigs__length_32925445/,"13"); print}' shunda_snps_filtered_temp20.vcf > shunda_snps_filtered_temp21.vcf
+awk '{gsub(/PGA_scaffold1__43_contigs__length_10481396/,"1"); print}' shunda_snps_filtered_temp21.vcf > shunda_snps_filtered_temp22.vcf
+awk '{gsub(/PGA_scaffold2__66_contigs__length_13522551/,"18"); print}' shunda_snps_filtered_temp22.vcf > shunda_snps_filtered_temp23.vcf
 
 
 cp shunda_snps_filtered_temp23.vcf shunda_snps_filtered.vcf

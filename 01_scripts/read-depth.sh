@@ -16,6 +16,6 @@ source ${CONDA_BASE}/etc/profile.d/conda.sh
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 #location-specific to exon 7
-samtools depth -a -r -J "PGA_scaffold14__88_contigs__length_21401847:15,449,686-15,450,142" -f SL_bamfiles_full.txt -o Shunda-exon7-amhy-depth.txt
+samtools depth -a -r -J "PGA_scaffold14__88_contigs__length_21401847:15,449,686-15,450,142" -f 02_info_files/SL_bamfiles_full.txt -o Shunda-exon7-amhy-depth.txt
 
 conda deactivate

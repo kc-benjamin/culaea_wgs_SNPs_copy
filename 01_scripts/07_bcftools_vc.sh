@@ -4,13 +4,13 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=1024M
+#SBATCH --mem=4G
 #SBATCH --time=0-12:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-30
+#SBATCH --array=1-23
 
 # Load needed modules
 #module load BCFtools/1.21-GCC-13.3.0
@@ -22,11 +22,11 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 # Global variables
 INFO="02_info_files"
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 basename)
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
 VCF="07_raw_VCFs"
-BAM="02_info_files/SL_bamfiles_full.txt"
+BAM="02_info_files/AL_bamfiles_full.txt"
 echo $BAM
-SAMPS="02_info_files/SRR_Acc_List_SL.txt" #why does this not split it by file?
+SAMPS="02_info_files/SRR_Acc_List_AL.txt"
 
 #Pass the chromosome number from the sbatch command
 chrom_num=$SLURM_ARRAY_TASK_ID

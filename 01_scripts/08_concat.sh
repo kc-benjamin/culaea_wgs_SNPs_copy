@@ -18,7 +18,7 @@ OUT="/scratch/kcb95328/MuirLakeBrooks/09_clean_vcf_space"
 vcf-concat $(ls -1 /scratch/kcb95328/MuirLakeBrooks/07_raw_VCFs/* | perl -pe 's/\n/ /g') > $OUT/Muir_snps.vcf
 
 bgzip $OUT/Muir_snps.vcf
-# tabix --force --preset vcf Astotin_snps.vcf
+tabix --force --preset vcf $OUT/Muir_snps.vcf
 
 bcftools filter -e 'MQ < 30' $OUT/Muir_snps.vcf.gz -Oz > $OUT/tmp.vcf.gz
 

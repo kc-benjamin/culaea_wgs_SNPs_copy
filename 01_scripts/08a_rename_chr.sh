@@ -40,6 +40,6 @@ ml BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCcore-13.3.0
 
 # rm Shunda_snps_filtered_temp*.vcf
 
-bgzip -k Astotin_snps_filtered_renamed.vcf
+#bgzip -k Astotin_snps_filtered_renamed.vcf
 tabix -p vcf Astotin_snps_filtered_renamed.vcf.gz
 

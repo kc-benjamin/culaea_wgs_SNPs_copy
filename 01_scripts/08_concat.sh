@@ -19,7 +19,7 @@ module load VCFtools/0.1.16-GCC-13.3.0 BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCc
 # bgzip Astotin_snps.vcf
 # tabix --force --preset vcf Astotin_snps.vcf
 
-bcftools filter -e 'MQ < 30' Shunda_snps.vcf.gz -Oz > tmp.vcf.gz
+bcftools filter -e 'MQ < 30' shunda_snps.vcf.gz -Oz > tmp.vcf.gz
 
 vcftools --gzvcf tmp.vcf.gz --minQ 30 --minGQ 20 --minDP 1 --recode --recode-INFO-all --stdout > Shunda_snps_filtered.vcf
 

@@ -4,14 +4,14 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=1G
-#SBATCH --time=00-01:00:00
+#SBATCH --mem=8G
+#SBATCH --time=00-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
 
-gunzip -c Astotin_snps_filtered.vcf.gz > Astotin_snps_filtered.vcf
+#gunzip -c Astotin_snps_filtered.vcf.gz > Astotin_snps_filtered.vcf
 
 awk '{gsub(/PGA_scaffold22__123_contigs__length_35631191/,"4"); print}' Astotin_snps_filtered.vcf > Astotin_snps_filtered_temp1.vcf
 awk '{gsub(/PGA_scaffold23__90_contigs__length_32925445/,"13"); print}' Astotin_snps_filtered_temp1.vcf > Astotin_snps_filtered_temp2.vcf

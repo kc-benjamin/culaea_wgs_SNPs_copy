@@ -28,7 +28,7 @@ BAM="02_info_files/AL_bamfiles_full.txt"
 echo $BAM
 SAMPS="02_info_files/SRR_Acc_List_AL.txt"
 
-#Pass the chromosome number from the sbatch command
+#Pass the chromosome number from sbatch command
 chrom_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch chromosome from the array

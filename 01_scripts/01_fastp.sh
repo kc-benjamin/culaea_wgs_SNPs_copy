@@ -12,7 +12,6 @@
 #SBATCH --error=98_log_files/%a_%x.err
 #SBATCH --array=1-1
 
-#PREFIX=$(sed -n "${SLURM_ARRAY_TASK_ID}p" 02_info_files/SRR_Acc_List_ML.txt)
 #currently for Shunda Lake
 # Load up fastp
 module load fastp/0.23.4-GCC-13.2.0

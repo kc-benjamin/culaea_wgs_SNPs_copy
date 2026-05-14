@@ -21,7 +21,6 @@ ml SAMtools/1.18-GCC-12.3.0
 #PICARD=$EBROOTPICARD/picard.jar
 #MARKDUPS="MarkDuplicates"
 ALIGNEDFOLDER="06_bam_files"
-#ALIGNEDFOLDER_test="06_bam_files"
 METRICSFOLDER="99_metrics"
 
 # Copy script to log folder

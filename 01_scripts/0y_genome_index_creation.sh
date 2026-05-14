@@ -17,10 +17,10 @@ GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-#bwa index $GENOME_FULL bwa-generated-index
+bwa index $GENOME_FULL bwa-generated-index
 bwa index -p GCF_949316345.1_Punpun_genome.fa -a bwtsw $GENOME_FULL
-#samtools faidx $GENOME_FULL
+samtools faidx $GENOME_FULL
 
-#module purge
-#ml Java/17.0.6 GATK/4.6.0.0-GCCcore-13.2.0-Java-17 picard/3.3.0-Java-17
-#java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict
+module purge
+ml Java/17.0.6 GATK/4.6.0.0-GCCcore-13.2.0-Java-17 picard/3.3.0-Java-17
+java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary -R $GENOME_FULL -O $GENOMEFOLDER/brook_genome_hap1_v1.dict

@@ -12,7 +12,7 @@
 #SBATCH --error=98_log_files/%x_%j.err
 #SBATCH --array=1-95
 
-# Copy script to log folder
+# Copy script over to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
 NAME=$(basename $0)

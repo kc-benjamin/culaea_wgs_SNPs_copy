@@ -14,7 +14,7 @@ module load BWA/0.7.18-GCCcore-13.3.0 #SAMtools/1.18-GCC-12.3.0
 
 #location variables
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename) #changed to brook genome
+GENOME=$(ls -1 $GENOMEFOLDER/GCF_949316345.1_Punpun_genome.fa | xargs -n 1 basename)
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
 #bwa index $GENOME_FULL bwa-generated-index

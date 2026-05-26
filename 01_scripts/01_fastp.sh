@@ -10,15 +10,15 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%a_%x.out
 #SBATCH --error=98_log_files/%a_%x.err
-#SBATCH --array=1-1
+#SBATCH --array=1-97
 
-#currently for Shunda Lake
+#currently for Muir Lake
 # Load up fastp
 module load fastp/0.23.4-GCC-13.2.0
 
 # Variables
-INDIR="04_raw_data"
-OUTDIR="05_trimmed_data"
+INDIR="04_raw_data/split-read-files"
+OUTDIR="05_trimmed_new"
 LOG="98_log_files"
 #mkdir $OUTDIR/01_reports
 #need to make the directory 01_reports in 05_trimmed_data
@@ -27,8 +27,8 @@ LOG="98_log_files"
 samp_num=$SLURM_ARRAY_TASK_ID
 
 #Pull sample name from the sample info
-#sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
-sample_name=SRR19221345
+sample_name=$(cut -f1 02_info_files/SRR_Acc_List_ML.txt | sed -n "${samp_num}p")
+#sample_name=SRR19221345
 
 fastp -w ${SLURM_CPUS_PER_TASK} --trim_poly_g --dedup \
         -i "$INDIR/${sample_name}_1.fastq.gz" \

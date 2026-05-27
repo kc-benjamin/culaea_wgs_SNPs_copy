@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-23
+#SBATCH --array=1-21
 
 # Load needed modules
 #module load BCFtools/1.21-GCC-13.3.0
@@ -23,10 +23,10 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 INFO="02_info_files"
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
-VCF="07_raw_VCFs"
-BAM="02_info_files/AL_bamfiles_full.txt"
+VCF="07_vcfs_new"
+BAM="02_info_files/ML_bamfiles_full.txt"
 echo $BAM
-SAMPS="02_info_files/SRR_Acc_List_AL.txt"
+SAMPS="02_info_files/SRR_Acc_List_ML.txt"
 
 #Pass the chromosome number from sbatch command
 chrom_num=$SLURM_ARRAY_TASK_ID

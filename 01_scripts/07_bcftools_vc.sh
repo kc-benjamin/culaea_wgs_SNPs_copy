@@ -24,7 +24,7 @@ INFO="02_info_files"
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
 VCF="07_vcfs_new"
-BAM="02_info_files/ML_bamfiles_full.txt"
+BAM="02_info_files/ML_bamfiles_new.txt"
 echo $BAM
 SAMPS="02_info_files/SRR_Acc_List_ML.txt"
 

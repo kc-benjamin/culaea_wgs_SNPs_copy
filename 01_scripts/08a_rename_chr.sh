@@ -12,7 +12,7 @@
 #SBATCH --error=98_log_files/%x_%j.err
 
 ml BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCcore-13.3.0
-#gunzip -c Muir_snps_filtered.vcf.gz > Muir_snps_filtered.vcf
+gunzip -c Muir_snps_filtered.vcf.gz > Muir_snps_filtered.vcf
 
 awk '{gsub(/PGA_scaffold22__123_contigs__length_35631191/,"4"); print}' Muir_snps_filtered.vcf > Muir_snps_filtered_temp1.vcf
 awk '{gsub(/PGA_scaffold23__90_contigs__length_32925445/,"13"); print}' Muir_snps_filtered_temp1.vcf > Muir_snps_filtered_temp2.vcf

@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --time=06:00:00
-#SBATCH --mem=8G
+#SBATCH --mem=16G
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=99_log_files/star-align_%j.out
@@ -30,6 +30,7 @@ name=$(cut -f1 raw_data_list3.txt | sed -n "${samp_num}p")
 STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --runMode genomeGenerate \
      --genomeDir $GENOMEDIR \
+     --genomeSAindexNbases 13 \
      --genomeFastaFiles $SLURM_SUBMIT_DIR/brook_genome_hap1_v1.fasta \
      --sjdbGTFfile $SLURM_SUBMIT_DIR/brook_genome_hap1_v1.gff \
 

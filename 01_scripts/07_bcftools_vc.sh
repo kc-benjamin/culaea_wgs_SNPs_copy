@@ -34,7 +34,7 @@ SAMPS="02_info_files/SRR_Acc_List_ML.txt"
 # Fetch chromosome from the array
 # CHROM=$(sed -n "${chrom_num}p" 02_info_files/brook_genome_hap1_v1_chromosomes2.txt)
 # echo $CHROM
-CHROM = "PGA_scaffold2__66_contigs__length_13522551"
+CHROM="PGA_scaffold2__66_contigs__length_13522551"
 #SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
 

@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=06:00:00
-#SBATCH --mem=16G
+#SBATCH --time=4-00:00:00
+#SBATCH --mem=24G
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=99_log_files/star-align_%j.out

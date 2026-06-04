@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --partition=batch
-#SBATCH --partition=batch
 #SBATCH --job-name="star-align"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -16,9 +15,9 @@ cd $SLURM_SUBMIT_DIR
 ml STAR/2.7.11a-GCC-12.3.0
 
 #variables
-GENOMEDIR="02_genome"
+GENOMEDIR="02_genome/with-gff"
 FASTA="brook_genome_hap1_v1.fasta"
-GTF="brook_genome_hap1_v1.gtf"
+GTF="brook_genome_hap1_v1.gff"
 
 STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --runMode genomeGenerate \

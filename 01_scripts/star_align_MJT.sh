@@ -24,23 +24,6 @@ R2="${INDIR}/${SAMPLE}_R2_001.fastq.gz"
 OUTDIR="/scratch/kcb95328/brook_RNA_Mar2025/04_counts"
 INDEX="/scratch/kcb95328/brook_RNA_Mar2025/02_genome/star_index"
 
-if [[ ! -f "samples.txt" ]]; then
-    echo "Error: samples.txt file not found."
-    exit 1
-fi
-
-if [[ -z "${SAMPLE}" ]]; then
-    echo "Error: No sample ID for SLURM_ARRAY_TASK_ID=${SLURM_ARRAY_TASK_ID}"
-    exit 1
-fi
-
-if [[ ! -f "${R1}" || \
-    ! -f "${R2}" ]]; then
-    echo "Error: Input files for sample ${SAMPLE} not found."
-    exit 1
-fi
-
-mkdir -p "${OUTDIR}"
 
 # readFilesCommand only needed if reads are zipped (.gz)
 STAR --runMode alignReads \

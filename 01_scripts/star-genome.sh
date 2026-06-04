@@ -18,11 +18,11 @@ ml STAR/2.7.11a-GCC-12.3.0
 #variables
 GENOMEDIR="02_genome"
 FASTA="brook_genome_hap1_v1.fasta"
-GTF="brook_genome_hap1_v1.gff"
+GTF="brook_genome_hap1_v1.gtf"
 
 STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --runMode genomeGenerate \
      --genomeDir $GENOMEDIR \
      --genomeSAindexNbases 13 \
-     --genomeFastaFiles $SLURM_SUBMIT_DIR/brook_genome_hap1_v1.fasta \
-     --sjdbGTFfile $SLURM_SUBMIT_DIR/brook_genome_hap1_v1.gff \
+     --genomeFastaFiles $SLURM_SUBMIT_DIR/${FASTA} \
+     --sjdbGTFfile $SLURM_SUBMIT_DIR/${GTF} \

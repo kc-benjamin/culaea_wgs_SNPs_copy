@@ -22,7 +22,7 @@ INDIR="/scratch/kcb95328/brook_RNA_Mar2025/01_raw_reads"
 R1="${INDIR}/${SAMPLE}_R1_001.fastq.gz"
 R2="${INDIR}/${SAMPLE}_R2_001.fastq.gz"
 OUTDIR="/scratch/kcb95328/brook_RNA_Mar2025/04_counts"
-INDEX="/scratch/kcb95328/brook_RNA_Mar2025/02_genome/star_index"
+INDEX="/scratch/kcb95328/brook_RNA_Mar2025/02_genome"
 
 
 # readFilesCommand only needed if reads are zipped (.gz)

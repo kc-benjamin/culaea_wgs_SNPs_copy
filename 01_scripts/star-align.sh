@@ -14,7 +14,6 @@
 #SBATCH --array=1-40
 
 ml STAR/2.7.11a-GCC-12.3.0
-rm -r _STARtmp
 
 #variables
 INDIR="01_raw_reads"
@@ -26,13 +25,6 @@ samp_num=$SLURM_ARRAY_TASK_ID
 
 # Pull sample name from the sample info
 name=$(cut -f1 raw_data_list3.txt | sed -n "${samp_num}p")
-
-STAR --runThreadN $SLURM_CPUS_PER_TASK \
-     --runMode genomeGenerate \
-     --genomeDir $GENOMEDIR \
-     --genomeSAindexNbases 13 \
-     --genomeFastaFiles $SLURM_SUBMIT_DIR/brook_genome_hap1_v1.fasta \
-     --sjdbGTFfile $SLURM_SUBMIT_DIR/brook_genome_hap1_v1.gff \
 
 STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --genomeDir $GENOMEDIR \

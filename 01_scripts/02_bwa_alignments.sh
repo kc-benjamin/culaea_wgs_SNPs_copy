@@ -21,11 +21,11 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 # Global variables
 GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fasta | xargs -n 1 basename)
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 ##INDGENOME="${GENOME}.fai"
 RAWDATAFOLDER="05_trimmed_new"
-ALIGNEDFOLDER="06_bams_new"
+ALIGNEDFOLDER="06_aligned_bams"
 #ALIGNED_test="06_bam_files/test3"
 LOG_FOLDER="98_log_files"
 #echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"

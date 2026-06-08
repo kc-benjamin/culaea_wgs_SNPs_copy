@@ -18,7 +18,7 @@ ml STAR/2.7.11a-GCC-12.3.0
 #variables
 INDIR="01_raw_reads"
 OUTDIR="03_star_output"
-GENOMEDIR="02_genome"
+GENOMEDIR="02_genome/with-gff-2"
 
 #Pass the sample number from the sbatch command
 samp_num=$SLURM_ARRAY_TASK_ID

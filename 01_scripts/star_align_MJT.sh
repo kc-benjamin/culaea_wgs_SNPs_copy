@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --partition=batch          # use other queues for >7 days, more memory, gpu
-#SBATCH --job-name=star_align
+#SBATCH --job-name=star_align_MJT
 #SBATCH --ntasks=1
 #SBATCH --time=24:00:00         # D-HH:MM:SS format
 #SBATCH --mem=100G                # memory per node
 #SBATCH --cpus-per-task=8
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
-#SBATCH --output=99_log_files/star-align_%j.out
-#SBATCH --error=99_log_files/star-align_%j.err
+#SBATCH --output=99_log_files/star-align_MJT_%j.out
+#SBATCH --error=99_log_files/star-align_MJT_%j.err
 #SBATCH --array=1-40                # set range
 
 set -euo pipefail

@@ -29,7 +29,7 @@ echo $BAM
 SAMPS="02_info_files/SRR_Acc_List_AL.txt"
 
 #Pass the chromosome number from sbatch command
-#chrom_num=$SLURM_ARRAY_TASK_ID
+chrom_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch chromosome from the array
 CHROM=$(sed -n "${chrom_num}p" 02_info_files/brook_genome_hap1_v1_chromosomes2.txt)

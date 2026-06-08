@@ -15,7 +15,7 @@ cd $SLURM_SUBMIT_DIR
 ml STAR/2.7.11a-GCC-12.3.0
 
 #variables
-GENOMEDIR="02_genome/with-gff"
+GENOMEDIR="02_genome/with-gff-2"
 FASTA="brook_genome_hap1_v1.fasta"
 GTF="brook_genome_hap1_v1.gff"
 
@@ -23,5 +23,11 @@ STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --runMode genomeGenerate \
      --genomeDir $GENOMEDIR \
      --genomeSAindexNbases 13 \
+     --sjdbGTFtagExonParentGene locus_tag \
+     --sjdbGTFtagExonParentTranscript Parent \
      --genomeFastaFiles $SLURM_SUBMIT_DIR/${FASTA} \
-     --sjdbGTFfile $SLURM_SUBMIT_DIR/${GTF} \
+     --sjdbGTFfile $SLURM_SUBMIT_DIR/${GTF}
+
+#added --sjdbGTFtagExonParentGene locus_tag because it was erroring out for not being able to find the gene ID; locus_tag contains the temp annotation name
+#added --sjdbGTFtagExonParentTranscript Parent to be able to use the GFF file, not the GTF file
+#added --genomeSAindexNbases 13 for the size of the genome; told to by the program

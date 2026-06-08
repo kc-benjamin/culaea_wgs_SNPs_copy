@@ -10,7 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
-#SBATCH --array=1-1
+#SBATCH --array=1-23
 
 # Load needed modules
 #module load BCFtools/1.21-GCC-13.3.0
@@ -23,18 +23,18 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 INFO="02_info_files"
 GENOMEFOLDER="03_genome"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
-VCF="07_vcfs_new"
-BAM="02_info_files/ML_bamfiles_new.txt"
+VCF="07_vcfs"
+BAM="02_info_files/AL_bamfiles.txt"
 echo $BAM
-SAMPS="02_info_files/SRR_Acc_List_ML.txt"
+SAMPS="02_info_files/SRR_Acc_List_AL.txt"
 
 #Pass the chromosome number from sbatch command
 #chrom_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch chromosome from the array
-# CHROM=$(sed -n "${chrom_num}p" 02_info_files/brook_genome_hap1_v1_chromosomes2.txt)
-# echo $CHROM
-CHROM="PGA_scaffold2__66_contigs__length_13522551"
+CHROM=$(sed -n "${chrom_num}p" 02_info_files/brook_genome_hap1_v1_chromosomes2.txt)
+echo $CHROM
+#CHROM="PGA_scaffold2__66_contigs__length_13522551"
 #SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
 

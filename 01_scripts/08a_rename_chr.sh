@@ -27,7 +27,7 @@ awk '{gsub(/PGA_scaffold15__61_contigs__length_21329229/,"19"); print}' Ast_snps
 awk '{gsub(/PGA_scaffold12__56_contigs__length_20552211/,"6"); print}' Ast_snps_IncFilt_filtered_temp10.vcf > Ast_snps_IncFilt_filtered_temp11.vcf
 awk '{gsub(/PGA_scaffold10__89_contigs__length_20417627/,"16"); print}' Ast_snps_IncFilt_filtered_temp11.vcf > Ast_snps_IncFilt_filtered_temp12.vcf
 awk '{gsub(/PGA_scaffold13__42_contigs__length_19371112/,"7"); print}' Ast_snps_IncFilt_filtered_temp12.vcf > Ast_snps_IncFilt_filtered_temp13.vcf
-awk '{gsub(/PGA_scaffold11__71_contigs__length_19041060/,"1"); print}' Ast_snps_IncFilt_filtered_temp13.vcf > Ast_snps_IncFilt_filtered_temp14.vcf
+awk '{gsub(/PGA_scaffold11__71_contigs__length_19041060/,"11"); print}' Ast_snps_IncFilt_filtered_temp13.vcf > Ast_snps_IncFilt_filtered_temp14.vcf
 awk '{gsub(/PGA_scaffold7__70_contigs__length_18533579/,"15"); print}' Ast_snps_IncFilt_filtered_temp14.vcf > Ast_snps_IncFilt_filtered_temp15.vcf
 awk '{gsub(/PGA_scaffold9__59_contigs__length_18519828/,"21"); print}' Ast_snps_IncFilt_filtered_temp15.vcf > Ast_snps_IncFilt_filtered_temp16.vcf
 awk '{gsub(/PGA_scaffold8__67_contigs__length_18086311/,"10"); print}' Ast_snps_IncFilt_filtered_temp16.vcf > Ast_snps_IncFilt_filtered_temp17.vcf

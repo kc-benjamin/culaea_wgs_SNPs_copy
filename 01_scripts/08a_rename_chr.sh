@@ -11,7 +11,6 @@
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
 
-ml BCFtools/1.21-GCC-13.3.0 tabix/0.2.6-GCCcore-13.3.0
 gunzip -c Ast_snps_IncFilt_filtered.vcf.gz > Ast_snps_IncFilt_filtered.vcf
 
 awk '{gsub(/PGA_scaffold22__123_contigs__length_35631191/,"4"); print}' Ast_snps_IncFilt_filtered.vcf > Ast_snps_IncFilt_filtered_temp1.vcf
@@ -39,7 +38,4 @@ awk '{gsub(/PGA_scaffold2__66_contigs__length_13522551/,"18"); print}' Ast_snps_
 awk '{gsub(/PGA_scaffold1__43_contigs__length_10481396/,"1"); print}' Ast_snps_IncFilt_filtered_temp22.vcf > Ast_snps_IncFilt_filtered_renamed.vcf
 
 rm Ast_snps_IncFilt_filtered_temp*.vcf
-
-bgzip Ast_snps_IncFilt_filtered_renamed.vcf
-
 

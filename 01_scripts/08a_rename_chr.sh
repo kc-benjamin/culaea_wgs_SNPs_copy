@@ -11,7 +11,7 @@
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
 
-gunzip -c Ast_snps_IncFilt_filtered.vcf.gz > Ast_snps_IncFilt_filtered.vcf
+#gunzip -c Ast_snps_IncFilt_filtered.vcf.gz > Ast_snps_IncFilt_filtered.vcf
 
 awk '{gsub(/PGA_scaffold22__123_contigs__length_35631191/,"4"); print}' Ast_snps_IncFilt_filtered.vcf > Ast_snps_IncFilt_filtered_temp1.vcf
 awk '{gsub(/PGA_scaffold23__90_contigs__length_32925445/,"13"); print}' Ast_snps_IncFilt_filtered_temp1.vcf > Ast_snps_IncFilt_filtered_temp2.vcf

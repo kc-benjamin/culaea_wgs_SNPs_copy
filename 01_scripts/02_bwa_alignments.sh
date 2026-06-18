@@ -25,7 +25,7 @@ GENOMEFOLDER="/home/kcb95328/genomes"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 basename)
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-RAWDATAFOLDER="/scratch/kcb95328/MuirLakeBrooks/05_trimmed_data" #change as needed to the main population directory
+RAWDATAFOLDER="/scratch/kcb95328/MuirLakeBrooks/05_trimmed_new" #change as needed to the main population directory
 ALIGNEDFOLDER="01_aligned_bams" #change as needed; should be from the submit directory
 LOG_FOLDER="98_log_files"
 #echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"

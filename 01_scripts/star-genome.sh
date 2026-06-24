@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=batch
-#SBATCH --job-name="star-align"
+#SBATCH --job-name="star-genome"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -23,7 +23,7 @@ STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --runMode genomeGenerate \
      --genomeDir $GENOMEDIR \
      --genomeSAindexNbases 13 \
-     --sjdbGTFtagExonParentGene locus_tag \
+     --sjdbGTFtagExonParentGene gene \
      --sjdbGTFtagExonParentTranscript Parent \
      --genomeFastaFiles $SLURM_SUBMIT_DIR/${FASTA} \
      --sjdbGTFfile $SLURM_SUBMIT_DIR/${GTF}

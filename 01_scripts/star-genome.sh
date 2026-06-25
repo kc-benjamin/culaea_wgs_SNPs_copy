@@ -15,15 +15,15 @@ cd $SLURM_SUBMIT_DIR
 ml STAR/2.7.11a-GCC-12.3.0
 
 #variables
-GENOMEDIR="02_genome/with-gff-2"
+GENOMEDIR="02_genome/missing-genes"
 FASTA="brook_genome_hap1_v1.fasta"
-GTF="brook_genome_hap1_v1.gff"
+GTF="brook-annotations-MissingGeneIDs.gff"
 
 STAR --runThreadN $SLURM_CPUS_PER_TASK \
      --runMode genomeGenerate \
      --genomeDir $GENOMEDIR \
      --genomeSAindexNbases 13 \
-     --sjdbGTFtagExonParentGene gene \
+     --sjdbGTFtagExonParentGene locus_tag \
      --sjdbGTFtagExonParentTranscript Parent \
      --genomeFastaFiles $SLURM_SUBMIT_DIR/${FASTA} \
      --sjdbGTFfile $SLURM_SUBMIT_DIR/${GTF}

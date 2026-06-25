@@ -21,8 +21,8 @@ SAMPLE=$(sed -n "$((SLURM_ARRAY_TASK_ID))p" raw_data_list3.txt)
 INDIR="/scratch/kcb95328/brook_RNA_Mar2025/01_raw_reads"
 R1="${INDIR}/${SAMPLE}_R1_001.fastq.gz"
 R2="${INDIR}/${SAMPLE}_R2_001.fastq.gz"
-OUTDIR="/scratch/kcb95328/brook_RNA_Mar2025/06_rerun_new_table"
-INDEX="/scratch/kcb95328/brook_RNA_Mar2025/02_genome/with-gff-2"
+OUTDIR="/scratch/kcb95328/brook_RNA_Mar2025/07_missing_genes"
+INDEX="/scratch/kcb95328/brook_RNA_Mar2025/02_genome/missing-genes"
 
 
 # readFilesCommand only needed if reads are zipped (.gz)

@@ -19,13 +19,13 @@ source ${CONDA_BASE}/etc/profile.d/conda.sh
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 # Global variables
-POPULATION="/home/kcb95328/Info-Astotin" #change this line as needed
+POPULATION="/home/kcb95328/Info-Shunda" #change this line as needed
 
 GENOMEFOLDER="/home/kcb95328/genomes"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 basename)
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-RAWDATAFOLDER="/scratch/kcb95328/AstotinLakeBrooks/05_trimmed_data" #change as needed to the main population directory
+RAWDATAFOLDER="/scratch/kcb95328/ShundaLakeBrooks/05_trimmed_data" #change as needed to the main population directory
 ALIGNEDFOLDER="01_aligned_bams" #change as needed; should be from the submit directory
 LOG_FOLDER="98_log_files"
 #echo "$GENOME and $INDGENOME found in $GENOMEFOLDER"
@@ -43,7 +43,7 @@ echo "samp_num='$samp_num'"
 #echo "PREFIX='$PREFIX'"
 
 # Pull sample name from the sample info
-name=$(cut -f1 $POPULATION/SRR_Acc_List_AL.txt | sed -n "${samp_num}p") #change as needed
+name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${samp_num}p") #change as needed
 #name=SRR19221338
 
 # Name of uncompressed file

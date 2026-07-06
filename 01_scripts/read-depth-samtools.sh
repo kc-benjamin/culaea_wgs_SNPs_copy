@@ -30,6 +30,6 @@ name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${SLURM_ARRAY_TASK_ID}p
 
 
 #Calculate coverage for a specific chromosome:
-samtools coverage -r PGA_scaffold14__88_contigs__length_21401847 -m -w 10000 ${name}.bam > ${name}_chr20_coverage.txt
+samtools coverage -r PGA_scaffold14__88_contigs__length_21401847 -m -w 10000 $DATAFOLDER/${name}.trimmed.fastq.gz.sorted.bam > ${name}_chr20_coverage.txt
 
 conda deactivate

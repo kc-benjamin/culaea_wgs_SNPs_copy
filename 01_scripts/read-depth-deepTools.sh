@@ -22,14 +22,14 @@ POPULATION="/home/kcb95328/Info-Shunda"
  # 1. Loop through all BAMs and create bigwigs for chr1
 for bam in 01_aligned_bams/*.trimmed.fastq.gz.sorted.bam; do
     echo "Processing $bam..."
-    bamCoverage -b "$bam" -o "${bam%.trimmed.fastq.gz.sorted.bam}_chr1.bw" --region chr1 --binSize 100 --normalizeUsing RPKM --numberOfProcessors 8
+    bamCoverage -b "$bam" -o "${bam%.trimmed.fastq.gz.sorted.bam}_chr1.bw" --region PGA_scaffold14__88_contigs__length_21401847 --binSize 100 --normalizeUsing RPKM --numberOfProcessors 8
 done
 
 #2: Compile the data matric with deeptools
 multiBigwigSummary bins \
     -b *_chr20.bw \
     -o all-bams_chr20.npz \
-    --region 20 \
+    --region PGA_scaffold14__88_contigs__length_21401847 \
     --binSize 100
 
 #3: Generate the scan

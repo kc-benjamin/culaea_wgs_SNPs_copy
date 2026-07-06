@@ -20,14 +20,14 @@ POPULATION="/home/kcb95328/Info-Shunda"
 #name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${samp_num}p") #change as needed
 
  # 1. Loop through all BAMs and create bigwigs for chr1
-for bam in 01_aligned_bams/*.trimmed.fastq.gz.sorted.bam; do
-    echo "Processing $bam..."
-    bamCoverage -b "$bam" -o "${bam%.trimmed.fastq.gz.sorted.bam}_chr1.bw" --region PGA_scaffold14__88_contigs__length_21401847 --binSize 100 --normalizeUsing RPKM --numberOfProcessors 8
-done
+# for bam in 01_aligned_bams/*.trimmed.fastq.gz.sorted.bam; do
+#     echo "Processing $bam..."
+#     bamCoverage -b "$bam" -o "02_read_depth_windows/${bam%.trimmed.fastq.gz.sorted.bam}_chr1.bw" --region PGA_scaffold14__88_contigs__length_21401847 --binSize 100 --normalizeUsing RPKM --numberOfProcessors 8
+# done
 
 #2: Compile the data matric with deeptools
 multiBigwigSummary bins \
-    -b *_chr20.bw \
+    -b 02_read_depth_windows/*_chr20.bw \
     -o all-bams_chr20.npz \
     --region PGA_scaffold14__88_contigs__length_21401847 \
     --binSize 100

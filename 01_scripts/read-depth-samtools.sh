@@ -24,7 +24,7 @@ GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 ba
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
 DATAFOLDER="/scratch/kcb95328/ShundaLakeBrooks/06_bam_files" #change as needed to the main population directory
-OUTPUT= "/scratch/kcb95328/ShundaLakeBrooks/11_read_depth" #change as needed; should be from the submit directory
+OUTPUT="/scratch/kcb95328/ShundaLakeBrooks/11_read_depth" #change as needed; should be from the submit directory
 LOG_FOLDER="98_log_files"
 name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${SLURM_ARRAY_TASK_ID}p") #change as needed
 

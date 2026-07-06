@@ -23,13 +23,13 @@ GENOMEFOLDER="/home/kcb95328/genomes"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1_amhy_masked.fa | xargs -n 1 basename)
 GENOME_FULL="$GENOMEFOLDER/$GENOME"
 
-DATAFOLDER="/scratch/kcb95328/AmhyMasked-Shunda/Unfiltered/01_aligned_bams" #change as needed to the main population directory
-#OUTPUT= #change as needed; should be from the submit directory
+DATAFOLDER="/scratch/kcb95328/ShundaLakeBrooks/06_bam_files" #change as needed to the main population directory
+OUTPUT= "/scratch/kcb95328/ShundaLakeBrooks/11_read_depth" #change as needed; should be from the submit directory
 LOG_FOLDER="98_log_files"
 name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${SLURM_ARRAY_TASK_ID}p") #change as needed
 
 
 #Calculate coverage for a specific chromosome:
-samtools coverage -r PGA_scaffold14__88_contigs__length_21401847 -w 10000 $DATAFOLDER/${name}.trimmed.fastq.gz.sorted.bam > ${name}_chr20_coverage.txt
+samtools coverage -r PGA_scaffold14__88_contigs__length_21401847 -w 10000 $DATAFOLDER/${name}.trimmed.fastq.gz.sorted.bam > ${OUTPUT}/${name}_chr20_coverage.txt
 
 conda deactivate

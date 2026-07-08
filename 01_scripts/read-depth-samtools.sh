@@ -19,7 +19,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 # Global variables
 POPULATION="/home/kcb95328/Info-Shunda" #change this line as needed
 
-OUTPUT="/scratch/kcb95328/ShundaLakeBrooks" #change as needed; should be from the submit directory
+OUTPUT="/scratch/kcb95328/ShundaLakeBrooks/11_read_depth" #change as needed; should be from the submit directory
 #name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${SLURM_ARRAY_TASK_ID}p") #change as needed
 
 
@@ -27,7 +27,7 @@ OUTPUT="/scratch/kcb95328/ShundaLakeBrooks" #change as needed; should be from th
 #samtools coverage -r PGA_scaffold14__88_contigs__length_21401847 -w 113 --plot-depth --ascii $DATAFOLDER/${name}.trimmed.fastq.gz.sorted.bam > ${OUTPUT}/${name}_chr20_coverage.txt
 
 #Calculate coverage for a chromosome to be used with R:
-samtools depth -a -H -J -r PGA_scaffold14__88_contigs__length_21401847 -f $POPULATION/SL_bamfiles_complete_name.txt -o $OUTPUT/Shunda-all-chr20-depth.txt
+samtools depth -a -H -J -r PGA_scaffold14__88_contigs__length_21401847 -f $POPULATION/SL_bamfiles_absolute_redone.txt -o $OUTPUT/Shunda-all-chr20-depth.txt
 #-a: output all positions, including those with zero coverage
 #-H: show column names at the beginning of the output
 #-J: include reads with deletions in depth computation

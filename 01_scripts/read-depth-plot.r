@@ -1,4 +1,4 @@
-install.packages(c("zoo", "ggplot2", "tidyr", "dplyr", "rollmean"))
+install.packages(c("zoo", "ggplot2", "tidyr", "dplyr", "rollmean"), repos="https://cran.r-project.org")
 
 library('ggplot2')
 library('tidyr')

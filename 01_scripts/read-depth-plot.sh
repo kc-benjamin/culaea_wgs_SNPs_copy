@@ -4,8 +4,8 @@
 #SBATCH --job-name="read_depth_R"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=300G
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=500G
 #SBATCH --time=0-24:00:00
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL

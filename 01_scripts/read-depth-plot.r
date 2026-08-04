@@ -38,7 +38,7 @@ df_with_sex$smooth <- rollmean(df_with_sex$value, k = window_size, fill = NA, al
 #plot
 largeplot<-ggplot(df_with_sex, aes(x = POS)) +
   geom_line(aes(y = value), color = "gray80", alpha = 0.5) +  # Raw data in the background
-  geom_line(aes(y = smooth), color = "blue", size = 1) + # Smoothed line
+  geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
   labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth")
 #save it
 ggsave(filename="Norm10000-Shunda-chr20-11to19-all_8-2026.pdf", plot=largeplot)
@@ -52,7 +52,7 @@ small_df_with_sex<- df_with_sex %>%
 
 #plot
 thresholdplot<-ggplot(small_df_with_sex, aes(x = POS)) +
-  geom_line(aes(y = smooth), color = "blue", size = 1) + # Smoothed line
+  geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
   labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth") +
   theme(text = element_text(family = "Arial"))
 #save

@@ -3,7 +3,6 @@ install.packages(c("zoo", "ggplot2", "tidyr", "dplyr", "rollmean"), repos="https
 library('ggplot2')
 library('tidyr')
 library('zoo')
-library('rollmean')
 library('dplyr')
 setwd("/scratch/kcb95328/ShundaLakeBrooks/11_read_depth")
 

@@ -16,4 +16,6 @@
 cd $SLURM_SUBMIT_DIR
 
 #activate R script
+ml R/4.5.1-gfbf-2025a
+
 R --no-save < /home/kcb95328/culaea_wgs_SNPs_copy/01_scripts/read-depth-plot.r

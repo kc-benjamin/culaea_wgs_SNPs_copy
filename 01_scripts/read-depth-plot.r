@@ -1,9 +1,18 @@
-install.packages(c("zoo", "ggplot2", "tidyr", "dplyr", "rollmean"), repos="https://cran.r-project.org")
+# Define required packages
+required_packages <- c("ggplot2", "dplyr", "zoo", "tidyr")
 
-library('ggplot2')
-library('tidyr')
-library('zoo')
-library('dplyr')
+# Check for missing packages
+missing_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]
+
+# Install missing ones only
+if(length(missing_packages) > 0) {
+    install.packages(missing_packages, repos = "https://r-project.org")
+}
+
+# Load all packages safely
+invisible(lapply(required_packages, library, character.only = TRUE))
+
+# Set working directory
 setwd("/scratch/kcb95328/ShundaLakeBrooks/11_read_depth")
 
 #read in data
@@ -37,7 +46,6 @@ df_with_sex$smooth <- rollmean(df_with_sex$value, k = window_size, fill = NA, al
 
 #plot
 largeplot<-ggplot(df_with_sex, aes(x = POS)) +
-  geom_line(aes(y = value), color = "gray80", alpha = 0.5) +  # Raw data in the background
   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
   labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth")
 #save it

@@ -49,7 +49,9 @@ largeplot<-ggplot(df_with_sex, aes(x = POS)) +
   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
   labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth")
 #save it
-ggsave(filename="Norm10000-Shunda-chr20-11to19-all_8-2026.pdf", plot=largeplot)
+pdf("Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
+print(largeplot)
+dev.off()
 
 #let's get rid of that crazy region:
 #define threshold
@@ -64,4 +66,6 @@ thresholdplot<-ggplot(small_df_with_sex, aes(x = POS)) +
   labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth") +
   theme(text = element_text(family = "Arial"))
 #save
-ggsave(filename="Threshold3-Norm10000-Shunda-chr20-11to19-all_8-2026.pdf", plot=thresholdplot)
+pdf("Threshold3-Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
+print(thresholdplot)
+dev.off()

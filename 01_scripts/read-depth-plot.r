@@ -39,33 +39,48 @@ depth_long$value <- depth_long$value / mean(depth_long$value)
 names(depth_long)[3]<-"Run"
 df_with_sex<-merge(depth_long,sex_shunda, by="Run")
 
+#subset by genotype (test)
+df_male <- df_with_sex %>% filter(sex == "male")
+df_female <- df_with_sex %>% filter(sex == "female")
+
 #smooth out the data:
 window_size <- 10000
 
-df_with_sex$smooth <- rollmean(df_with_sex$value, k = window_size, fill = NA, align = "center")
+df_male$smooth <- rollmean(df_male$value, k = window_size, fill = NA, align = "center")
+df_female$smooth <- rollmean(df_female$value, k = window_size, fill = NA, align = "center")
 
-#plot
-largeplot<-ggplot(df_with_sex, aes(x = POS)) +
+
+#plot (males only)
+maleplot<-ggplot(df_male, aes(x = POS)) +
   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
-  labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth")
+  labs(title = "Read depth from 11M to 19M, Shunda males only - Normalized 10,000 bp windows", x = "Position (bp)", y = "Depth")
 #save it
 pdf("Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
-print(largeplot)
+print(maleplot)
 dev.off()
 
-#let's get rid of that crazy region:
-#define threshold
-threshold <- 3
-#keep only those below the threshold
-small_df_with_sex<- df_with_sex %>%
-    filter(value <= threshold)
-
-#plot
-thresholdplot<-ggplot(small_df_with_sex, aes(x = POS)) +
+#plot (females only)
+femaleplot<-ggplot(df_female, aes(x = POS)) +
   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
-  labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth") +
-  theme(text = element_text(family = "Arial"))
-#save
-pdf("Threshold3-Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
-print(thresholdplot)
+  labs(title = "Read depth from 11M to 19M, Shunda females only - Normalized 10,000 bp windows", x = "Position (bp)", y = "Depth")
+#save it
+pdf("Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
+print(femaleplot)
 dev.off()
+
+# #let's get rid of that crazy region:
+# #define threshold
+# threshold <- 3
+# #keep only those below the threshold
+# small_df_with_sex<- df_with_sex %>%
+#     filter(value <= threshold)
+
+# #plot
+# thresholdplot<-ggplot(small_df_with_sex, aes(x = POS)) +
+#   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
+#   labs(title = "Sliding Window Smoothing (Rolling Mean)", x = "Position (bp)", y = "Depth") +
+#   theme(text = element_text(family = "Arial"))
+# #save
+# pdf("Threshold3-Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
+# print(thresholdplot)
+# dev.off()

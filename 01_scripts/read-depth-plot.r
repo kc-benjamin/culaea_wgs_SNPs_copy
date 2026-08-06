@@ -2,11 +2,11 @@
 required_packages <- c("ggplot2", "dplyr", "zoo", "tidyr")
 
 # Check for missing packages
-missing_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]
+missing_packages <- required_packages[!(required_packages %in% installed.packages()[, "Package"])]
 
 # Install missing ones only
 if(length(missing_packages) > 0) {
-    install.packages(missing_packages, repos = "https://r-project.org")
+  install.packages(missing_packages, repos = "https://r-project.org")
 }
 
 # Load all packages safely
@@ -15,58 +15,54 @@ invisible(lapply(required_packages, library, character.only = TRUE))
 # Set working directory
 setwd("/scratch/kcb95328/ShundaLakeBrooks/11_read_depth")
 
-#read in data
-df <- read.delim("Shunda-11to19-chr20-depth.txt")
-
-#reformat data
-colnames(df) <- gsub("X.scratch.kcb95328.ShundaLakeBrooks.09_bam_copies."," ",colnames(df)) 
-names(df) <- gsub(".trimmed.fastq.gz.sorted.bam"," ",names(df))
-colnames(df) <- trimws(colnames(df))
-
-#reformat for combination with sex
-depth_long<-pivot_longer(df,cols=starts_with("SRR"))
-depth_long$POS<-as.numeric(depth_long$POS)
-depth_long$value<-as.numeric(depth_long$value)
-
-#read in sex metadata
+#read in data (make for loop)
 sex_shunda<-read.csv("/home/kcb95328/Info-Shunda/SraRunTable-metadata-SL.csv", header=TRUE)
 sex_shunda<-sex_shunda[, c("Run","sex")]
 
+for(i in sex_shunda$Run) {
+  df <- read.delim(paste0(i, "_chr20-depth.txt"))
+
+
+#reformat data
+  colnames(df) <- gsub("X.scratch.kcb95328.ShundaLakeBrooks.09_bam_copies."," ",colnames(df)) 
+  names(df) <- gsub(".trimmed.fastq.gz.sorted.bam"," ",names(df))
+  colnames(df) <- trimws(colnames(df))
+
+#reformat for combination with sex
+  depth_long<-pivot_longer(df,cols=starts_with("SRR"))
+  depth_long$POS<-as.numeric(depth_long$POS)
+  depth_long$value<-as.numeric(depth_long$value)
+  rm(df)
+
 #normalize depth values
-depth_long$value <- depth_long$value / mean(depth_long$value)
+  depth_long$value <- depth_long$value / mean(depth_long$value)
 
 #merge
-names(depth_long)[3]<-"Run"
-df_with_sex<-merge(depth_long,sex_shunda, by="Run")
-
-#subset by genotype (test)
-df_male <- df_with_sex %>% filter(sex == "male")
-df_female <- df_with_sex %>% filter(sex == "female")
+  names(depth_long)[3]<-"Run"
+  df_with_sex<-merge(depth_long,sex_shunda, by="Run")
 
 #smooth out the data:
-window_size <- 10000
+  window_size <- 10000
 
-df_male$smooth <- rollmean(df_male$value, k = window_size, fill = NA, align = "center")
-df_female$smooth <- rollmean(df_female$value, k = window_size, fill = NA, align = "center")
-
+  df_with_sex$smooth <- rollmean(df_with_sex$value, k = window_size, fill = NA, align = "center")
 
 #plot (males only)
-maleplot<-ggplot(df_male, aes(x = POS)) +
-  geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
-  labs(title = "Read depth from 11M to 19M, Shunda males only - Normalized 10,000 bp windows", x = "Position (bp)", y = "Depth")
+  plot<-ggplot(df_with_sex, aes(x = POS)) +
+   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
+   labs(title = "Read depth from 11M to 19M- Normalized 10,000 bp windows", x = "Position (bp)", y = "Depth")
 #save it
-pdf("Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
-print(maleplot)
-dev.off()
-
+  pdf(paste0("Norm10000-Shunda-chr20-11to19", i, ".pdf"))
+  print(plot)
+  dev.off()
+}
 #plot (females only)
-femaleplot<-ggplot(df_female, aes(x = POS)) +
-  geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
-  labs(title = "Read depth from 11M to 19M, Shunda females only - Normalized 10,000 bp windows", x = "Position (bp)", y = "Depth")
-#save it
-pdf("Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
-print(femaleplot)
-dev.off()
+# femaleplot<-ggplot(df_female, aes(x = POS)) +
+#   geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
+#   labs(title = "Read depth from 11M to 19M, Shunda females only - Normalized 10,000 bp windows", x = "Position (bp)", y = "Depth")
+# #save it
+# pdf("Norm10000-Shunda-chr20-11to19-all_8-2026.pdf")
+# print(femaleplot)
+# dev.off()
 
 # #let's get rid of that crazy region:
 # #define threshold

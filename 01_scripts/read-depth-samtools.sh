@@ -30,9 +30,10 @@ OUTPUT="/scratch/kcb95328/ShundaLakeBrooks/11_read_depth" #change as needed; sho
 #samtools coverage -r PGA_scaffold14__88_contigs__length_21401847 -w 113 --plot-depth --ascii $DATAFOLDER/${name}.trimmed.fastq.gz.sorted.bam > ${OUTPUT}/${name}_chr20_coverage.txt
 
 #Calculate coverage for a chromosome to be used with R:
-samtools depth -a -H -J -r PGA_scaffold14__88_contigs__length_21401847:11,712,677-19,202,098 -f $file -o $OUTPUT/${name}_chr20_11.7to19.2_read-depth.txt
+samtools depth -a -H -J -r PGA_scaffold14__88_contigs__length_21401847:11,712,677-19,202,098 -X ${file} ${file}.bai -o $OUTPUT/${name}_chr20_11.7to19.2_read-depth.txt
 #-a: output all positions, including those with zero coverage
 #-H: show column names at the beginning of the output
 #-J: include reads with deletions in depth computation
+#-f normally needs a list of bam files, but since we are doing it one at a time here I replaced it with X and specified the file and its counterpart index manually
 
 conda deactivate

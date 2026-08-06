@@ -19,7 +19,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 # Global variables
 POPULATION="/home/kcb95328/Info-Shunda" #change this line as needed
 name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${SLURM_ARRAY_TASK_ID}p") #change as needed
-file=${name}.trimmed.fastq.gz.sorted.bam
+file="/scratch/kcb95328/ShundaLakeBrooks/06_bam_files/${name}.trimmed.fastq.gz.sorted.bam"
 
 OUTPUT="/scratch/kcb95328/ShundaLakeBrooks/11_read_depth" #change as needed; should be from the submit directory
 #name=$(cut -f1 $POPULATION/SRR_Acc_List_SL.txt | sed -n "${SLURM_ARRAY_TASK_ID}p") #change as needed

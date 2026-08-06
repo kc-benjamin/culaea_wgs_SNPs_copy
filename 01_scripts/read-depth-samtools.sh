@@ -10,6 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=98_log_files/%x_%j.out
 #SBATCH --error=98_log_files/%x_%j.err
+#SBATCH --array=1-95
 
 # Load needed modules
 CONDA_BASE=$(conda info --base)

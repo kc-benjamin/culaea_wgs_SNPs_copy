@@ -36,18 +36,18 @@ for(i in sex_shunda$Run) {
 
   df$smooth <- rollmean(df[, 3], k = window_size, fill = NA, align = "center")
 
-#cut down the dataset to 14 to 16,000,000
-  df_14to16 <- df[df$POS >= 14000000 & df$POS <= 16000000, ]
+#cut down the dataset to 15 to 16,000,000
+  df_15to16 <- df[df$POS >= 15000000 & df$POS <= 16000000, ]
 
 #plot
-  plot <- ggplot(df_14to16, aes(x = POS)) +
+  plot <- ggplot(df_15to16, aes(x = POS)) +
     geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
     labs(
-	    title = paste("Read depth from 14M to 16M", i, "Normalized 15,000 bp windows"),
+	    title = paste("Read depth from 15M to 16M", i, "Normalized 15,000 bp windows"),
 	    x = "Position (bp)",
 	    y = "Depth")
 
-  pdf(paste0("Norm15000-NFShunda-chr20-14to16-", i, ".pdf"))
+  pdf(paste0("Norm15000-NFShunda-chr20-15to16-", i, ".pdf"))
   print(plot)
   dev.off()
 }

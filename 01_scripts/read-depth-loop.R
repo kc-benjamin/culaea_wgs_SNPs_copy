@@ -31,23 +31,35 @@ for(i in sex_shunda$Run) {
 #normalize by average read depth across the chromosome
   df[, 3] <- df[, 3] / mean(df[, 3])
 
-#smooth out by averaging across 15,000bp windows
-  window_size <- 15000
+#smooth out by averaging across 40,000bp windows
+  window_size <- 40000
 
   df$smooth <- rollmean(df[, 3], k = window_size, fill = NA, align = "center")
 
-#cut down the dataset to 15 to 16,000,000
-  df_15to16 <- df[df$POS >= 15000000 & df$POS <= 16000000, ]
-
 #plot
-  plot <- ggplot(df_15to16, aes(x = POS)) +
+  plot <- ggplot(df, aes(x = POS)) +
     geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
     labs(
-	    title = paste("Read depth from 15M to 16M", i, "Normalized 15,000 bp windows"),
+	    title = paste("Read depth from 11M to 19M", i, "Normalized 40,000 bp windows"),
 	    x = "Position (bp)",
 	    y = "Depth")
 
-  pdf(paste0("Norm15000-NFShunda-chr20-15to16-", i, ".pdf"))
+  pdf(paste0("Norm40000-NFShunda-chr20-11to19-", i, ".pdf"))
+  print(plot)
+  dev.off()
+
+#cut down the dataset to 15.4M to 15.5M
+  df_amhy <- df[df$POS >= 15400000 & df$POS <= 15500000, ]
+
+#plot
+  plot <- ggplot(df_amhy, aes(x = POS)) +
+    geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
+    labs(
+	    title = paste("Read depth from 15.4M to 15.5M", i, "Normalized 40,000 bp windows"),
+	    x = "Position (bp)",
+	    y = "Depth")
+
+  pdf(paste0("Norm40000-NFShunda-chr20-amhy-", i, ".pdf"))
   print(plot)
   dev.off()
 }

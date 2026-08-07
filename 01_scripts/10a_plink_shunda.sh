@@ -34,7 +34,7 @@ echo "step 6: make bed file for filtered file"
 plink --file SHU_snps_geno20_maf01_2 --make-bed --out SHU_snps_geno20_maf01_2
 
 echo "step 7: create genetic relationship matrix"
-gcta64 --bfile SHU_snps_geno20_maf01_2_pruned --make-grm --out SHU_snps_geno20_maf01_2_pruned2
+gcta64 --bfile SHU_snps_geno20_maf01_2_pruned --make-grm --out SHU_snps_geno20_maf01_2_pruned_2
 
 echo "step 8: run the mlma"
 gcta64 --mlma --bfile SHU_snps_geno20_maf01_2_pruned --grm SHU_snps_geno20_maf01_2_pruned --pheno SHU_snps.phen --out SHU_snps_jon_phenos_spines_2

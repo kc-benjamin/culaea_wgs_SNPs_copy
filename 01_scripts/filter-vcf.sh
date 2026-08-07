@@ -17,6 +17,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 #bcftools index muir_snps_filtered.vcf.gz
 
-bcftools filter --include "CHROM==20" shunda_snps_filtered.vcf.gz > shunda_snps_filtered_chr20.vcf
+bcftools filter --include 'CHROM=20' shunda_snps_filtered.vcf.gz > shunda_snps_filtered_chr20.vcf
+bcftools view --regions PGA_scaffold14__88_contigs__length_21401847 shunda_snps_filtered.vcf.gz
 
 conda deactivate

@@ -10,48 +10,14 @@
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=09_process_snps_%j.out
-
-echo "Uncompressing vcf.gz file at: `date`"
-
-# gunzip -c muir_snps_filtered.vcf.gz > muir_snps_filtered_LG.vcf
-
-# awk '{gsub(/OX438541.1/,"1"); print}' muir_snps_filtered_LG.vcf > muir_snps_filtered_temp1.vcf
-# awk '{gsub(/OX438542.1/,"2"); print}' muir_snps_filtered_temp1.vcf > muir_snps_filtered_temp2.vcf
-# awk '{gsub(/OX438543.1/,"3"); print}' muir_snps_filtered_temp2.vcf > muir_snps_filtered_temp3.vcf
-# awk '{gsub(/OX438544.1/,"4"); print}' muir_snps_filtered_temp3.vcf > muir_snps_filtered_temp4.vcf
-# awk '{gsub(/OX438545.1/,"5"); print}' muir_snps_filtered_temp4.vcf > muir_snps_filtered_temp5.vcf
-# awk '{gsub(/OX438546.1/,"6"); print}' muir_snps_filtered_temp5.vcf > muir_snps_filtered_temp6.vcf
-# awk '{gsub(/OX438547.1/,"7"); print}' muir_snps_filtered_temp6.vcf > muir_snps_filtered_temp7.vcf
-# awk '{gsub(/OX438548.1/,"8"); print}' muir_snps_filtered_temp7.vcf > muir_snps_filtered_temp8.vcf
-# awk '{gsub(/OX438549.1/,"9"); print}' muir_snps_filtered_temp8.vcf > muir_snps_filtered_temp9.vcf
-# awk '{gsub(/OX438550.1/,"10"); print}' muir_snps_filtered_temp9.vcf > muir_snps_filtered_temp10.vcf
-# awk '{gsub(/OX438551.1/,"11"); print}' muir_snps_filtered_temp10.vcf > muir_snps_filtered_temp11.vcf
-# awk '{gsub(/OX438552.1/,"12"); print}' muir_snps_filtered_temp11.vcf > muir_snps_filtered_temp12.vcf
-# awk '{gsub(/OX438553.1/,"13"); print}' muir_snps_filtered_temp12.vcf > muir_snps_filtered_temp13.vcf
-# awk '{gsub(/OX438554.1/,"14"); print}' muir_snps_filtered_temp13.vcf > muir_snps_filtered_temp14.vcf
-# awk '{gsub(/OX438555.1/,"15"); print}' muir_snps_filtered_temp14.vcf > muir_snps_filtered_temp15.vcf
-# awk '{gsub(/OX438556.1/,"16"); print}' muir_snps_filtered_temp15.vcf > muir_snps_filtered_temp16.vcf
-# awk '{gsub(/OX438557.1/,"17"); print}' muir_snps_filtered_temp16.vcf > muir_snps_filtered_temp17.vcf
-# awk '{gsub(/OX438558.1/,"18"); print}' muir_snps_filtered_temp17.vcf > muir_snps_filtered_temp18.vcf
-# awk '{gsub(/OX438559.1/,"19"); print}' muir_snps_filtered_temp18.vcf > muir_snps_filtered_temp19.vcf
-# awk '{gsub(/OX438560.1/,"20"); print}' muir_snps_filtered_temp19.vcf > muir_snps_filtered_temp20.vcf
-# awk '{gsub(/OX438561.1/,"21"); print}' muir_snps_filtered_temp20.vcf > muir_snps_filtered_temp21.vcf
-# awk '{gsub(/OX438562.1/,"M"); print}' muir_snps_filtered_temp21.vcf > muir_snps_filtered_tempM.vcf
-
-# cp muir_snps_filtered_tempM.vcf muir_snps_filtered.vcf
-
-# rm muir_snps_filtered_temp*
+#SBATCH --error=09_process_snps_%j.err
 
 echo "Converting to PLINK at: `date`"
 
 ## load all modules at once ###
 #module load VCFtools/0.1.16-GCC-13.3.0 plink/1.9b_6.21-x86_64 gcta/1.26.0
-#conda init bash
-#conda activate /home/kcb95328/conda/envs/culaea_pkgs #this doesnt work just copy over the packages it loads
 ###############
-# Initialize Conda (adjust the path to your conda installation if needed)
-#source activate /home/kcb95328/conda/envs/culaea_pkgs
-# Activate the environment
+# Alternatively, initialize conda (adjust the path to your conda installation if needed)
 CONDA_BASE=$(conda info --base)
 source ${CONDA_BASE}/etc/profile.d/conda.sh 
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
@@ -60,10 +26,10 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 #bcftools view -H muir_snps_filtered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0}' > muir_snps_filtered.chrom-map.txt
 
 #make a ped file using this chrom map
-vcftools --vcf muir_snps_filtered.vcf --plink --chrom-map muir_snps_filtered.chrom-map.txt --out MU_snps
+vcftools --gzvcf Ast_snps_IncFilt_filtered_renamed.vcf.gz --plink --out Ast_snps_IncFilt_filtered_renamed
 
 #vcftools --vcf muir_snps_filtered.vcf --plink --out MU_snps
-plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --recode vcf --out MU_snps
+plink --file Ast_snps_IncFilt_filtered_renamed --allow-extra-chr --recode vcf --out Ast_snps_IncFilt_filtered_renamed
 
 echo "Starting PLINK filtering and removing missing data at: `date`"
 
@@ -75,15 +41,44 @@ echo "Creating VCF file with appropriate LG labels at: `date`"
 
 echo "Filtering at: `date`"
 
-plink --file MU_snps --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out MU_snps_geno20_maf01
+plink --file Ast_snps_IncFilt_filtered_renamed --allow-extra-chr --geno 0.2 --maf 0.01 --recode --out Ast_snps_IncFilt_filtered_renamed_geno20_maf01
 
 #geno: removes SNPs with more than 20% missing data
 #maf: removes SNPs with minor allele frequency less than 0.01
 #recode: outputs in ped/map format, which is needed for GCTA
 
+#5/18/2026: I wanted to see what kind of plot is made by plink at this stage; see here:
+plink --file Muir_snps_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno SL_pheno_numbers.txt --out Muir_snps_geno20_maf01_assoc
+
+### 5/26/2026: trying this on the amhy- males only
+plink --file Shunda_snps_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno SL_geno_SRmales_and_females_only.txt --out Shunda_amhy-males_and_females
+
+#### 5/27/2026: for Amhy Masked Shunda, all males and females
+plink --file Shunda_AmhyMasked_snps_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno SL_pheno_numbers.txt --out Shunda_AmhyMasked_snps_geno20_maf01_assoc
+
+### 5/29/2026: for Muir
+plink --file Muir_snps_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno ML_sex_pheno_numbers.txt --out Muir_snps_geno20_maf01_assoc
+
+### 6/1/2026: Muir
+# for amhy- males and amhy- females
+plink --file Muir_snps_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno ML_all_phenotypes.txt --pheno-name Amhy_Null --out Muir_snps_amhy_null
+
+plink --file Astotin_snps_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno AS_sex_pheno_amhynull-only.txt --out Astotin_snps_amhy_null
+
+### 6/3/2026: Muir but with all chromosomes
+plink --file Muir_snps_ALL_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno ML_sex_pheno_numbers.txt --out Muir_snps_ALL
+plink --file Muir_snps_ALL_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno ML_all_phenotypes.txt --pheno-name Amhy_Null --out Muir_snps_ALL_amhy_null
+
+### 6/9/2026: on Astotin but with increased filtering at the samtools step
+plink --file Ast_snps_IncFilt_filtered_renamed_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno AS_sex_pheno_numbers.txt --out Ast_snps_IncFilt_MFall
+plink --file Ast_snps_IncFilt_filtered_renamed_geno20_maf01 --assoc perm fisher --allow-extra-chr --allow-no-sex --pheno AS_sex_pheno_amhynull-only.txt --out Ast_snps_IncFilt_amhynull
+
+
+
+
 echo "Finished removing missing data at: `date`"
 
-plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --indep 50 5 2
+plink --file MU_snps_geno20_maf01 --allow-extra-chr --indep 50 5 2
 plink --file MU_snps_geno20_maf01 --make-pheno test-pheno.txt 2 --mpheno 4 --update-sex test-sex.txt --allow-extra-chr --extract plink.prune.in --make-bed --out MU_snps_geno20_maf01_pruned
 
 echo "Finished pruning SNPs for LD at: `date`"

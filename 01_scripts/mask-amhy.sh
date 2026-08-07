@@ -16,7 +16,7 @@ module load BEDTools/2.31.1-GCC-13.3.0 SAMtools/1.21-GCC-13.3.0
 #mask.bed file contents:
 #PGA_scaffold14__88_contigs__length_21401847   15445433       15450428
 
-### mask Y par in reference fasta
+### mask Y par in reference fasta; hard masked by default
 bedtools maskfasta \
     -bed 03_genome/mask.bed \
     -fi 03_genome/brook_genome_hap1_v1.fa \

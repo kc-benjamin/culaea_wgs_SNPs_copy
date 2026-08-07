@@ -20,25 +20,25 @@ source ${CONDA_BASE}/etc/profile.d/conda.sh
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 # Global variables
-INFO="02_info_files"
-GENOMEFOLDER="03_genome"
-GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fa | xargs -n 1 basename)
+POPULATION="/home/kcb95328/Info-Muir"
+GENOMEFOLDER="/home/kcb95328/genomes"
+GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fasta | xargs -n 1 basename)
 VCF="07_vcfs"
-BAM="02_info_files/AL_bamfiles.txt"
+BAM="ML_bamfiles.txt" #this should be generated at the command line from the work dir each time this is run: find . -name "*trimmed.fastq.gz.sorted.bam" -printf "%h/%f\n" > ML_bamfiles.txt
 echo $BAM
-SAMPS="02_info_files/SRR_Acc_List_AL.txt"
+SAMPS="$POPULATION/SRR_Acc_List_ML.txt"
 
 #Pass the chromosome number from sbatch command
 chrom_num=$SLURM_ARRAY_TASK_ID
 
 # Fetch chromosome from the array
-CHROM=$(sed -n "${chrom_num}p" 02_info_files/brook_genome_hap1_v1_chromosomes2.txt)
+CHROM=$(sed -n "${chrom_num}p" $GENOMEFOLDER/brook_genome_hap1_v1_chromosomes2.txt)
 echo $CHROM
 #CHROM="PGA_scaffold2__66_contigs__length_13522551"
 #SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
-
-bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list $BAM -q 5 -r $CHROM -I -a FMT/AD | \
+#removed the -q 5 quality filtering from this step
+bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list $BAM -r $CHROM -I -a FMT/AD | \
 	bcftools call -S "$SAMPS" -G - -f GQ -mv -Ov > "$VCF/${CHROM}.vcf"
 
 conda deactivate

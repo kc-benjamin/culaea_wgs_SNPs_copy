@@ -1,5 +1,5 @@
 #testing script
-setwd("/scratch/kcb95328/ShundaLakeBrooks/11_read_depth")
+setwd("/scratch/kcb95328/NoFiltering-Shunda/02_read_depth")
 
 #load packages
 required_packages <- c("ggplot2", "dplyr", "zoo", "tidyr")

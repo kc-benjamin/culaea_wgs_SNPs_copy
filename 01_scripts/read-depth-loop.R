@@ -21,7 +21,7 @@ for(i in sex_shunda$Run) {
 
 #no need to reformat for combo with sex
 #make sure its in the right orientation and the column names are good
-  colnames(df) <- gsub("X.scratch.kcb95328.ShundaLakeBrooks.06_bam_files.", " ", colnames(df))
+  colnames(df) <- gsub("X.scratch.kcb95328.NoFiltering-Shunda.01_aligned_bams.", " ", colnames(df))
   names(df) <- gsub(".trimmed.fastq.gz.sorted.bam.bai", " ", names(df))
   colnames(df) <- trimws(colnames(df))
 
@@ -31,8 +31,8 @@ for(i in sex_shunda$Run) {
 #normalize by average read depth across the chromosome
   df[, 3] <- df[, 3] / mean(df[, 3])
 
-#smooth out by averaging across 20,000bp windows
-  window_size <- 20000
+#smooth out by averaging across 15,000bp windows
+  window_size <- 15000
 
   df$smooth <- rollmean(df[, 3], k = window_size, fill = NA, align = "center")
 
@@ -43,11 +43,11 @@ for(i in sex_shunda$Run) {
   plot <- ggplot(df_14to16, aes(x = POS)) +
     geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
     labs(
-	    title = paste("Read depth from 14M to 16M", i, "Normalized 20,000 bp windows"),
+	    title = paste("Read depth from 14M to 16M", i, "Normalized 15,000 bp windows"),
 	    x = "Position (bp)",
 	    y = "Depth")
 
-  pdf(paste0("Norm10000-Shunda-chr20-14to16-", i, ".pdf"))
+  pdf(paste0("Norm15000-NFShunda-chr20-14to16-", i, ".pdf"))
   print(plot)
   dev.off()
 }

@@ -43,9 +43,9 @@ for(i in sex_shunda$Run) {
   plot <- ggplot(df_18to19, aes(x = POS)) +
     geom_line(aes(y = smooth), color = "blue", linewidth = 1) + # Smoothed line
     labs(
-	title = paste("Read depth from 18M to 19M", i, "Normalized 20,000 bp windows"),
-	x = "Position (bp)",
-	y = "Depth")
+	    title = paste("Read depth from 18M to 19M", i, "Normalized 20,000 bp windows"),
+	    x = "Position (bp)",
+	    y = "Depth")
 
   pdf(paste0("Norm10000-Shunda-chr20-11to19-", i, ".pdf"))
   print(plot)

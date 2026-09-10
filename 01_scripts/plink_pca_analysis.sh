@@ -1,12 +1,11 @@
 #!/bin/bash
 #SBATCH --partition=batch
-#SBATCH --partition=batch
 #SBATCH --job-name="plink_pca_analysis"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --time=06:00:00
-#SBATCH --mem=18G
+#SBATCH --cpus-per-task=12
+#SBATCH --time=012:00:00
+#SBATCH --mem=256G
 #SBATCH --mail-user=kcb95328@uga.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=plink_pca_analysis_%j.out

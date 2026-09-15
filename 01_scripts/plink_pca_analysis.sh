@@ -23,4 +23,7 @@ DATA="/home/kcb95328/Info-Astotin/"
 
 
 plink --file Astotin_snps_geno20_maf01 --pca 10 --out Astotin_pca_out
-plink --file Astotin_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Astotin_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/AL_pheno_numbers_all.txt --mpheno 1 --out Astotin_with_pca_GWAS_results
+plink --file Astotin_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Astotin_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/AS_sex_pheno_numbers.txt --mpheno 1 --out Astotin_with_pca_GWAS_results
+#plink --file Astotin_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Astotin_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/AL_pheno_numbers_all.txt --mpheno 1 --out Astotin_with_pca_GWAS_results
+
+conda deactivate

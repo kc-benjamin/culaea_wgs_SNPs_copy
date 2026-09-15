@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=batch
-#SBATCH --job-name="plink_pca_analysis"
+#SBATCH --job-name="plink_pca_analysis_Astotin"
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
@@ -17,6 +17,10 @@ source ${CONDA_BASE}/etc/profile.d/conda.sh
 conda activate /home/kcb95328/conda/envs/culaea_pkgs
 
 #this code assumes you have already generated the filtered, renamed, maf and genotype files
+cd $SLURM_SUBMIT_DIR #should be the same as your input folder
+INPUT="/scratch/kcb95328/AstotinLakeBrooks/"
+DATA="/home/kcb95328/Info-Astotin/"
 
-#plink --file Shunda_snps_geno20_maf01 --pca 10 --out Shunda_pca_out
-plink --file Shunda_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Shunda_pca_out.eigenvec --covar-number 1-4 --pheno /home/kcb95328/Info-Shunda/SL_pheno_numbers_all.txt --mpheno 1 --out Shunda_with_pca_GWAS_results
+
+plink --file Astotin_snps_geno20_maf01 --pca 10 --out Astotin_pca_out
+plink --file Astotin_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Astotin_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/AL_pheno_numbers_all.txt --mpheno 1 --out Astotin_with_pca_GWAS_results

@@ -19,7 +19,7 @@ conda activate /home/kcb95328/conda/envs/culaea_pkgs
 #this code assumes you have already generated the filtered, renamed, maf and genotype files
 cd $SLURM_SUBMIT_DIR #should be the same as your input folder
 INPUT="/scratch/kcb95328/AstotinLakeBrooks"
-DATA="/home/kcb95328/Info-Muir/"
+DATA="/home/kcb95328/Info-Astotin"
 
 
 #plink --file Muir_snps_geno20_maf01 --pca 10 --out Muir_pca_out

@@ -24,7 +24,7 @@ POPULATION="/home/kcb95328/Info-Muir"
 GENOMEFOLDER="/home/kcb95328/genomes"
 GENOME=$(ls -1 $GENOMEFOLDER/brook_genome_hap1_v1.fasta | xargs -n 1 basename)
 VCF="07_vcfs"
-BAM="ML_bamfiles.txt" #this should be generated at the command line from the work dir each time this is run: find . -name "*trimmed.fastq.gz.sorted.bam" -printf "%h/%f\n" > ML_bamfiles.txt
+BAM="ML_bamfiles_new.txt" #this should be generated at the command line from the work dir each time this is run: find . -name "*trimmed.fastq.gz.sorted.bam" -printf "%h/%f\n" > ML_bamfiles.txt
 echo $BAM
 SAMPS="$POPULATION/SRR_Acc_List_ML.txt"
 
@@ -38,7 +38,7 @@ echo $CHROM
 #SCAFFOLD=$(echo "$CHROM" | grep -oP 'scaffold\d+')
 
 #removed the -q 5 quality filtering from this step
-bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list $BAM -r $CHROM -I -a FMT/AD | \
+bcftools mpileup -Ou --fasta-ref $GENOMEFOLDER/$GENOME --bam-list ${POPULATION}/${BAM} -r $CHROM -I -a FMT/AD | \
 	bcftools call -S "$SAMPS" -G - -f GQ -mv -Ov > "$VCF/${CHROM}.vcf"
 
 conda deactivate

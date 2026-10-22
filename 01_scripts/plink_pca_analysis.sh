@@ -22,8 +22,8 @@ INPUT="/scratch/kcb95328/MuirLakeBrooks"
 DATA="/home/kcb95328/Info-Muir"
 
 
-#plink --file Muir_snps_geno20_maf01 --pca 10 --out Muir_pca_out
-plink --file Muir_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Muir_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/ML_all_phenotypes_outliers_removed.txt --mpheno 1 --out Muir_with_pca_GWAS_results_outliers_removed
+#plink --file Muir_snps_IncFilt_filtered_renamed_geno20_maf01 --pca 10 --out Muir_pca_out
+plink --file Muir_snps_IncFilt_filtered_renamed_geno20_maf01 --logistic --allow-extra-chr --allow-no-sex --covar Muir_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/ML_all_phenotypes_outliers_removed.txt --mpheno 1 --out Muir_with_pca_GWAS_results_outliers_removed
 #plink --file Muir_snps_geno20_maf01 --logistic mperm=10000 --allow-extra-chr --allow-no-sex --covar Muir_pca_out.eigenvec --covar-number 1-4 --pheno $DATA/AL_pheno_numbers_all.txt --mpheno 1 --out Muir_with_pca_GWAS_results
 
 conda deactivate
